@@ -125,6 +125,7 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-vendor/*
-app/vendor/*
+vendor/
+public/
+app/vendor/
 
