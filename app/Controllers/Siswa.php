@@ -49,7 +49,7 @@ class Siswa extends BaseController
 			$ops .= '</div></div>';
 
 
-			        
+
 
 			$data['data'][$key] = array(
 				$value->id,
@@ -98,6 +98,8 @@ class Siswa extends BaseController
 		$fields['nama_wali'] = $this->request->getPost('nama_wali');
 		$fields['alamat'] = $this->request->getPost('alamat');
 		$fields['telepon'] = $this->request->getPost('telepon');
+
+		var_dump($fields);
 
 
 		$this->validation->setRules([

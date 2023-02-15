@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="col-md-6 col-sm-6  form-group has-feedback">
-                  <input id="nama_ayah" name="nama_ayah" type="tel" class="form-control has-feedback-left" id="inputSuccess5" placeholder="Nama Ayah">
+                  <input id="nama_ayah" name="nama_ayah" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="Nama Ayah">
                   <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
@@ -136,7 +136,7 @@
                 </div>
 
                 <div class="col-md-6 col-sm-6  form-group has-feedback">
-                  <input id="telepon" name="telepon" type="email" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Telepon">
+                  <input id="telepon" name="telepon" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Telepon">
                   <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
@@ -148,7 +148,7 @@
               <div class="modal-footer">
                 <div class="form-group">
                   <button class="btn btn-primary" type="reset"><?= lang("App.cancel") ?></button>
-                  <button type="submit" class="btn btn-success"><?= lang("App.save") ?></button>
+                  <button type="button" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
                 </div>
               </div>
             </form>
@@ -222,6 +222,7 @@
             },
             dataType: 'json',
             success: function(response) {
+              alert(response.nis);
               $('#model-header').removeClass('bg-success').addClass('bg-info');
               $("#info-header-modalLabel").text('<?= lang("App.edit") ?>');
               $("#form-btn").text(submitText);
