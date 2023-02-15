@@ -32,6 +32,11 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->get('/siswa', 'Siswa::index');
 $routes->post('/siswa/getAll', 'Siswa::getAll');
+$routes->post('/siswa/getOne', 'Siswa::getOne');
+$routes->post('/siswa/add', 'Siswa::add');
+$routes->post('/siswa/edit', 'Siswa::edit');
+$routes->post('/siswa/remove', 'Siswa::remove');
+
 
 /*
  * --------------------------------------------------------------------
