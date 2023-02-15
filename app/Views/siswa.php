@@ -7,7 +7,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Bordered Table</h3>
+        <h3 class="card-title">Data Siswa</h3>
         <div class="card-tools">
           <div class="input-group input-group-sm">
             <button type="button" class="btn btn-success float-right" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
