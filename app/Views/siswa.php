@@ -38,7 +38,7 @@
 <!-- ADD modal content -->
 
 <!-- ADD modal content -->
-<div id="data-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="data-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
     <div class="modal-content">
       <div class="text-center bg-info p-3" id="model-header">
@@ -98,7 +98,7 @@
                 <textarea cols="40" rows="4" id="alamat" name="alamat" class="form-control" placeholder="Alamat" minlength="0"></textarea>
               </div>
             </div>
-            
+
           </div>
 
           <div class="form-group text-center">
@@ -126,9 +126,9 @@
   // dataTables
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
-      "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-        $('td:eq(0)', nRow).html(iDisplayIndexFull +1);
-    },
+      "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
+      },
       "paging": true,
       "lengthChange": false,
       "searching": true,
@@ -170,6 +170,10 @@
       $("#info-header-modalLabel").text('<?= lang("App.add") ?>');
       $("#form-btn").text(submitText);
       $('#data-modal').modal('show');
+
+
+      // $("#data-modal").data('bs.modal')._config.backdrop = 'static'; 
+
     } else { //edit
       urlController = '<?= base_url($controller . "/edit") ?>';
       submitText = '<?= lang("App.update") ?>';
@@ -185,6 +189,10 @@
           $("#info-header-modalLabel").text('<?= lang("App.edit") ?>');
           $("#form-btn").text(submitText);
           $('#data-modal').modal('show');
+          $('#data-modal').modal({
+            backdrop: 'static',
+            keyboard: false
+          });
           //insert data to form
           $("#data-form #id").val(response.id);
           $("#data-form #nis").val(response.nis);
