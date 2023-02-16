@@ -7,7 +7,7 @@
   <div class="card-header">
     <div class="row">
       <div class="col-10 mt-2">
-        <h3 class="card-title">kelas_siswa</h3>
+        <h3 class="card-title">Data Siswa</h3>
       </div>
       <div class="col-2">
         <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
@@ -48,22 +48,22 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="form-group mb-3">
-                <label for="id_siswa" class="col-form-label"> Nama siswa: <span class="text-danger">*</span> </label>
-                <select id="id_siswa" class="search form-control" multiple="multiple" name="id_siswa[]" required>
-                  <option value="">Select Siswa</option>
-                  <?php foreach ($siswa as $s) { ?>
-                    <option value="<?php echo $s->id; ?>"><?php echo $s->nama_lengkap; ?></option>"
-                  <?php } ?>
-
-                </select>
+              <div class="form-group">
+                <div class="select2-purple">
+                  <label for="id_siswa" class="col-form-label"> Nama siswa: <span class="text-danger">*</span> </label>
+                  <select id="id_siswa" class="search select2" multiple="multiple" name="id_siswa[]" required>
+                    <?php foreach ($siswa as $s) { ?>
+                      <option value="<?php echo $s->id; ?>"><?php echo $s->nama_lengkap; ?></option>"
+                    <?php } ?>
+                  </select>
+                </div>
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group mb-3">
-                <label for="id_kelas" class="col-form-label"> Id kelas: <span class="text-danger">*</span> </label>
-                <select id="id_kelas" name="id_kelas" class="form-select" required>
-                <option value="">Select Siswa</option>
+                <label for="id_kelas" class="col-form-label"> Kelas: <span class="text-danger">*</span> </label>
+                <select id="id_kelas" name="id_kelas" class="form-control" required>
+                  <option value="">Pilih Kelas</option>
                   <?php foreach ($kelas as $k) { ?>
                     <option value="<?php echo $k->id; ?>"><?php echo $k->nama_kelas; ?></option>"
                   <?php } ?>
@@ -75,7 +75,7 @@
 
           <div class="form-group text-center">
             <div class="btn-group">
-              <button type="submit" class="btn btn-success mr-2" id="form-btn"><?= lang("App.save") ?></button>
+              <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
             </div>
           </div>

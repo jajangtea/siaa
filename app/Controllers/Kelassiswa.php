@@ -27,7 +27,7 @@ class Kelassiswa extends BaseController
 
 		$data = [
 			'controller'    	=> 'kelassiswa',
-			'title'     		=> 'kelas_siswa',
+			'title'     		=> 'Daftar Siswa Perkelas',
 			'siswa' => $this->kelassiswaModel->getSiswa(),
 			'kelas' => $this->kelassiswaModel->getKelas(),
 		];
