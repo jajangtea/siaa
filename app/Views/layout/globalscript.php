@@ -16,6 +16,8 @@
 <script src="<?= base_url('asset/js/sweetalert2.all.min.js') ?>"></script>
 <!-- jquery-validation -->
 <script src="<?= base_url('asset/js/jquery.validate.min.js') ?>"></script>
+<!-- Select2 -->
+<script src="<?= base_url('asset/plugins/select2/js/select2.full.min.js')?>"></script>
 
 <!-- DataTables Full Function -->
 <script src="<?= base_url("asset/plugins/datatables/DataTables-1.11.3/js/jquery.dataTables.min.js") ;?>" type="text/javascript"></script>

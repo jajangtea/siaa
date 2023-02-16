@@ -11,7 +11,7 @@
     <meta name="author" content="ocomshop">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= csrf_meta()?>
+    <?= csrf_meta() ?>
 
     <!-- Google Font: Thai Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,15 +21,20 @@
     <link rel="stylesheet" href="<?= base_url('asset/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') ?>">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('asset/css/adminlte.min.css') ?>">
-     <!--<link rel="stylesheet" href="<?php /* echo base_url('asset/css/rtl/adminlte.rtl.min.css') */ ?>"> --> 
-	 
+    <!--<link rel="stylesheet" href="<?php /* echo base_url('asset/css/rtl/adminlte.rtl.min.css') */ ?>"> -->
+
     <!-- SweetAlert2 Bootstrap or Dark -->
     <link rel="stylesheet" href="<?= base_url('asset/css/sweetalert2-dark.min.css') ?>">
     <!-- DataTables -->
- 	<link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/DataTables-1.11.3/css/dataTables.bootstrap5.min.css') ;?>">
-	<link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/Responsive-2.2.9/css/responsive.bootstrap5.min.css') ;?>"> 
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/DataTables-1.11.3/css/dataTables.bootstrap5.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/Responsive-2.2.9/css/responsive.bootstrap5.min.css'); ?>">
 
     <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/StateRestore-1.1.1/css/stateRestore.bootstrap5.min.css') ?>">
+
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/select2/css/select2.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
+
+
     <!-- Dark style -->
-    <!--<link rel="stylesheet" href="<?php /* echo base_url('asset/css/dark/adminlte-dark-addon.min.css')*/ ?>">  --> 
+    <!--<link rel="stylesheet" href="<?php /* echo base_url('asset/css/dark/adminlte-dark-addon.min.css')*/ ?>">  -->
 </head>

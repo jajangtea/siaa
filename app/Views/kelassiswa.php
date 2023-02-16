@@ -3,39 +3,36 @@
 <?= $this->section("content") ?>
 
 <!-- Main content -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Data Siswa</h3>
-        <div class="card-tools">
-          <div class="input-group input-group-sm">
-            <button type="button" class="btn btn-success float-right" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
-          </div>
-        </div>
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-10 mt-2">
+        <h3 class="card-title">kelas_siswa</h3>
       </div>
-      <div class="card-body">
-        <table id="data_table" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>NIS</th>
-              <th>NISN</th>
-              <th>Nama Lengkap</th>
-              <th>Nama Ayah</th>
-              <th>Nama Ibu</th>
-              <th>Nama Wali</th>
-              <th>Alamat</th>
-              <th>Telepon</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-        </table>
+      <div class="col-2">
+        <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
       </div>
     </div>
   </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table id="data_table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Id siswa</th>
+          <th>Id kelas</th>
+
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- /.card-body -->
 </div>
-<!-- ADD modal content -->
+<!-- /.card -->
+
+<!-- /Main content -->
 
 <!-- ADD modal content -->
 <div id="data-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -50,55 +47,30 @@
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nis" class="col-form-label"> Nis: <span class="text-danger">*</span> </label>
-                <input type="number" id="nis" name="nis" class="form-control" placeholder="Nis" minlength="0" maxlength="11" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nisn" class="col-form-label"> Nisn: <span class="text-danger">*</span> </label>
-                <input type="number" id="nisn" name="nisn" class="form-control" placeholder="Nisn" minlength="0" maxlength="11" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_lengkap" class="col-form-label"> Nama lengkap: </label>
-                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" placeholder="Nama lengkap" minlength="0" maxlength="250">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_ayah" class="col-form-label"> Nama ayah: </label>
-                <input type="text" id="nama_ayah" name="nama_ayah" class="form-control" placeholder="Nama ayah" minlength="0" maxlength="250">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_ibu" class="col-form-label"> Nama ibu: </label>
-                <input type="text" id="nama_ibu" name="nama_ibu" class="form-control" placeholder="Nama ibu" minlength="0" maxlength="250">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_wali" class="col-form-label"> Nama wali: </label>
-                <input type="text" id="nama_wali" name="nama_wali" class="form-control" placeholder="Nama wali" minlength="0" maxlength="250">
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="id_siswa" class="col-form-label"> Nama siswa: <span class="text-danger">*</span> </label>
+                <select id="id_siswa" class="search form-control" multiple="multiple" name="id_siswa[]" required>
+                  <option value="">Select Siswa</option>
+                  <?php foreach ($siswa as $s) { ?>
+                    <option value="<?php echo $s->id; ?>"><?php echo $s->nama_lengkap; ?></option>"
+                  <?php } ?>
+
+                </select>
               </div>
             </div>
             <div class="col-md-12">
-              <div class="form-group mb-2">
-                <label for="telepon" class="col-form-label"> Telepon: </label>
-                <input type="text" id="telepon" name="telepon" class="form-control" placeholder="Telepon" minlength="0" maxlength="20">
+              <div class="form-group mb-3">
+                <label for="id_kelas" class="col-form-label"> Id kelas: <span class="text-danger">*</span> </label>
+                <select id="id_kelas" name="id_kelas" class="form-select" required>
+                <option value="">Select Siswa</option>
+                  <?php foreach ($kelas as $k) { ?>
+                    <option value="<?php echo $k->id; ?>"><?php echo $k->nama_kelas; ?></option>"
+                  <?php } ?>
+                </select>
+
               </div>
             </div>
-            <div class="col-md-12">
-              <div class="form-group mb-2">
-                <label for="alamat" class="col-form-label"> Alamat: </label>
-                <textarea cols="40" rows="4" id="alamat" name="alamat" class="form-control" placeholder="Alamat" minlength="0"></textarea>
-              </div>
-            </div>
-            
           </div>
 
           <div class="form-group text-center">
@@ -122,19 +94,18 @@
 
 <!-- page script -->
 <?= $this->section("pageScript") ?>
+
+
 <script>
   // dataTables
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
-      "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-        $('td:eq(0)', nRow).html(iDisplayIndexFull +1);
-    },
       "paging": true,
       "lengthChange": false,
       "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": true,
+      "autoWidth": false,
       "scrollY": '45vh',
       "scrollX": true,
       "scrollCollapse": false,
@@ -187,14 +158,8 @@
           $('#data-modal').modal('show');
           //insert data to form
           $("#data-form #id").val(response.id);
-          $("#data-form #nis").val(response.nis);
-          $("#data-form #nisn").val(response.nisn);
-          $("#data-form #nama_lengkap").val(response.nama_lengkap);
-          $("#data-form #nama_ayah").val(response.nama_ayah);
-          $("#data-form #nama_ibu").val(response.nama_ibu);
-          $("#data-form #nama_wali").val(response.nama_wali);
-          $("#data-form #alamat").val(response.alamat);
-          $("#data-form #telepon").val(response.telepon);
+          $("#data-form #id_siswa").val(response.id_siswa);
+          $("#data-form #id_kelas").val(response.id_kelas);
 
         }
       });
@@ -335,6 +300,13 @@
       }
     })
   }
+
+  $(".search").select2({
+
+    dropdownParent: $('#data-modal .modal-content')
+
+
+  });
 </script>
 
 

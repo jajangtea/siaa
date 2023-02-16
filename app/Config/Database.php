@@ -26,10 +26,11 @@ class Database extends Config
      */
     public array $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => '',
+        // 'hostname' => 'localhost',
+        'hostname' => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
+        'username' => 'root',
         'password' => '',
-        'database' => '',
+        'database' => 'db_siaa',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

@@ -38,6 +38,15 @@ $routes->post('/siswa/edit', 'Siswa::edit');
 $routes->post('/siswa/remove', 'Siswa::remove');
 
 
+
+$routes->get('/kelassiswa', 'Kelassiswa::index');
+$routes->post('/kelassiswa/getAll', 'Kelassiswa::getAll');
+$routes->post('/kelassiswa/add', 'Kelassiswa::add');
+
+$routes->match(['get', 'post'], 'kelassiswa/ajaxSearch', 'Kelassiswa::ajaxSearch');
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

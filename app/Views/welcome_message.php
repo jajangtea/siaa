@@ -1,4 +1,4 @@
-<?= $this->extend('layout/page_layout') ?>
+<?= $this->extend('layout/master') ?>
 
 <?= $this->section('content') ?>
 <div class="right_col" role="main">
