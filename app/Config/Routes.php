@@ -42,6 +42,8 @@ $routes->post('/siswa/remove', 'Siswa::remove');
 $routes->get('/kelassiswa', 'Kelassiswa::index');
 $routes->post('/kelassiswa/getAll', 'Kelassiswa::getAll');
 $routes->post('/kelassiswa/add', 'Kelassiswa::add');
+$routes->post('/kelassiswa/edit', 'Kelassiswa::edit');
+$routes->post('/kelassiswa/remove', 'Kelassiswa::remove');
 
 $routes->match(['get', 'post'], 'kelassiswa/ajaxSearch', 'Kelassiswa::ajaxSearch');
 

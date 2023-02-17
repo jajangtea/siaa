@@ -39,9 +39,15 @@ class Kelassiswa extends BaseController
 	{
 		$response = $data['data'] = array();
 
-		$result = $this->kelassiswaModel->select()->findAll();
+		// $result = $this->kelassiswaModel->select()->findAll();
+		$db      = \Config\Database::connect();
+		$builder = $db->table('kelas_siswa');
+		$builder->select('kelas_siswa.id,siswa.nisn,siswa.nis,siswa.nama_lengkap,kelas.nama_kelas,kelas.fase');
+		$builder->join('siswa', 'siswa.id = kelas_siswa.id_siswa');
+		$builder->join('kelas', 'kelas.id = kelas_siswa.id_kelas');
+		$result = $builder->get();
 
-		foreach ($result as $key => $value) {
+		foreach ($result->getResult() as $key => $value) {
 
 			$ops = '<div class="btn-group">';
 			$ops .= '<button type="button" class=" btn btn-sm dropdown-toggle btn-info" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
@@ -55,8 +61,11 @@ class Kelassiswa extends BaseController
 
 			$data['data'][$key] = array(
 				$value->id,
-				$value->id_siswa,
-				$value->id_kelas,
+				$value->nisn,
+				$value->nis,
+				$value->nama_lengkap,
+				$value->nama_kelas,
+				$value->fase,
 
 				$ops
 			);
@@ -103,29 +112,29 @@ class Kelassiswa extends BaseController
 		// 	$response['messages'] = $this->validation->getErrors(); //Show Error in Input Form
 
 		// } else {
-			if (!empty($id_siswas)) {
-				foreach ($id_siswas as $id_siswa) {
-					// echo $id_siswa;
-					$data = [
-						'id_siswa' => $id_siswa,
-						'id_kelas' => $id_kelas,
-					];
-					// $this->db->table('kelas')->insert($data);
-					$this->kelassiswaModel->insert($data);
-				}
+		if (!empty($id_siswas)) {
+			foreach ($id_siswas as $id_siswa) {
+				// echo $id_siswa;
+				$data = [
+					'id_siswa' => $id_siswa,
+					'id_kelas' => $id_kelas,
+				];
+				// $this->db->table('kelas')->insert($data);
+				$this->kelassiswaModel->insert($data);
 			}
+		}
 
 
-			// if ($this->kelassiswaModel->insert($fields)) {
+		// if ($this->kelassiswaModel->insert($fields)) {
 
-			// 	$response['success'] = true;
-			// 	$response['messages'] = lang("App.insert-success");
-			// } else {
+		// 	$response['success'] = true;
+		// 	$response['messages'] = lang("App.insert-success");
+		// } else {
 
-			// 	$response['success'] = false;
-			// 	$response['messages'] = lang("App.insert-error");
-			// }
-		
+		// 	$response['success'] = false;
+		// 	$response['messages'] = lang("App.insert-error");
+		// }
+
 
 		return $this->response->setJSON($response);
 	}

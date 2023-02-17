@@ -30,6 +30,23 @@
               <th>Aksi</th>
             </tr>
           </thead>
+          <tbody>
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>No</th>
+              <th>NIS</th>
+              <th>NISN</th>
+              <th>Nama Lengkap</th>
+              <th>Nama Ayah</th>
+              <th>Nama Ibu</th>
+              <th>Nama Wali</th>
+              <th>Alamat</th>
+              <th>Telepon</th>
+              <th>Aksi</th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -108,7 +125,7 @@
 
             </div>
 
-  
+
           </div>
         </form>
       </div>
@@ -128,25 +145,55 @@
 <script>
   // dataTables
   $(function() {
+    $('#data_table tfoot th').each(function() {
+      var title = $(this).text();
+      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
     var table = $('#data_table').removeAttr('width').DataTable({
       "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
       },
+
       "paging": true,
       "lengthChange": false,
-      "searching": true,
+      // "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": true,
       "scrollY": '45vh',
       "scrollX": true,
-      "scrollCollapse": false,
-      "responsive": false,
+      "scrollCollapse": true,
+      columnDefs: [{
+        width: 80,
+        targets: 0
+      }],
+      fixedColumns: true,
+      "responsive": true,
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
         "dataType": "json",
-        async: "true"
+        async: "true",
+      },
+      initComplete: function() {
+        this.api().columns([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).every(function() {
+          var column = this;
+          var select = $('<input type="text" class="form-control" />')
+            .appendTo($(column.footer()).empty())
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
+
+              column
+                .search(val ? '^' + val + '$' : '', true, false)
+                .draw();
+            });
+
+          column.data().unique().sort().each(function(d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
+          });
+        }, );
       }
     });
   });

@@ -19,13 +19,30 @@
     <table id="data_table" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Id siswa</th>
-          <th>Id kelas</th>
+          <th>No</th>
+          <th>NISN</th>
+          <th>NIS</th>
+          <th>Nama Lengkap</th>
+          <th>Kelas</th>
+          <th>Fase</th>
 
           <th></th>
         </tr>
       </thead>
+      <tbody>
+
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>No</th>
+          <th>NISN</th>
+          <th>NIS</th>
+          <th>Nama Lengkap</th>
+          <th>Kelas</th>
+          <th>Fase</th>
+          <th></th>
+        </tr>
+      </tfoot>
     </table>
   </div>
   <!-- /.card-body -->
@@ -98,25 +115,83 @@
 
 <script>
   // dataTables
+
+
+
   $(function() {
+
+    $('#data_table tfoot th').each(function() {
+      var title = $(this).text();
+      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+
     var table = $('#data_table').removeAttr('width').DataTable({
+
+      "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
+      },
       "paging": true,
       "lengthChange": false,
-      "searching": true,
+      // "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false,
       "scrollY": '45vh',
       "scrollX": true,
-      "scrollCollapse": false,
-      "responsive": false,
+      "scrollCollapse": true,
+      columnDefs: [{
+        width: 200,
+        targets: 0
+      }],
+      "responsive": true,
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
         "dataType": "json",
         async: "true"
+      },
+      initComplete: function() {
+        this.api().columns([1, 2, 4, 5]).every(function() {
+          var column = this;
+          var select = $('<select class="form-control"><option value=""></option></select>')
+            .appendTo($(column.footer()).empty())
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
+
+              column
+                .search(val ? '^' + val + '$' : '', true, false)
+                .draw();
+            });
+
+          column.data().unique().sort().each(function(d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
+          });
+        }, );
+
+        this.api().columns([0, 1, 2, 3, 6]).every(function() {
+          var column = this;
+          var select = $('<input type="text" class="form-control" />')
+            .appendTo($(column.footer()).empty())
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
+
+              column
+                .search(val ? '^' + val + '$' : '', true, false)
+                .draw();
+            });
+
+          column.data().unique().sort().each(function(d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
+          });
+        }, );
       }
     });
+
+
   });
 
   var urlController = '';
@@ -308,6 +383,14 @@
 
   });
 </script>
+
+<style>
+  tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+</style>
 
 
 <?= $this->endSection() ?>
