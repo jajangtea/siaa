@@ -6,7 +6,7 @@ return [
     'add'  => 'Tambah',
     'edit'  => 'Edit',
     'back'  => 'Kembalikan',
-    'detail'  => 'Detail',
+    'detail'  => 'Kembalikan',
     'update' => 'Update',
     'delete' => 'Delete',
     'copy' => 'Copy',

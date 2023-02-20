@@ -30,7 +30,6 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-
 $routes->get('/siswa', 'Siswa::index');
 $routes->post('/siswa/getAll', 'Siswa::getAll');
 $routes->post('/siswa/getOne', 'Siswa::getOne');
