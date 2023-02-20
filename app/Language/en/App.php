@@ -2,15 +2,17 @@
 
 
 return [
-    'new' => 'New',
-    'add'  => 'Add',
+    'new' => 'Data Baru',
+    'add'  => 'Tambah',
     'edit'  => 'Edit',
+    'back'  => 'Kembalikan',
+    'detail'  => 'Detail',
     'update' => 'Update',
     'delete' => 'Delete',
     'copy' => 'Copy',
     'save'  => 'Save',
-    'confirm' => 'Confirm',
-    'cancel'  => 'Cancel',
+    'confirm' => 'Konfirmasi',
+    'cancel'  => 'Batal',
     'remove-title' => 'Are you sure of the deleting process?',
     'remove-text' => 'You cannot back after confirmation',
     'insert-success' => 'Data has been inserted successfully',

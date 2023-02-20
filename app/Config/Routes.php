@@ -30,20 +30,58 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
 $routes->get('/siswa', 'Siswa::index');
 $routes->post('/siswa/getAll', 'Siswa::getAll');
 $routes->post('/siswa/getOne', 'Siswa::getOne');
 $routes->post('/siswa/add', 'Siswa::add');
 $routes->post('/siswa/edit', 'Siswa::edit');
 $routes->post('/siswa/remove', 'Siswa::remove');
+$routes->get('/siswa/updatelulus/(:num)', 'Siswa::updatelulus/$1');
 
 
 
 $routes->get('/kelassiswa', 'Kelassiswa::index');
 $routes->post('/kelassiswa/getAll', 'Kelassiswa::getAll');
+$routes->post('/kelassiswa/getOne', 'Kelassiswa::getOne');
+
 $routes->post('/kelassiswa/add', 'Kelassiswa::add');
 $routes->post('/kelassiswa/edit', 'Kelassiswa::edit');
 $routes->post('/kelassiswa/remove', 'Kelassiswa::remove');
+
+$routes->get('/kegiatan', 'Kegiatan::index');
+$routes->post('/kegiatan/getAll', 'Kegiatan::getAll');
+$routes->post('/kegiatan/add', 'Kegiatan::add');
+$routes->post('/kegiatan/edit', 'Kegiatan::edit');
+$routes->post('/kegiatan/remove', 'Kegiatan::remove');
+
+
+$routes->get('/peminatan', 'Peminatan::index');
+$routes->post('/peminatan/getAll', 'Peminatan::getAll');
+$routes->post('/peminatan/add', 'Peminatan::add');
+$routes->post('/peminatan/edit', 'Peminatan::edit');
+$routes->post('/peminatan/remove', 'Peminatan::remove');
+
+
+$routes->get('/tp', 'Tp::index');
+$routes->post('/tp/getAll', 'Tp::getAll');
+$routes->post('/tp/add', 'Tp::add');
+$routes->post('/tp/edit', 'Tp::edit');
+$routes->post('/tp/remove', 'Tp::remove');
+
+$routes->get('/kelas', 'Kelas::index');
+$routes->post('/kelas/getAll', 'Kelas::getAll');
+$routes->post('/kelas/add', 'Kelas::add');
+$routes->post('/kelas/edit', 'Kelas::edit');
+$routes->post('/kelas/remove', 'Kelas::remove');
+
+
+$routes->get('/alumni', 'Alumni::index');
+$routes->post('/alumni/getAll', 'Alumni::getAll');
+$routes->post('/alumni/getOne', 'Alumni::getOne');
+$routes->post('/alumni/add', 'Alumni::add');
+$routes->post('/alumni/edit', 'Alumni::edit');
+$routes->post('/alumni/remove', 'Alumni::remove');
 
 $routes->match(['get', 'post'], 'kelassiswa/ajaxSearch', 'Kelassiswa::ajaxSearch');
 

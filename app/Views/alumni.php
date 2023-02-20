@@ -3,58 +3,40 @@
 <?= $this->section("content") ?>
 
 <!-- Main content -->
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Data Siswa</h3>
-        <div class="card-tools">
-          <div class="input-group input-group-sm">
-            <button type="button" class="btn btn-success float-right" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
-          </div>
-        </div>
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-10 mt-2">
+        <h3 class="card-title">alumni</h3>
       </div>
-      <div class="card-body">
-        <table id="data_table" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>NIS</th>
-              <th>NISN</th>
-              <th>Nama Lengkap</th>
-              <th>Nama Ayah</th>
-              <th>Nama Ibu</th>
-              <th>Nama Wali</th>
-              <th>Alamat</th>
-              <th>Telepon</th>
-              <th>Status</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>No</th>
-              <th>NIS</th>
-              <th>NISN</th>
-              <th>Nama Lengkap</th>
-              <th>Nama Ayah</th>
-              <th>Nama Ibu</th>
-              <th>Nama Wali</th>
-              <th>Alamat</th>
-              <th>Telepon</th>
-              <th>Status</th>
-              <th>Aksi</th>
-            </tr>
-          </tfoot>
-        </table>
+      <div class="col-2">
+        <!-- <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button> -->
       </div>
     </div>
   </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table id="data_table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>NISN</th>
+          <th>NIS</th>
+          <th>Nama</th>
+          <th>Telepon/HP</th>
+          <th>Kegiatan</th>
+          <th>Tahun Lulus</th>
+
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- /.card-body -->
 </div>
-<!-- ADD modal content -->
+<!-- /.card -->
+
+<!-- /Main content -->
 
 <!-- ADD modal content -->
 <div id="data-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
@@ -64,70 +46,58 @@
         <h4 class="modal-title text-white" id="info-header-modalLabel"></h4>
       </div>
       <div class="modal-body">
-        <form id="data-form" class="pl-3 pr-3">
+        <form id="data-form"  enctype="multipart/form-data" class="pl-3 pr-3">
           <div class="row">
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
           <div class="row">
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nis" class="col-form-label"> Nis: <span class="text-danger">*</span> </label>
-                <input type="number" id="nis" name="nis" class="form-control" placeholder="Nis" minlength="0" maxlength="11" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nisn" class="col-form-label"> Nisn: <span class="text-danger">*</span> </label>
-                <input type="number" id="nisn" name="nisn" class="form-control" placeholder="Nisn" minlength="0" maxlength="11" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_lengkap" class="col-form-label"> Nama lengkap: </label>
-                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" placeholder="Nama lengkap" minlength="0" maxlength="250">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_ayah" class="col-form-label"> Nama ayah: </label>
-                <input type="text" id="nama_ayah" name="nama_ayah" class="form-control" placeholder="Nama ayah" minlength="0" maxlength="250">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_ibu" class="col-form-label"> Nama ibu: </label>
-                <input type="text" id="nama_ibu" name="nama_ibu" class="form-control" placeholder="Nama ibu" minlength="0" maxlength="250">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-2">
-                <label for="nama_wali" class="col-form-label"> Nama wali: </label>
-                <input type="text" id="nama_wali" name="nama_wali" class="form-control" placeholder="Nama wali" minlength="0" maxlength="250">
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="id_kegiatan" class="col-form-label"> Kegiatan: <span class="text-danger">*</span> </label>
+                <select id="id_kegiatan" name="id_kegiatan" class="form-control" required>
+                  <option value="">Pilih Kegiatan</option>
+                  <?php foreach ($kegiatan as $k) { ?>
+                    <option value="<?php echo $k->id; ?>"><?php echo $k->nama_kegiatan; ?></option>"
+                  <?php } ?>
+                </select>
               </div>
             </div>
             <div class="col-md-12">
-              <div class="form-group mb-2">
-                <label for="telepon" class="col-form-label"> Telepon: </label>
-                <input type="text" id="telepon" name="telepon" class="form-control" placeholder="Telepon" minlength="0" maxlength="20">
+              <div class="form-group mb-3">
+                <label for="id_tp_lulus" class="col-form-label"> Tahun Lulus: <span class="text-danger">*</span> </label>
+                <select id="id_tp_lulus" name="id_tp_lulus" class="form-control" required>
+                  <option value="">Pilih Tahun Lulus</option>
+                  <?php foreach ($tp as $k) { ?>
+                    <option value="<?php echo $k->id; ?>"><?php echo $k->tahun_pelajaran; ?></option>"
+                  <?php } ?>
+                </select>
               </div>
             </div>
             <div class="col-md-12">
-              <div class="form-group mb-2">
-                <label for="alamat" class="col-form-label"> Alamat: </label>
-                <textarea cols="40" rows="4" id="alamat" name="alamat" class="form-control" placeholder="Alamat" minlength="0"></textarea>
+              <div class="form-group mb-3">
+                <label for="al_img" class="col-form-label"> Foto: <span class="text-danger">*</span> </label>
+                <input type="file" id="al_img" name="al_img" class="form-control" required>
               </div>
             </div>
-
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="id_siswa" class="col-form-label"> Id siswa: <span class="text-danger">*</span> </label>
+                <input type="number" id="id_siswa" name="id_siswa" class="form-control" placeholder="Id siswa" minlength="0" maxlength="11" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="password" class="col-form-label"> Password: <span class="text-danger">*</span> </label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" minlength="0" maxlength="200" required>
+              </div>
+            </div>
           </div>
 
           <div class="form-group text-center">
             <div class="btn-group">
-              <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
+              <button type="submit" class="btn btn-success mr-2" id="form-btn"><?= lang("App.save") ?></button>
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
-
             </div>
-
-
           </div>
         </form>
       </div>
@@ -147,73 +117,30 @@
 <script>
   // dataTables
   $(function() {
-    $('#data_table tfoot th').each(function() {
-      var title = $(this).text();
-      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-    });
     var table = $('#data_table').removeAttr('width').DataTable({
       "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
       },
-
+      'columnDefs': [{
+        "targets": 7, // your case first column
+        "className": "text-center",
+        // "width": "4%"
+      }, ],
       "paging": true,
       "lengthChange": false,
-      // "searching": true,
+      "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": true,
+      "autoWidth": false,
       "scrollY": '45vh',
       "scrollX": true,
-      "scrollCollapse": true,
-      columnDefs: [{
-        width: 80,
-        targets: 0
-      }],
-      fixedColumns: true,
-      "responsive": true,
+      "scrollCollapse": false,
+      "responsive": false,
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
         "dataType": "json",
-        async: "true",
-      },
-      initComplete: function() {
-        this.api().columns([9]).every(function() {
-          var column = this;
-          var select = $('<select class="form-control"><option value=""></option></select>')
-            .appendTo($(column.footer()).empty())
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
-
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
-            });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-          });
-        }, );
-        this.api().columns([0, 1, 2, 3, 4, 5, 6, 7, 8, 10]).every(function() {
-          var column = this;
-          var select = $('<input type="text" class="form-control" />')
-            .appendTo($(column.footer()).empty())
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
-
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
-            });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-          });
-        }, );
+        async: "true"
       }
     });
   });
@@ -240,10 +167,6 @@
       $("#info-header-modalLabel").text('<?= lang("App.add") ?>');
       $("#form-btn").text(submitText);
       $('#data-modal').modal('show');
-
-
-      // $("#data-modal").data('bs.modal')._config.backdrop = 'static'; 
-
     } else { //edit
       urlController = '<?= base_url($controller . "/edit") ?>';
       submitText = '<?= lang("App.update") ?>';
@@ -259,20 +182,13 @@
           $("#info-header-modalLabel").text('<?= lang("App.edit") ?>');
           $("#form-btn").text(submitText);
           $('#data-modal').modal('show');
-          $('#data-modal').modal({
-            backdrop: 'static',
-            keyboard: false
-          });
           //insert data to form
           $("#data-form #id").val(response.id);
-          $("#data-form #nis").val(response.nis);
-          $("#data-form #nisn").val(response.nisn);
-          $("#data-form #nama_lengkap").val(response.nama_lengkap);
-          $("#data-form #nama_ayah").val(response.nama_ayah);
-          $("#data-form #nama_ibu").val(response.nama_ibu);
-          $("#data-form #nama_wali").val(response.nama_wali);
-          $("#data-form #alamat").val(response.alamat);
-          $("#data-form #telepon").val(response.telepon);
+          $("#data-form #id_kegiatan").val(response.id_kegiatan);
+          $("#data-form #id_tp_lulus").val(response.id_tp_lulus);
+          $("#data-form #al_img").val(response.al_img);
+          $("#data-form #id_siswa").val(response.id_siswa);
+          $("#data-form #password").val(response.password);
 
         }
       });

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2023 at 01:29 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Waktu pembuatan: 20 Feb 2023 pada 09.13
+-- Versi server: 10.4.27-MariaDB
+-- Versi PHP: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,99 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelas`
+-- Struktur dari tabel `alumni`
+--
+
+CREATE TABLE `alumni` (
+  `id` int(11) NOT NULL,
+  `id_kegiatan` int(11) NOT NULL,
+  `id_tp_lulus` int(11) NOT NULL,
+  `al_img` varchar(150) DEFAULT NULL,
+  `id_siswa` int(11) NOT NULL,
+  `password` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `alumni`
+--
+
+INSERT INTO `alumni` (`id`, `id_kegiatan`, `id_tp_lulus`, `al_img`, `id_siswa`, `password`) VALUES
+(19, 1, 1, NULL, 3, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `instansi`
+--
+
+CREATE TABLE `instansi` (
+  `id` int(11) NOT NULL,
+  `id_jenis` int(11) NOT NULL,
+  `nama_instansi` varchar(250) NOT NULL,
+  `jabatan` varchar(200) NOT NULL,
+  `nama_atasan` varchar(200) NOT NULL,
+  `alamat_instansi` tinytext NOT NULL,
+  `no_telepon` varchar(100) NOT NULL,
+  `id_alumni` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kampus`
+--
+
+CREATE TABLE `kampus` (
+  `id` int(11) NOT NULL,
+  `nama_kampus` varchar(200) NOT NULL,
+  `fakultas` varchar(200) NOT NULL,
+  `program_studi` varchar(100) NOT NULL,
+  `jenjang` varchar(20) NOT NULL,
+  `alamat_kampus` tinytext NOT NULL,
+  `no_telepon` varchar(20) NOT NULL,
+  `id_alumni` int(11) NOT NULL,
+  `keterangan` varchar(100) DEFAULT NULL,
+  `tahun_masuk` int(11) NOT NULL,
+  `tahun_lulus` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kegiatan`
+--
+
+CREATE TABLE `kegiatan` (
+  `id` int(11) NOT NULL,
+  `nama_kegiatan` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `kegiatan`
+--
+
+INSERT INTO `kegiatan` (`id`, `nama_kegiatan`) VALUES
+(1, 'Kuliah'),
+(2, 'Bekerja'),
+(3, 'Belum Bekerja'),
+(4, 'Mencari Pekerjaan');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kegiatan_alumni`
+--
+
+CREATE TABLE `kegiatan_alumni` (
+  `id` int(11) NOT NULL,
+  `id_alumni` int(11) NOT NULL,
+  `id_kegiatan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kelas`
 --
 
 CREATE TABLE `kelas` (
@@ -34,7 +126,7 @@ CREATE TABLE `kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `kelas`
+-- Dumping data untuk tabel `kelas`
 --
 
 INSERT INTO `kelas` (`id`, `nama_kelas`, `fase`) VALUES
@@ -46,7 +138,7 @@ INSERT INTO `kelas` (`id`, `nama_kelas`, `fase`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelas_siswa`
+-- Struktur dari tabel `kelas_siswa`
 --
 
 CREATE TABLE `kelas_siswa` (
@@ -56,61 +148,157 @@ CREATE TABLE `kelas_siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `kelas_siswa`
+-- Dumping data untuk tabel `kelas_siswa`
 --
 
 INSERT INTO `kelas_siswa` (`id`, `id_siswa`, `id_kelas`) VALUES
-(1, 1, 2),
-(2, 3, 2),
-(3, 1, 3),
-(4, 3, 3),
-(5, 1, 1),
-(6, 3, 1),
-(7, 1, 1),
-(8, 3, 1),
-(9, 1, 3),
-(10, 3, 3),
-(11, 1, 3),
-(12, 3, 3);
+(20, 1, 1),
+(21, 3, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `siswa`
+-- Struktur dari tabel `peminatan`
+--
+
+CREATE TABLE `peminatan` (
+  `id` int(11) NOT NULL,
+  `nama_peminatan` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `peminatan`
+--
+
+INSERT INTO `peminatan` (`id`, `nama_peminatan`) VALUES
+(1, 'IPA'),
+(2, 'IPS'),
+(3, 'Bahasa');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `siswa`
 --
 
 CREATE TABLE `siswa` (
   `id` int(11) NOT NULL,
   `nis` varchar(50) NOT NULL,
   `nisn` varchar(50) NOT NULL,
+  `id_tp_masuk` int(11) DEFAULT NULL,
   `nama_lengkap` varchar(250) NOT NULL,
+  `asal_sekolah` varchar(200) NOT NULL,
+  `img` varchar(150) NOT NULL,
   `nama_ayah` varchar(250) DEFAULT NULL,
   `nama_ibu` varchar(250) DEFAULT NULL,
   `nama_wali` varchar(250) DEFAULT NULL,
   `alamat` tinytext DEFAULT NULL,
-  `telepon` varchar(20) DEFAULT NULL
+  `telepon` varchar(20) DEFAULT NULL,
+  `id_status` int(11) NOT NULL,
+  `id_peminatan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `siswa`
+-- Dumping data untuk tabel `siswa`
 --
 
-INSERT INTO `siswa` (`id`, `nis`, `nisn`, `nama_lengkap`, `nama_ayah`, `nama_ibu`, `nama_wali`, `alamat`, `telepon`) VALUES
-(1, '6876687', '7878', 'Joko', 'Ayah Joko', 'Ibu Joko', 'Wali Joko', 'PERM.LEMBAH ASRI BLOK A6 NO.10 RT.003 RW.008\r\nKEL.BATU IX KECAMATAN.TANJUNGPINANG TIMUR', '081391927475'),
-(3, '76557', '6546456', 'Jono', 'rdtre', 'tert', 'tert', 'tretre', 'tret');
+INSERT INTO `siswa` (`id`, `nis`, `nisn`, `id_tp_masuk`, `nama_lengkap`, `asal_sekolah`, `img`, `nama_ayah`, `nama_ibu`, `nama_wali`, `alamat`, `telepon`, `id_status`, `id_peminatan`) VALUES
+(1, '6876687', '7878', 4, 'Joko', 'SMP 5 Tanjungpinang', '', 'Ayah Joko', 'Ibu Joko', 'Wali Joko', 'PERM.LEMBAH ASRI BLOK A6 NO.10 RT.003 RW.008\nKEL.BATU IX KECAMATAN.TANJUNGPINANG TIMUR', '081391927475', 1, 1),
+(3, '76557', '6546456', 4, 'Jono', 'SMP 5 Tanjungpinang', '', 'Ayah Jono', 'Ibu Jono', 'Wali Jono', 'PERM.LEMBAH ASRI BLOK A6 NO.10 RT.003 RW.008\nKEL.BATU IX KECAMATAN.TANJUNGPINANG TIMUR', '0812323233333', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `status`
+--
+
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `nama_status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `status`
+--
+
+INSERT INTO `status` (`id`, `nama_status`) VALUES
+(1, 'Aktif'),
+(2, 'Lulus'),
+(3, 'Pindah'),
+(4, 'Berhenti'),
+(5, 'Meninggal Dunia');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tp`
+--
+
+CREATE TABLE `tp` (
+  `id` int(11) NOT NULL,
+  `tahun_pelajaran` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tp`
+--
+
+INSERT INTO `tp` (`id`, `tahun_pelajaran`) VALUES
+(1, '2019/2020'),
+(2, '2020/2021'),
+(3, '2021/2022'),
+(4, '2022/2023'),
+(5, '2023/2024');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `kelas`
+-- Indeks untuk tabel `alumni`
+--
+ALTER TABLE `alumni`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kegiatan` (`id_kegiatan`),
+  ADD KEY `id_tp` (`id_tp_lulus`),
+  ADD KEY `id_siswa` (`id_siswa`);
+
+--
+-- Indeks untuk tabel `instansi`
+--
+ALTER TABLE `instansi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_alumni` (`id_alumni`);
+
+--
+-- Indeks untuk tabel `kampus`
+--
+ALTER TABLE `kampus`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_alumni` (`id_alumni`);
+
+--
+-- Indeks untuk tabel `kegiatan`
+--
+ALTER TABLE `kegiatan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `kegiatan_alumni`
+--
+ALTER TABLE `kegiatan_alumni`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_alumni` (`id_alumni`),
+  ADD KEY `id_kegiatan` (`id_kegiatan`);
+
+--
+-- Indeks untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kelas_siswa`
+-- Indeks untuk tabel `kelas_siswa`
 --
 ALTER TABLE `kelas_siswa`
   ADD PRIMARY KEY (`id`),
@@ -118,45 +306,149 @@ ALTER TABLE `kelas_siswa`
   ADD KEY `id_siswa` (`id_siswa`);
 
 --
--- Indexes for table `siswa`
+-- Indeks untuk tabel `peminatan`
+--
+ALTER TABLE `peminatan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nis` (`nis`),
-  ADD UNIQUE KEY `nisn` (`nisn`);
+  ADD UNIQUE KEY `nisn` (`nisn`),
+  ADD KEY `siswa_ibfk_1` (`id_status`),
+  ADD KEY `id_peminatan` (`id_peminatan`),
+  ADD KEY `id_tp_masuk` (`id_tp_masuk`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeks untuk tabel `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tp`
+--
+ALTER TABLE `tp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `kelas`
+-- AUTO_INCREMENT untuk tabel `alumni`
+--
+ALTER TABLE `alumni`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT untuk tabel `instansi`
+--
+ALTER TABLE `instansi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kampus`
+--
+ALTER TABLE `kampus`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kegiatan`
+--
+ALTER TABLE `kegiatan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `kegiatan_alumni`
+--
+ALTER TABLE `kegiatan_alumni`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `kelas_siswa`
+-- AUTO_INCREMENT untuk tabel `kelas_siswa`
 --
 ALTER TABLE `kelas_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `siswa`
+-- AUTO_INCREMENT untuk tabel `peminatan`
+--
+ALTER TABLE `peminatan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT untuk tabel `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `tp`
+--
+ALTER TABLE `tp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `kelas_siswa`
+-- Ketidakleluasaan untuk tabel `alumni`
+--
+ALTER TABLE `alumni`
+  ADD CONSTRAINT `alumni_ibfk_1` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id`),
+  ADD CONSTRAINT `alumni_ibfk_2` FOREIGN KEY (`id_tp_lulus`) REFERENCES `tp` (`id`),
+  ADD CONSTRAINT `alumni_ibfk_3` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `instansi`
+--
+ALTER TABLE `instansi`
+  ADD CONSTRAINT `instansi_ibfk_1` FOREIGN KEY (`id_alumni`) REFERENCES `alumni` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `kampus`
+--
+ALTER TABLE `kampus`
+  ADD CONSTRAINT `kampus_ibfk_1` FOREIGN KEY (`id_alumni`) REFERENCES `alumni` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `kegiatan_alumni`
+--
+ALTER TABLE `kegiatan_alumni`
+  ADD CONSTRAINT `kegiatan_alumni_ibfk_1` FOREIGN KEY (`id_alumni`) REFERENCES `alumni` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kegiatan_alumni_ibfk_2` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id`) ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `kelas_siswa`
 --
 ALTER TABLE `kelas_siswa`
   ADD CONSTRAINT `kelas_siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `kelas_siswa_ibfk_2` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `siswa`
+--
+ALTER TABLE `siswa`
+  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `siswa_ibfk_2` FOREIGN KEY (`id_peminatan`) REFERENCES `peminatan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `siswa_ibfk_3` FOREIGN KEY (`id_tp_masuk`) REFERENCES `tp` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
