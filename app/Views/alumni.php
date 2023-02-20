@@ -95,7 +95,7 @@
 
           <div class="form-group text-center">
             <div class="btn-group">
-              <button type="submit" class="btn btn-success mr-2" id="form-btn"><?= lang("App.save") ?></button>
+              <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
             </div>
           </div>

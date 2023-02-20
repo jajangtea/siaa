@@ -52,7 +52,7 @@
 <!-- /Main content -->
 
 <!-- ADD modal content -->
-<div id="data-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="data-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
     <div class="modal-content">
       <div class="text-center bg-info p-3" id="model-header">
