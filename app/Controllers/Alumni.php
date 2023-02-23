@@ -359,24 +359,25 @@ class Alumni extends BaseController
 		$nisn = $this->request->getVar('nisn');
 		$password = $this->request->getVar('password');
 		$db = db_connect();
-		$sql = "select siswa.nisn,alumni.password from alumni INNER join siswa on siswa.id=alumni.id_siswa where siswa.nisn='" . $nisn . "' ";
+		$sql = "select siswa.nisn,alumni.password,alumni.id_siswa from alumni INNER join siswa on siswa.id=alumni.id_siswa where siswa.nisn='" . $nisn . "' ";
 
 		$data = $db->query($sql)->getRow();
-	
+
 		if ($data) {
 			$pass = $data->password;
 			$verify_pass = password_verify($password, $pass);
 			if ($verify_pass) {
 				$ses_data = [
 					'nisn'     => $data->nisn,
+					'id_siswa'     => $data->id_siswa,
 					'password'    => $data->password,
 					'logged_in'     => TRUE
 				];
-				echo "hasil : " . $verify_pass;
+				echo "hasilx : " . $verify_pass;
 				print_r($ses_data);
-				exit;
+				// exit;
 				$session->set($ses_data);
-				return redirect()->to('/dashboard');
+				return redirect()->to(base_url('alumni/dashboard'));
 			} else {
 				// $session->setFlashdata('msg', 'Wrong Password');
 				// return redirect()->to('/login');
@@ -393,6 +394,50 @@ class Alumni extends BaseController
 	{
 		$session = session();
 		$session->destroy();
-		return redirect()->to('/login');
+		return redirect()->to(base_url('alumni/login_alumni'));
 	}
+
+	public function dashboard()
+	{
+
+
+		$response = $data['data'] = array();
+
+		$session = session();
+		// echo "Welcome back, " . $session->get('nisn');
+		$db      = \Config\Database::connect();
+		$builder = $db->table('siswa');
+		$builder->where('siswa.nisn', $session->get('nisn'));
+		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id,tp.tahun_pelajaran');
+		$builder->join('status', 'status.id = siswa.id_status');
+		$builder->join('tp', 'tp.id = siswa.id_tp_masuk');
+
+
+		$result = $builder->get()->getRow();
+
+		$data = [
+			'controller'    	=> 'alumni',
+			'title'     		=> 'Dashboard Alumni',
+			'biodata'	=> $result,
+			'tp_lulus' => $this->getTahunLulus()
+
+		];
+
+		return view('alumni/dashboard', $data);
+	}
+
+	public function getTahunLulus()
+	{
+		$session = session();
+		$db      = \Config\Database::connect();
+		$builder = $db->table('alumni');
+		$builder->where('alumni.id_siswa', $session->get('id_siswa'));
+		$builder->select('tp.tahun_pelajaran');
+		$builder->join('tp', 'tp.id = alumni.id_tp_lulus');
+		$result = $builder->get()->getRow();
+		$tp_lulus = $result->tahun_pelajaran;
+		return $tp_lulus;
+	}
+
+	
 }
