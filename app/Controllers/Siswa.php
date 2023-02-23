@@ -109,6 +109,7 @@ class Siswa extends BaseController
 				'id_kegiatan'    => 1,
 				'id_tp_lulus'   => 1,
 				'id_siswa' => $seg1,
+				'password'=>  password_hash("1234", PASSWORD_DEFAULT)
 			]);
 
 			$builder = $db->table('siswa');

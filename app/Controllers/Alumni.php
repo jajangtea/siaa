@@ -340,4 +340,59 @@ class Alumni extends BaseController
 
 		return redirect()->to(site_url('kelassiswa'));
 	}
+
+	public function login_alumni()
+	{
+		$data = [
+			'controller'    	=> 'siswa',
+			'title'     		=> 'Login Alumni'
+		];
+		helper(['form']);
+		echo view('login', $data);
+	}
+
+
+
+	public function auth()
+	{
+		$session = session();
+		$nisn = $this->request->getVar('nisn');
+		$password = $this->request->getVar('password');
+		$db = db_connect();
+		$sql = "select siswa.nisn,alumni.password from alumni INNER join siswa on siswa.id=alumni.id_siswa where siswa.nisn='" . $nisn . "' ";
+
+		$data = $db->query($sql)->getRow();
+	
+		if ($data) {
+			$pass = $data->password;
+			$verify_pass = password_verify($password, $pass);
+			if ($verify_pass) {
+				$ses_data = [
+					'nisn'     => $data->nisn,
+					'password'    => $data->password,
+					'logged_in'     => TRUE
+				];
+				echo "hasil : " . $verify_pass;
+				print_r($ses_data);
+				exit;
+				$session->set($ses_data);
+				return redirect()->to('/dashboard');
+			} else {
+				// $session->setFlashdata('msg', 'Wrong Password');
+				// return redirect()->to('/login');
+				echo "hasil : " . $verify_pass;
+			}
+		} else {
+			$session->setFlashdata('msg', 'Email not Found');
+			// return redirect()->to('/login');
+			echo "hasil : ";
+		}
+	}
+
+	public function logout()
+	{
+		$session = session();
+		$session->destroy();
+		return redirect()->to('/login');
+	}
 }
