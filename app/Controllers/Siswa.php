@@ -40,6 +40,7 @@ class Siswa extends BaseController
 		// $result = $this->kelassiswaModel->select()->findAll();
 		$db      = \Config\Database::connect();
 		$builder = $db->table('siswa');
+		$builder->where('siswa.id_status!=','2');
 		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id');
 		$builder->join('status', 'status.id = siswa.id_status');
 		$result = $builder->get();

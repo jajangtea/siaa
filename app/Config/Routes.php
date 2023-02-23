@@ -82,6 +82,7 @@ $routes->post('/alumni/add', 'Alumni::add');
 $routes->post('/alumni/edit', 'Alumni::edit');
 $routes->post('/alumni/remove', 'Alumni::remove');
 $routes->post('/alumni/upload', 'Alumni::upload');
+$routes->get('/alumni/kembalikan/(:num)', 'Alumni::Kembalikan/$1');
 
 $routes->match(['get', 'post'], 'kelassiswa/ajaxSearch', 'Kelassiswa::ajaxSearch');
 

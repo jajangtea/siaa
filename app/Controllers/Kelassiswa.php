@@ -42,7 +42,7 @@ class Kelassiswa extends BaseController
 		$db      = \Config\Database::connect();
 		$builder = $db->table('kelas_siswa');
 		$builder->select('kelas_siswa.id,siswa.nisn,siswa.nis,siswa.nama_lengkap,kelas.nama_kelas,kelas.fase,kelas_siswa.id_siswa');
-		$builder->where('siswa.id_status!=','');
+		$builder->where('siswa.id_status','1');
 		$builder->join('siswa', 'siswa.id = kelas_siswa.id_siswa');
 		$builder->join('kelas', 'kelas.id = kelas_siswa.id_kelas');
 		$result = $builder->get();

@@ -34,23 +34,33 @@ class Alumni extends BaseController
 
 	public function getAll()
 	{
+		$response = $data['data'] = array();
 		$db      = \Config\Database::connect();
 		$builder = $db->table('alumni');
-		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.telepon,kegiatan.nama_kegiatan,tp.tahun_pelajaran,alumni.id');
+		$builder->where('siswa.id_status', '2');
+		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.telepon,kegiatan.nama_kegiatan,tp.tahun_pelajaran,alumni.id,alumni.id_siswa');
 		$builder->join('kegiatan', 'kegiatan.id = alumni.id_kegiatan');
 		$builder->join('tp', 'tp.id = alumni.id_tp_lulus');
 		$builder->join('siswa', 'siswa.id = alumni.id_siswa');
 		$result = $builder->get();
 
 
+
+		// $sql = $db->getLastQuery();
+		// echo $sql;
+
+		// exit;
+
+
 		// $result = $this->alumniModel->select()->findAll();
+		//$ops .= '</div><a href="' . base_url('siswa/updatelulus/' . $value->id_siswa) . '" class="btn btn-warning float-right"><i class="fa fa-graduation-cap"></i> Lulus</button></div>';
 
 		foreach ($result->getResult() as $key => $value) {
 			$ops = '<div class="btn-group">';
 			$ops .= '<button type="button" class="btn  btn-info" onClick="save(' . $value->id . ')"><i class="fa-solid fa-pen-to-square"></i>   ' .  lang("App.edit")  . '</button>';
 			$ops .= '<button type="button" class="btn  btn-success" onClick="save(' . $value->id . ')"><i class="fa-solid fa-user"></i>   ' .  lang("App.detail")  . '</button>';
-			$ops .= '<button type="button" class="btn  btn-warning" onClick="save(' . $value->id . ')"><i class="fa-solid fa-wand-magic-sparkles"></i>   ' .  lang("App.back")  . '</button>';
-			$ops .= '<button type="button" class="btn  btn-warning" onClick="simpan(' . $value->id . ')"><i class="fa-solid fa-wand-magic-sparkles"></i>Upload</button>';
+			$ops .= '<a href="' . base_url('alumni/kembalikan/' . $value->id_siswa) . '" class="btn btn-warning"><i class="fa fa-graduation-cap"></i> Kembalikan</a>';
+			$ops .= '<button type="button" class="btn  btn-warning" onClick="simpan(' . $value->id_siswa . ')"><i class="fa-solid fa-wand-magic-sparkles"></i>Upload</button>';
 			$ops .= '</div></div>';
 
 			$data['data'][$key] = array(
@@ -275,7 +285,6 @@ class Alumni extends BaseController
 
 
 		if (!$this->validate($validationRule)) {
-			// $response = ['msg' => $this->validator->getErrors()];
 			$response = [
 				'success' => true,
 				'data' => $this->validator->getErrors(),
@@ -304,5 +313,31 @@ class Alumni extends BaseController
 			];
 		}
 		return $this->response->setJSON($response);
+	}
+
+
+	public function kembalikan($id_siswa)
+	{
+		$response = array();
+		$db      = \Config\Database::connect();
+		$builder = $db->table('alumni');
+		$builder->where('id_siswa', $id_siswa);
+		$count = $builder->countAllResults();
+
+		if ($count > 0) {
+
+			$builder = $db->table('siswa');
+			$builder->set('id_status', 1, false);
+			$builder->where('id', $id_siswa);
+			$builder->update();
+			$response['success'] = true;
+			$response['messages'] = lang("App.update-success");
+		} else {
+
+			$response['success'] = false;
+			$response['messages'] = lang("App.update-error");
+		}
+
+		return redirect()->to(site_url('kelassiswa'));
 	}
 }
