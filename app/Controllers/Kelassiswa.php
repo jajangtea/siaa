@@ -39,10 +39,10 @@ class Kelassiswa extends BaseController
 	{
 		$response = $data['data'] = array();
 
-		// $result = $this->kelassiswaModel->select()->findAll();
 		$db      = \Config\Database::connect();
 		$builder = $db->table('kelas_siswa');
-		$builder->select('kelas_siswa.id,siswa.nisn,siswa.nis,siswa.nama_lengkap,kelas.nama_kelas,kelas.fase');
+		$builder->select('kelas_siswa.id,siswa.nisn,siswa.nis,siswa.nama_lengkap,kelas.nama_kelas,kelas.fase,kelas_siswa.id_siswa');
+		$builder->where('siswa.id_status!=','');
 		$builder->join('siswa', 'siswa.id = kelas_siswa.id_siswa');
 		$builder->join('kelas', 'kelas.id = kelas_siswa.id_kelas');
 		$result = $builder->get();
@@ -57,7 +57,7 @@ class Kelassiswa extends BaseController
 			$ops .= '<a class="dropdown-item text-orange" ><i class="fa-solid fa-copy"></i>   ' .  lang("App.copy")  . '</a>';
 			$ops .= '<div class="dropdown-divider"></div>';
 			$ops .= '<a class="dropdown-item text-danger" onClick="remove(' . $value->id . ')"><i class="fa-solid fa-trash"></i>   ' .  lang("App.delete")  . '</a>';
-			$ops .= '</div></div>';
+			$ops .= '</div><a href="' . base_url('siswa/updatelulus/' . $value->id_siswa) . '" class="btn btn-warning float-right"><i class="fa fa-graduation-cap"></i> Lulus</button></div>';
 
 			$data['data'][$key] = array(
 				$value->id,

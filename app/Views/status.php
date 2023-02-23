@@ -7,7 +7,7 @@
   <div class="card-header">
     <div class="row">
       <div class="col-10 mt-2">
-        <h3 class="card-title">Data Siswa</h3>
+        <h3 class="card-title">Daftar Status Siswa</h3>
       </div>
       <div class="col-2">
         <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
@@ -19,30 +19,12 @@
     <table id="data_table" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>No</th>
-          <th>NISN</th>
-          <th>NIS</th>
-          <th>Nama Lengkap</th>
-          <th>Kelas</th>
-          <th>Fase</th>
+          <th>Id</th>
+          <th>Nama Status</th>
 
           <th></th>
         </tr>
       </thead>
-      <tbody>
-
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>No</th>
-          <th>NISN</th>
-          <th>NIS</th>
-          <th>Nama Lengkap</th>
-          <th>Kelas</th>
-          <th>Fase</th>
-          <th></th>
-        </tr>
-      </tfoot>
     </table>
   </div>
   <!-- /.card-body -->
@@ -65,27 +47,9 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="form-group">
-                <div class="select2-purple">
-                  <label for="id_siswa" class="col-form-label"> Nama siswa: <span class="text-danger">*</span> </label>
-                  <select id="id_siswa" class="search select2" multiple="multiple" name="id_siswa[]" required>
-                    <?php foreach ($siswa as $s) { ?>
-                      <option value="<?php echo $s->id; ?>"><?php echo $s->nama_lengkap; ?></option>"
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
               <div class="form-group mb-3">
-                <label for="id_kelas" class="col-form-label"> Kelas: <span class="text-danger">*</span> </label>
-                <select id="id_kelas" name="id_kelas" class="form-control" required>
-                  <option value="">Pilih Kelas</option>
-                  <?php foreach ($kelas as $k) { ?>
-                    <option value="<?php echo $k->id; ?>"><?php echo $k->nama_kelas; ?></option>"
-                  <?php } ?>
-                </select>
-
+                <label for="nama_status" class="col-form-label"> Nama Status: <span class="text-danger">*</span> </label>
+                <input type="text" id="nama_status" name="nama_status" class="form-control" placeholder="Nama Status" minlength="0" maxlength="50" required>
               </div>
             </div>
           </div>
@@ -111,87 +75,27 @@
 
 <!-- page script -->
 <?= $this->section("pageScript") ?>
-
-
 <script>
   // dataTables
-
-
-
   $(function() {
-
-    $('#data_table tfoot th').each(function() {
-      var title = $(this).text();
-      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-    });
-
     var table = $('#data_table').removeAttr('width').DataTable({
-
-      "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-        $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
-      },
       "paging": true,
       "lengthChange": false,
-      // "searching": true,
+      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false,
       "scrollY": '45vh',
       "scrollX": true,
-      "scrollCollapse": true,
-      columnDefs: [{
-        width: 200,
-        targets: 0
-      }],
-      "responsive": true,
+      "scrollCollapse": false,
+      "responsive": false,
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
         "dataType": "json",
         async: "true"
-      },
-      initComplete: function() {
-        this.api().columns([1, 2, 4, 5]).every(function() {
-          var column = this;
-          var select = $('<select class="form-control"><option value=""></option></select>')
-            .appendTo($(column.footer()).empty())
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
-
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
-            });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-          });
-        }, );
-
-        this.api().columns([0, 1, 2, 3, 6]).every(function() {
-          var column = this;
-          var select = $('<input type="text" class="form-control" />')
-            .appendTo($(column.footer()).empty())
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
-
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
-            });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-          });
-        }, );
       }
     });
-
-
   });
 
   var urlController = '';
@@ -233,8 +137,7 @@
           $('#data-modal').modal('show');
           //insert data to form
           $("#data-form #id").val(response.id);
-          $("#data-form #id_siswa").val(response.id_siswa);
-          $("#data-form #id_kelas").val(response.id_kelas);
+          $("#data-form #nama_status").val(response.nama_status);
 
         }
       });
@@ -375,22 +278,7 @@
       }
     })
   }
-
-  $(".search").select2({
-
-    dropdownParent: $('#data-modal .modal-content')
-
-
-  });
 </script>
-
-<style>
-  tfoot input {
-    width: 100%;
-    padding: 3px;
-    box-sizing: border-box;
-  }
-</style>
 
 
 <?= $this->endSection() ?>

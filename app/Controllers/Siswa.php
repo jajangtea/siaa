@@ -32,11 +32,19 @@ class Siswa extends BaseController
 
 	public function getAll()
 	{
+
+		// $result = $this->siswaModel->select()->findAll();
+
 		$response = $data['data'] = array();
 
-		$result = $this->siswaModel->select()->findAll();
+		// $result = $this->kelassiswaModel->select()->findAll();
+		$db      = \Config\Database::connect();
+		$builder = $db->table('siswa');
+		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id');
+		$builder->join('status', 'status.id = siswa.id_status');
+		$result = $builder->get();
 
-		foreach ($result as $key => $value) {
+		foreach ($result->getResult() as $key => $value) {
 
 			$ops = '<div class="btn-group">';
 			$ops .= '<button type="button" class=" btn btn-sm dropdown-toggle btn-info" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
@@ -48,6 +56,9 @@ class Siswa extends BaseController
 			$ops .= '<a class="dropdown-item text-danger" onClick="remove(' . $value->id . ')"><i class="fa-solid fa-trash"></i>   ' .  lang("App.delete")  . '</a>';
 			$ops .= '</div></div>';
 
+
+
+
 			$data['data'][$key] = array(
 				$value->id,
 				$value->nis,
@@ -58,13 +69,16 @@ class Siswa extends BaseController
 				$value->nama_wali,
 				$value->alamat,
 				$value->telepon,
+				$value->nama_status,
 
-				$ops
+				$ops,
 			);
 		}
 
 		return $this->response->setJSON($data);
 	}
+
+
 
 	public function getOne()
 	{
@@ -80,6 +94,56 @@ class Siswa extends BaseController
 		} else {
 			throw new \CodeIgniter\Exceptions\PageNotFoundException();
 		}
+	}
+	public function updatelulus($seg1)
+	{
+		$response = array();
+		$db      = \Config\Database::connect();
+		$builder = $db->table('alumni');
+		$builder->where('id', $seg1);
+		$count = $builder->countAllResults();
+
+		if ($count == 0) {
+			$db->table('alumni')->insert([
+				'id_kegiatan'    => 1,
+				'id_tp_lulus'   => 1,
+				'id_siswa' => $seg1,
+			]);
+
+			$builder = $db->table('siswa');
+			$builder->set('id_status', 2, false);
+			$builder->where('id', $seg1);
+			$builder->update();
+			$response['success'] = true;
+			$response['messages'] = lang("App.update-success");
+		} else {
+
+			$response['success'] = false;
+			$response['messages'] = lang("App.update-error");
+		}
+
+		// return $this->response->setJSON($response);
+		return redirect()->to(site_url('kelassiswa'));
+
+		// Produces an integer, like 25
+
+		// $builder->from('alumni');
+		// echo $builder->countAllResults(); // Produces an integer, like 17
+
+		// $response = array();
+
+		// $id = $this->request->getPost('id');
+
+		// if ($this->validation->check($id, 'required|numeric')) {
+		// $db      = \Config\Database::connect();
+		// $count = $this->siswaModel->where('id', $seg1)->first();
+		// $count = $db->where('id', $seg1)->first();
+		// $count = $this->db->countAllResults('');
+
+		// 	return $this->response->setJSON($data);
+		// } else {
+		// 	throw new \CodeIgniter\Exceptions\PageNotFoundException();
+		// }
 	}
 
 	public function add()
