@@ -6,15 +6,18 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 
 use App\Models\AlumniModel;
+use App\Models\SiswaModel;
 
 class Alumni extends BaseController
 {
 
 	protected $alumniModel;
+	protected $siswaModel;
 	protected $validation;
 
 	public function __construct()
 	{
+		$this->siswaModel = new SiswaModel();
 		$this->alumniModel = new AlumniModel();
 		$this->validation =  \Config\Services::validation();
 	}
@@ -408,9 +411,11 @@ class Alumni extends BaseController
 		$db      = \Config\Database::connect();
 		$builder = $db->table('siswa');
 		$builder->where('siswa.nisn', $session->get('nisn'));
-		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id,tp.tahun_pelajaran');
+		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id,tp.tahun_pelajaran,alumni.al_img as foto_terbaru,alumni.telepon as telepon_terbaru,alumni.alamat as alamat_terbaru,siswa.img as foto_lawas,kegiatan.nama_kegiatan');
 		$builder->join('status', 'status.id = siswa.id_status');
 		$builder->join('tp', 'tp.id = siswa.id_tp_masuk');
+		$builder->join('alumni', 'alumni.id_siswa = siswa.id');
+		$builder->join('kegiatan', 'kegiatan.id = alumni.id_kegiatan');
 
 
 		$result = $builder->get()->getRow();
@@ -439,5 +444,18 @@ class Alumni extends BaseController
 		return $tp_lulus;
 	}
 
-	
+	public function getOne_alumni()
+	{
+		$session = session();
+		$response = array();
+
+		$id = $session->get('id_siswa');
+
+		if ($this->validation->check($id, 'required|numeric')) {
+			$data = $this->siswaModel->where('id', $id)->first();
+			return $this->response->setJSON($data);
+		} else {
+			throw new \CodeIgniter\Exceptions\PageNotFoundException();
+		}
+	}
 }

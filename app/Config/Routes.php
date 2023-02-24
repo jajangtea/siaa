@@ -87,6 +87,8 @@ $routes->get('/alumni/login_alumni', 'Alumni::login_alumni');
 $routes->post('/alumni/auth', 'Alumni::auth');
 $routes->get('/alumni/dashboard', 'Alumni::dashboard');
 $routes->get('/alumni/logout', 'Alumni::logout');
+$routes->post('/alumni/getOne_alumni', 'Alumni::getOne_alumni');
+$routes->post('/alumni/edit_alumni', 'Alumni::edit_alumni');
 
 $routes->match(['get', 'post'], 'kelassiswa/ajaxSearch', 'Kelassiswa::ajaxSearch');
 
