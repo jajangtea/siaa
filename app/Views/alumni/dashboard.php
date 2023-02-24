@@ -68,12 +68,12 @@
                                 <b>Telepon/Whatsapp</b> <a class="float-right"><?= $biodata->telepon_terbaru ?></a>
                             </li>
                             <li class="list-group-item">
-                                <b>Alamat</b> <a class="float-right"><?= $biodata->alamat_terbaru ?></a>
+                                <b>Alamat</b> <a class="float-right" id="d_alamat"><?= $biodata->alamat_terbaru ?></a>
                             </li>
-
                         </ul>
 
-                        <button type="button" onclick="update()" class="btn btn-primary btn-block"><b>Update Image & Whatsapp</b></button>
+                        <button type="button" onclick="update()" class="btn btn-primary btn-block"><b>Update Data</b></button>
+                        <button type="button" onclick="updateFoto()" class="btn btn-primary btn-block"><b>Update Foto</b></button>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -95,7 +95,6 @@
                                 <div class="col-12">
                                     <h4>
                                         <i class="fas fa-user"></i> Informasi Pendidikan
-                                        <small class="float-right">Date: 2/10/2014</small>
                                     </h4>
                                 </div>
                                 <!-- /.col -->
@@ -117,7 +116,6 @@
                                                 <th>Tahun masuk</th>
                                                 <th>Tahun lulus</th>
                                                 <th>Keterangan</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -142,23 +140,6 @@
                                 </div>
                                 <!-- /.col -->
                             </div>
-                            <!-- /.row -->
-
-
-                            <!-- /.row -->
-
-                            <!-- this row will not appear when printing -->
-                            <div class="row no-print">
-                                <div class="col-12">
-                                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                                        Payment
-                                    </button>
-                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-download"></i> Generate PDF
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                         <!-- /.invoice -->
                     </div><!-- /.col -->
@@ -172,7 +153,6 @@
                                 <div class="col-12">
                                     <h4>
                                         <i class="fas fa-user"></i> Informasi Pekerjaan
-                                        <small class="float-right">Date: 2/10/2014</small>
                                     </h4>
                                 </div>
                                 <!-- /.col -->
@@ -217,34 +197,12 @@
                                 </div>
                                 <!-- /.col -->
                             </div>
-                            <!-- /.row -->
-
-
-                            <!-- /.row -->
-
-                            <!-- this row will not appear when printing -->
-                            <div class="row no-print">
-                                <div class="col-12">
-                                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                                        Payment
-                                    </button>
-                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-download"></i> Generate PDF
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                         <!-- /.invoice -->
                     </div><!-- /.col -->
                 </div>
             </div>
-
-
-
-
         </div>
-
         <!-- /.col -->
     </div>
     <!-- /.row -->
@@ -263,42 +221,30 @@
                         <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label for="nis" class="col-form-label"> Nis: <span class="text-danger">*</span> </label>
-                                <input type="number" id="nis" name="nis" class="form-control" placeholder="Nis" minlength="0" maxlength="11" required>
+                                <label for="id_kegiatan" class="col-form-label"> Kegiatan: <span class="text-danger">*</span> </label>
+                                <select id="id_kegiatan" name="id_kegiatan" class="form-control" required>
+                                    <option value="">Pilih Kegiatan</option>
+                                    <?php foreach ($kegiatan as $k) { ?>
+                                        <option value="<?php echo $k->id; ?>"><?php echo $k->nama_kegiatan; ?></option>"
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+
+                        <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label for="nisn" class="col-form-label"> Nisn: <span class="text-danger">*</span> </label>
-                                <input type="number" id="nisn" name="nisn" class="form-control" placeholder="Nisn" minlength="0" maxlength="11" required>
+                                <label for="id_tp_lulus" class="col-form-label"> Telepon: </label>
+                                <select id="id_tp_lulus" name="id_tp_lulus" class="form-control" required>
+                                    <option value="">Pilih Tahun Lulus</option>
+                                    <?php foreach ($tp as $k) { ?>
+                                        <option value="<?php echo $k->id; ?>"><?php echo $k->tahun_pelajaran; ?></option>"
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <label for="nama_lengkap" class="col-form-label"> Nama lengkap: </label>
-                                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" placeholder="Nama lengkap" minlength="0" maxlength="250">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <label for="nama_ayah" class="col-form-label"> Nama ayah: </label>
-                                <input type="text" id="nama_ayah" name="nama_ayah" class="form-control" placeholder="Nama ayah" minlength="0" maxlength="250">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <label for="nama_ibu" class="col-form-label"> Nama ibu: </label>
-                                <input type="text" id="nama_ibu" name="nama_ibu" class="form-control" placeholder="Nama ibu" minlength="0" maxlength="250">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <label for="nama_wali" class="col-form-label"> Nama wali: </label>
-                                <input type="text" id="nama_wali" name="nama_wali" class="form-control" placeholder="Nama wali" minlength="0" maxlength="250">
-                            </div>
-                        </div>
+
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <label for="telepon" class="col-form-label"> Telepon: </label>
@@ -330,16 +276,53 @@
 </div>
 
 
+<div id="data-modal-upload" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="text-center bg-info p-3" id="model-header">
+                <h4 class="modal-title text-white" id="info-header-modalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="upload_image_form" enctype="multipart/form-data">
+                    <div id="alertMessage" class="alert alert-warning mb-3" style="display: none">
+                        <span id="alertMsg"></span>
+                    </div>
+                    <div class="d-grid text-center">
+                        <img class="mb-3" id="ajaxImgUpload" alt="Preview Image" src="https://via.placeholder.com/300" />
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" name="file" multiple="true" id="finput" onchange="onFileUpload(this);" class="form-control form-control-lg" accept="image/*">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success uploadBtn">Upload</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
 <!-- /.content -->
 <?= $this->endSection() ?>
 <!-- page script -->
 <?= $this->section("pageScript") ?>
 <script>
-    nisn = <?= $biodata->nisn; ?>;
+    nisn = <?= $biodata->id_siswa; ?>;
     id = parseInt(nisn);
+    var urlController = '';
+    var submitText = '';
+
+    function getUrl() {
+        return urlController;
+    }
+
+    function getSubmitText() {
+        return submitText;
+    }
 
     function update() {
-        console.log(id);
         // reset the form 
         $("#data-form")[0].reset();
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
@@ -361,14 +344,122 @@
                     $('#data-modal').modal('show');
                     //insert data to form
                     $("#data-form #id").val(response.id);
-                    $("#data-form #nis").val(response.nis);
-                    $("#data-form #nisn").val(response.nisn);
-                    $("#data-form #nama_lengkap").val(response.nama_lengkap);
-                    $("#data-form #nama_ayah").val(response.nama_ayah);
-                    $("#data-form #nama_ibu").val(response.nama_ibu);
-                    $("#data-form #nama_wali").val(response.nama_wali);
+                    $("#data-form #id_kegiatan").val(response.id_kegiatan);
+                    $("#data-form #id_siswa").val(response.id_siswa);
+                    $("#data-form #id_tp_lulus").val(response.id_tp_lulus);
                     $("#data-form #alamat").val(response.alamat);
                     $("#data-form #telepon").val(response.telepon);
+                    $("#data-form #d_alamat").val(response.alamat);
+
+                }
+            });
+        }
+        $.validator.setDefaults({
+            highlight: function(element) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            },
+            errorElement: 'div ',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else if ($(element).is('.select')) {
+                    element.next().after(error);
+                } else if (element.hasClass('select2')) {
+                    //error.insertAfter(element);
+                    error.insertAfter(element.next());
+                } else if (element.hasClass('selectpicker')) {
+                    error.insertAfter(element.next());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var form = $('#data-form');
+                $(".text-danger").remove();
+                $.ajax({
+                    url: getUrl(),
+                    type: 'post',
+                    data: form.serialize(),
+                    cache: false,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $('#form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                    },
+                    success: function(response) {
+                        if (response.success === true) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: response.messages,
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function() {
+                                location.replace('<?= base_url($controller . "/dashboard") ?>');
+                                $('#data-modal').modal('hide');
+                            })
+                        } else {
+                            if (response.messages instanceof Object) {
+                                $.each(response.messages, function(index, value) {
+                                    var ele = $("#" + index);
+                                    ele.closest('.form-control')
+                                        .removeClass('is-invalid')
+                                        .removeClass('is-valid')
+                                        .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                                    ele.after('<div class="invalid-feedback">' + response.messages[index] + '</div>');
+                                });
+                            } else {
+                                Swal.fire({
+                                    toast: false,
+                                    position: 'bottom-end',
+                                    icon: 'error',
+                                    title: response.messages,
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                })
+
+                            }
+                        }
+                        $('#form-btn').html(getSubmitText());
+                    }
+                });
+                return false;
+            }
+        });
+
+        $('#data-form').validate({
+
+            //insert data-form to database
+
+        });
+    }
+
+
+    function updateFoto() {
+        console.log(id);
+        // reset the form 
+        $("#data-form")[0].reset();
+        $(".form-control").removeClass('is-invalid').removeClass('is-valid');
+        if (id > 0) { //edit
+            urlController = '<?= base_url($controller . "/edit_alumni") ?>';
+            submitText = '<?= lang("App.update") ?>';
+            $.ajax({
+                url: '<?php echo base_url($controller . "/getOne_alumni") ?>',
+                type: 'post',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#model-header').removeClass('bg-success').addClass('bg-info');
+                    $("#info-header-modalLabel").text('<?= lang("App.edit") ?>');
+                    $("#form-btn").text(submitText);
+                    $('#data-modal-upload').modal('show');
+                    $("#data-form #al_img").val(response.id_kegiatan);
 
                 }
             });

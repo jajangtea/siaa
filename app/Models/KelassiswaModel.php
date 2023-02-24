@@ -2,16 +2,19 @@
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
 namespace App\Models;
+
 use CodeIgniter\Model;
 
-class KelassiswaModel extends Model {
+class KelassiswaModel extends Model
+{
 
-	public function __construct() {
-        parent::__construct();
-        //$this->load->database();
-        $db = \Config\Database::connect();
-    }
-    
+	public function __construct()
+	{
+		parent::__construct();
+		//$this->load->database();
+		$db = \Config\Database::connect();
+	}
+
 	protected $table = 'kelas_siswa';
 	protected $primaryKey = 'id';
 	protected $returnType = 'object';
@@ -23,17 +26,18 @@ class KelassiswaModel extends Model {
 	protected $deletedField  = 'deleted_at';
 	protected $validationRules    = [];
 	protected $validationMessages = [];
-	protected $skipValidation     = true;    
+	protected $skipValidation     = true;
 
-	public function getSiswa() {
- 
+	public function getSiswa()
+	{
+
 		$query = $this->db->query('select * from siswa');
 		return $query->getResult();
-	 }
-	public function getKelas() {
- 
+	}
+	public function getKelas()
+	{
+
 		$query = $this->db->query('select * from kelas');
 		return $query->getResult();
-	 }
-	
+	}
 }

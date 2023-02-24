@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 
 use App\Models\AlumniModel;
+use App\Models\KegiatanModel;
 use App\Models\SiswaModel;
 use App\Models\PekerjaanModel;
 use App\Models\PendidikanAlumniModel;
@@ -17,6 +18,7 @@ class Alumni extends BaseController
 	protected $siswaModel;
 	protected $pendidikanAlumniModel;
 	protected $pekerjaanModel;
+	protected $kegiatanModel;
 	protected $validation;
 
 	public function __construct()
@@ -25,6 +27,7 @@ class Alumni extends BaseController
 		$this->alumniModel = new AlumniModel();
 		$this->pendidikanAlumniModel = new PendidikanAlumniModel();
 		$this->pekerjaanModel = new PekerjaanModel();
+		$this->kegiatanModel = new KegiatanModel();
 		$this->validation =  \Config\Services::validation();
 	}
 
@@ -54,7 +57,7 @@ class Alumni extends BaseController
 		$result = $builder->get();
 
 
-
+		//$db      = \Config\Database::connect();
 		// $sql = $db->getLastQuery();
 		// echo $sql;
 
@@ -200,44 +203,6 @@ class Alumni extends BaseController
 			];
 		}
 		return $this->response->setJSON($response);
-		// $response = array();
-
-		// $fields['id'] = $this->request->getPost('id');
-		// $fields['id_kegiatan'] = $this->request->getPost('id_kegiatan');
-		// $fields['id_tp_lulus'] = $this->request->getPost('id_tp_lulus');
-		// $fields['al_img'] = $this->request->getPost('al_img');
-		// $fields['id_siswa'] = $this->request->getPost('id_siswa');
-		// $fields['password'] = $this->request->getPost('password');
-
-
-		// $this->validation->setRules([
-		// 	'id_kegiatan' => ['label' => 'Id kegiatan', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
-		// 	'id_tp_lulus' => ['label' => 'Id tp lulus', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
-		// 	'al_img' => ['label' => 'Al img', 'rules' => 'required|min_length[0]|max_length[150]'],
-		// 	'id_siswa' => ['label' => 'Id siswa', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
-		// 	'password' => ['label' => 'Password', 'rules' => 'required|min_length[0]|max_length[200]'],
-
-		// ]);
-
-		// if ($this->validation->run($fields) == FALSE) {
-
-		// 	$response['success'] = false;
-		// 	$response['messages'] = $this->validation->getErrors(); //Show Error in Input Form
-
-		// } else {
-
-		// 	if ($this->alumniModel->update($fields['id'], $fields)) {
-
-		// 		$response['success'] = true;
-		// 		$response['messages'] = lang("App.update-success");
-		// 	} else {
-
-		// 		$response['success'] = false;
-		// 		$response['messages'] = lang("App.update-error");
-		// 	}
-		// }
-
-		// return $this->response->setJSON($response);
 	}
 
 	public function remove()
@@ -417,7 +382,7 @@ class Alumni extends BaseController
 		$db      = \Config\Database::connect();
 		$builder = $db->table('siswa');
 		$builder->where('siswa.nisn', $session->get('nisn'));
-		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id,tp.tahun_pelajaran,alumni.al_img as foto_terbaru,alumni.telepon as telepon_terbaru,alumni.alamat as alamat_terbaru,siswa.img as foto_lawas,kegiatan.nama_kegiatan');
+		$builder->select('alumni.id_siswa,siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id,tp.tahun_pelajaran,alumni.al_img as foto_terbaru,alumni.telepon as telepon_terbaru,alumni.alamat as alamat_terbaru,siswa.img as foto_lawas,kegiatan.nama_kegiatan');
 		$builder->join('status', 'status.id = siswa.id_status');
 		$builder->join('tp', 'tp.id = siswa.id_tp_masuk');
 		$builder->join('alumni', 'alumni.id_siswa = siswa.id');
@@ -433,6 +398,8 @@ class Alumni extends BaseController
 			'tp_lulus' 			=> $this->getTahunLulus(),
 			'pendidikan' 		=> $this->getPendidikan(),
 			'pekerjaan' 		=> $this->getPekerjaan(),
+			'kegiatan' => $this->kegiatanModel->getKegiatan(),
+			'tp' => $this->siswaModel->getTP(),
 
 		];
 
@@ -460,7 +427,7 @@ class Alumni extends BaseController
 		$id = $session->get('id_siswa');
 
 		if ($this->validation->check($id, 'required|numeric')) {
-			$data = $this->siswaModel->where('id', $id)->first();
+			$data = $this->alumniModel->where('id_siswa', $id)->first();
 			return $this->response->setJSON($data);
 		} else {
 			throw new \CodeIgniter\Exceptions\PageNotFoundException();
@@ -495,5 +462,50 @@ class Alumni extends BaseController
 		$result = $builder->get()->getResult();
 
 		return $result;
+	}
+
+	public function edit_alumni()
+	{
+		$response = array();
+		$fields['id'] = $this->request->getPost('id');
+		$fields['id_kegiatan'] = $this->request->getPost('id_kegiatan');
+		$fields['id_tp_lulus'] = $this->request->getPost('id_tp_lulus');
+		$fields['telepon'] = $this->request->getPost('telepon');
+		$fields['alamat'] = $this->request->getPost('alamat');
+
+
+		$this->validation->setRules([
+			
+			'id_kegiatan' => ['label' => 'Id kegiatan', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
+			'id_tp_lulus' => ['label' => 'Id tp lulus', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
+			'telepon' => ['label' => 'Telepon', 'rules' => 'required|min_length[0]|max_length[20]'],
+			'alamat' => ['label' => 'Alamat', 'rules' => 'required|min_length[0]|max_length[300]'],
+
+		]);
+
+		if ($this->validation->run($fields) == FALSE) {
+
+			$response['success'] = false;
+			$response['messages'] = $this->validation->getErrors(); //Show Error in Input Form
+
+		} else {
+
+			if ($this->alumniModel->update($fields['id'], $fields)) {
+
+				// $db      = \Config\Database::connect();
+				// $sql = $db->getLastQuery();
+				// echo $sql;
+				// exit;
+
+				$response['success'] = true;
+				$response['messages'] = lang("App.update-success");
+			} else {
+
+				$response['success'] = false;
+				$response['messages'] = lang("App.update-error");
+			}
+		}
+
+		return $this->response->setJSON($response);
 	}
 }

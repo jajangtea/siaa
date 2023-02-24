@@ -18,5 +18,11 @@ class SiswaModel extends Model {
 	protected $validationRules    = [];
 	protected $validationMessages = [];
 	protected $skipValidation     = true;    
+
+	public function getTP()
+	{
+		$query = $this->db->query('select * from tp');
+		return $query->getResult();
+	}
 	
 }

@@ -50,6 +50,7 @@ $routes->post('/kelassiswa/remove', 'Kelassiswa::remove');
 
 $routes->get('/kegiatan', 'Kegiatan::index');
 $routes->post('/kegiatan/getAll', 'Kegiatan::getAll');
+$routes->post('/kegiatan/getOne', 'kegiatan::getOne');
 $routes->post('/kegiatan/add', 'Kegiatan::add');
 $routes->post('/kegiatan/edit', 'Kegiatan::edit');
 $routes->post('/kegiatan/remove', 'Kegiatan::remove');
@@ -85,7 +86,7 @@ $routes->post('/alumni/upload', 'Alumni::upload');
 $routes->get('/alumni/kembalikan/(:num)', 'Alumni::Kembalikan/$1');
 $routes->get('/alumni/login_alumni', 'Alumni::login_alumni');
 $routes->post('/alumni/auth', 'Alumni::auth');
-$routes->get('/alumni/dashboard', 'Alumni::dashboard');
+$routes->get('/alumni/dashboard', 'Alumni::dashboard',['filter' => 'auth']);
 $routes->get('/alumni/logout', 'Alumni::logout');
 $routes->post('/alumni/getOne_alumni', 'Alumni::getOne_alumni');
 $routes->post('/alumni/edit_alumni', 'Alumni::edit_alumni');

@@ -12,7 +12,7 @@ class AlumniModel extends Model
 	protected $primaryKey = 'id';
 	protected $returnType = 'object';
 	protected $useSoftDeletes = false;
-	protected $allowedFields = ['id_kegiatan', 'id_tp_lulus', 'al_img', 'id_siswa', 'password', 'file'];
+	protected $allowedFields = ['id_kegiatan', 'id_tp_lulus', 'al_img', 'id_siswa', 'password', 'file','telepon','alamat'];
 	protected $useTimestamps = false;
 	protected $createdField  = 'created_at';
 	protected $updatedField  = 'updated_at';

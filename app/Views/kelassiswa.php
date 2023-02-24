@@ -85,7 +85,6 @@
                     <option value="<?php echo $k->id; ?>"><?php echo $k->nama_kelas; ?></option>"
                   <?php } ?>
                 </select>
-
               </div>
             </div>
           </div>

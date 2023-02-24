@@ -18,5 +18,13 @@ class KegiatanModel extends Model {
 	protected $validationRules    = [];
 	protected $validationMessages = [];
 	protected $skipValidation     = true;    
+
+
+	public function getKegiatan()
+	{
+
+		$query = $this->db->query('select * from kegiatan');
+		return $query->getResult();
+	}
 	
 }
