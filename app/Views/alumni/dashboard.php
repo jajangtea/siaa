@@ -84,173 +84,7 @@
                     <div class="col-12">
                         <div class="callout callout-info">
                             <h5><i class="fas fa-info"></i> Note:</h5>
-                            Kegiatan <b><?= $biodata->nama_lengkap ?></b> saat ini adalah <b><?= $biodata->nama_kegiatan ?></b>.
-                        </div>
-
-
-                        <!-- Main content -->
-                        <div class="invoice p-3 mb-3">
-                            <!-- title row -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <h4>
-                                        <i class="fas fa-user"></i> Informasi Pendidikan Setelah Lulus
-                                        <small class="float-right">Date: 2/10/2014</small>
-                                    </h4>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- info row -->
-                            <div class="row invoice-info">
-                                <div class="col-sm-4 invoice-col">
-                                    From
-                                    <address>
-                                        <strong>Admin, Inc.</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (804) 123-5432<br>
-                                        Email: info@almasaeedstudio.com
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    To
-                                    <address>
-                                        <strong>John Doe</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (555) 539-1037<br>
-                                        Email: john.doe@example.com
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    <b>Invoice #007612</b><br>
-                                    <br>
-                                    <b>Order ID:</b> 4F3S8J<br>
-                                    <b>Payment Due:</b> 2/22/2014<br>
-                                    <b>Account:</b> 968-34567
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-
-                            <!-- Table row -->
-                            <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Qty</th>
-                                                <th>Product</th>
-                                                <th>Serial #</th>
-                                                <th>Description</th>
-                                                <th>Subtotal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Call of Duty</td>
-                                                <td>455-981-221</td>
-                                                <td>El snort testosterone trophy driving gloves handsome</td>
-                                                <td>$64.50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Need for Speed IV</td>
-                                                <td>247-925-726</td>
-                                                <td>Wes Anderson umami biodiesel</td>
-                                                <td>$50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Monsters DVD</td>
-                                                <td>735-845-642</td>
-                                                <td>Terry Richardson helvetica tousled street art master</td>
-                                                <td>$10.70</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Grown Ups Blue Ray</td>
-                                                <td>422-568-642</td>
-                                                <td>Tousled lomo letterpress</td>
-                                                <td>$25.99</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-
-                            <div class="row">
-                                <!-- accepted payments column -->
-                                <div class="col-6">
-                                    <p class="lead">Payment Methods:</p>
-                                    <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                                        plugg
-                                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                    </p>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-6">
-                                    <p class="lead">Amount Due 2/22/2014</p>
-
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th style="width:50%">Subtotal:</th>
-                                                    <td>$250.30</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Tax (9.3%)</th>
-                                                    <td>$10.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Shipping:</th>
-                                                    <td>$5.80</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total:</th>
-                                                    <td>$265.24</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-
-                            <!-- this row will not appear when printing -->
-                            <div class="row no-print">
-                                <div class="col-12">
-                                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                                        Payment
-                                    </button>
-                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-download"></i> Generate PDF
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.invoice -->
-                    </div><!-- /.col -->
-
-
-                    <div class="col-12">
-                        <div class="callout callout-info">
-                            <h5><i class="fas fa-info"></i> Note:</h5>
-                            Kegiatan <b><?= $biodata->nama_lengkap ?></b> saat ini adalah <b><?= $biodata->nama_kegiatan ?></b>. 
+                            Kegiatan <b><?= $biodata->nama_lengkap ?></b> saat ini adalah <b><?= $biodata->nama_kegiatan ?></b>. Berikut adalah informasi pendidikan dan pekerjaan setelah lulus di SMAN 5 Tanjungpinang
                         </div>
 
 
@@ -266,40 +100,6 @@
                                 </div>
                                 <!-- /.col -->
                             </div>
-                            <!-- info row -->
-                            <div class="row invoice-info">
-                                <div class="col-sm-4 invoice-col">
-                                    From
-                                    <address>
-                                        <strong>Admin, Inc.</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (804) 123-5432<br>
-                                        Email: info@almasaeedstudio.com
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    To
-                                    <address>
-                                        <strong>John Doe</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (555) 539-1037<br>
-                                        Email: john.doe@example.com
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    <b>Invoice #007612</b><br>
-                                    <br>
-                                    <b>Order ID:</b> 4F3S8J<br>
-                                    <b>Payment Due:</b> 2/22/2014<br>
-                                    <b>Account:</b> 968-34567
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
 
                             <!-- Table row -->
                             <div class="row">
@@ -307,42 +107,36 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Qty</th>
-                                                <th>Product</th>
-                                                <th>Serial #</th>
-                                                <th>Description</th>
-                                                <th>Subtotal</th>
+                                                <th>No</th>
+                                                <th>Nama Kampus</th>
+                                                <th>Fakultas</th>
+                                                <th>Program studi</th>
+                                                <th>Jenjang</th>
+                                                <th>Alamat Kampus</th>
+                                                <th>No telepon</th>
+                                                <th>Tahun masuk</th>
+                                                <th>Tahun lulus</th>
+                                                <th>Keterangan</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Call of Duty</td>
-                                                <td>455-981-221</td>
-                                                <td>El snort testosterone trophy driving gloves handsome</td>
-                                                <td>$64.50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Need for Speed IV</td>
-                                                <td>247-925-726</td>
-                                                <td>Wes Anderson umami biodiesel</td>
-                                                <td>$50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Monsters DVD</td>
-                                                <td>735-845-642</td>
-                                                <td>Terry Richardson helvetica tousled street art master</td>
-                                                <td>$10.70</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Grown Ups Blue Ray</td>
-                                                <td>422-568-642</td>
-                                                <td>Tousled lomo letterpress</td>
-                                                <td>$25.99</td>
-                                            </tr>
+                                            <?php $no = 1;
+                                            foreach ($pendidikan as $row) : ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $row->nama_kampus ?></td>
+                                                    <td><?= $row->fakultas ?></td>
+                                                    <td><?= $row->program_studi ?></td>
+                                                    <td><?= $row->jenjang ?></td>
+                                                    <td><?= $row->alamat_kampus ?></td>
+                                                    <td><?= $row->no_telepon ?></td>
+                                                    <td><?= $row->tahun_masuk  ?></td>
+                                                    <td><?= $row->tahun_lulus  ?></td>
+                                                    <td><?= $row->keterangan     ?></td>
+
+                                                </tr>
+                                            <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -350,50 +144,7 @@
                             </div>
                             <!-- /.row -->
 
-                            <div class="row">
-                                <!-- accepted payments column -->
-                                <div class="col-6">
-                                    <p class="lead">Payment Methods:</p>
-                                    <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
-                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                                        plugg
-                                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                    </p>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-6">
-                                    <p class="lead">Amount Due 2/22/2014</p>
-
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th style="width:50%">Subtotal:</th>
-                                                    <td>$250.30</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Tax (9.3%)</th>
-                                                    <td>$10.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Shipping:</th>
-                                                    <td>$5.80</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total:</th>
-                                                    <td>$265.24</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
-                            </div>
                             <!-- /.row -->
 
                             <!-- this row will not appear when printing -->
@@ -411,17 +162,9 @@
                         </div>
                         <!-- /.invoice -->
                     </div><!-- /.col -->
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
+
+
                     <div class="col-12">
-                        <div class="callout callout-info">
-                            <h5><i class="fas fa-info"></i> Note:</h5>
-                            Kegiatan <b><?= $biodata->nama_lengkap ?></b> saat ini adalah <b><?= $biodata->nama_kegiatan ?></b>.
-                        </div>
-
-
                         <!-- Main content -->
                         <div class="invoice p-3 mb-3">
                             <!-- title row -->
@@ -435,38 +178,7 @@
                                 <!-- /.col -->
                             </div>
                             <!-- info row -->
-                            <div class="row invoice-info">
-                                <div class="col-sm-4 invoice-col">
-                                    From
-                                    <address>
-                                        <strong>Admin, Inc.</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (804) 123-5432<br>
-                                        Email: info@almasaeedstudio.com
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    To
-                                    <address>
-                                        <strong>John Doe</strong><br>
-                                        795 Folsom Ave, Suite 600<br>
-                                        San Francisco, CA 94107<br>
-                                        Phone: (555) 539-1037<br>
-                                        Email: john.doe@example.com
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    <b>Invoice #007612</b><br>
-                                    <br>
-                                    <b>Order ID:</b> 4F3S8J<br>
-                                    <b>Payment Due:</b> 2/22/2014<br>
-                                    <b>Account:</b> 968-34567
-                                </div>
-                                <!-- /.col -->
-                            </div>
+
                             <!-- /.row -->
 
                             <!-- Table row -->
@@ -475,42 +187,31 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Qty</th>
-                                                <th>Product</th>
-                                                <th>Serial #</th>
-                                                <th>Description</th>
-                                                <th>Subtotal</th>
+                                                <th>No</th>
+                                                <th>Nama Instansi</th>
+                                                <th>Jabatan</th>
+                                                <th>Nama Atasan</th>
+                                                <th>No Telepon</th>
+                                                <th>Tahun Masuk</th>
+                                                <th>Alamat Instansi</th>
+                                                <th>Keterangan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Call of Duty</td>
-                                                <td>455-981-221</td>
-                                                <td>El snort testosterone trophy driving gloves handsome</td>
-                                                <td>$64.50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Need for Speed IV</td>
-                                                <td>247-925-726</td>
-                                                <td>Wes Anderson umami biodiesel</td>
-                                                <td>$50.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Monsters DVD</td>
-                                                <td>735-845-642</td>
-                                                <td>Terry Richardson helvetica tousled street art master</td>
-                                                <td>$10.70</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Grown Ups Blue Ray</td>
-                                                <td>422-568-642</td>
-                                                <td>Tousled lomo letterpress</td>
-                                                <td>$25.99</td>
-                                            </tr>
+                                            <?php $no = 1;
+                                            foreach ($pekerjaan as $row) : ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $row->nama_instansi ?></td>
+                                                    <td><?= $row->jabatan ?></td>
+                                                    <td><?= $row->nama_atasan ?></td>
+                                                    <td><?= $row->no_telepon  ?></td>
+                                                    <td><?= $row->tahun_masuk  ?></td>
+                                                    <td><?= $row->alamat_instansi ?></td>
+                                                    <td><?= $row->keterangan     ?></td>
+
+                                                </tr>
+                                            <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -518,50 +219,7 @@
                             </div>
                             <!-- /.row -->
 
-                            <div class="row">
-                                <!-- accepted payments column -->
-                                <div class="col-6">
-                                    <p class="lead">Payment Methods:</p>
-                                    <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
-                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                                        plugg
-                                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                    </p>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-6">
-                                    <p class="lead">Amount Due 2/22/2014</p>
-
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <th style="width:50%">Subtotal:</th>
-                                                    <td>$250.30</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Tax (9.3%)</th>
-                                                    <td>$10.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Shipping:</th>
-                                                    <td>$5.80</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total:</th>
-                                                    <td>$265.24</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
-                            </div>
                             <!-- /.row -->
 
                             <!-- this row will not appear when printing -->
@@ -580,14 +238,16 @@
                         <!-- /.invoice -->
                     </div><!-- /.col -->
                 </div>
-
-
-                
             </div>
 
-            <!-- /.col -->
+
+
+
         </div>
-        <!-- /.row -->
+
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
 

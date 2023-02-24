@@ -7,18 +7,24 @@ use App\Controllers\BaseController;
 
 use App\Models\AlumniModel;
 use App\Models\SiswaModel;
+use App\Models\PekerjaanModel;
+use App\Models\PendidikanAlumniModel;
 
 class Alumni extends BaseController
 {
 
 	protected $alumniModel;
 	protected $siswaModel;
+	protected $pendidikanAlumniModel;
+	protected $pekerjaanModel;
 	protected $validation;
 
 	public function __construct()
 	{
 		$this->siswaModel = new SiswaModel();
 		$this->alumniModel = new AlumniModel();
+		$this->pendidikanAlumniModel = new PendidikanAlumniModel();
+		$this->pekerjaanModel = new PekerjaanModel();
 		$this->validation =  \Config\Services::validation();
 	}
 
@@ -423,8 +429,10 @@ class Alumni extends BaseController
 		$data = [
 			'controller'    	=> 'alumni',
 			'title'     		=> 'Dashboard Alumni',
-			'biodata'	=> $result,
-			'tp_lulus' => $this->getTahunLulus()
+			'biodata'			=> $result,
+			'tp_lulus' 			=> $this->getTahunLulus(),
+			'pendidikan' 		=> $this->getPendidikan(),
+			'pekerjaan' 		=> $this->getPekerjaan(),
 
 		];
 
@@ -457,5 +465,35 @@ class Alumni extends BaseController
 		} else {
 			throw new \CodeIgniter\Exceptions\PageNotFoundException();
 		}
+	}
+
+
+
+	public function getPendidikan()
+	{
+		$session = session();
+		$id = $session->get('id_siswa');
+
+		$db      = \Config\Database::connect();
+		$builder = $db->table('pendidikan');
+		$builder->where('id_siswa', $id);
+		$builder->select('*');
+		$result = $builder->get()->getResult();
+
+		return $result;
+	}
+
+	public function getPekerjaan()
+	{
+		$session = session();
+		$id = $session->get('id_siswa');
+
+		$db      = \Config\Database::connect();
+		$builder = $db->table('pekerjaan');
+		$builder->where('id_siswa', $id);
+		$builder->select('*');
+		$result = $builder->get()->getResult();
+
+		return $result;
 	}
 }
