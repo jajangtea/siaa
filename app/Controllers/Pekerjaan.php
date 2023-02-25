@@ -24,10 +24,10 @@ class Pekerjaan extends BaseController
 
 		$data = [
 			'controller'    	=> 'pekerjaan',
-			'title'     		=> 'pekerjaan'
+			'title'     		=> 'Pekerjaan Alumni'
 		];
 
-		return view('pekerjaan', $data);
+		return view('alumni/pekerjaan', $data);
 	}
 
 	public function getAll()

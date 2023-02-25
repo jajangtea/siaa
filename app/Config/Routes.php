@@ -30,6 +30,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
 $routes->get('/siswa', 'Siswa::index');
 $routes->post('/siswa/getAll', 'Siswa::getAll');
 $routes->post('/siswa/getOne', 'Siswa::getOne');
@@ -71,9 +72,24 @@ $routes->post('/tp/remove', 'Tp::remove');
 
 $routes->get('/kelas', 'Kelas::index');
 $routes->post('/kelas/getAll', 'Kelas::getAll');
+$routes->post('/kelas/getOne', 'Kelas::getOne');
 $routes->post('/kelas/add', 'Kelas::add');
 $routes->post('/kelas/edit', 'Kelas::edit');
 $routes->post('/kelas/remove', 'Kelas::remove');
+
+$routes->get('/pekerjaan', 'Pekerjaan::index');
+$routes->post('/pekerjaan/getAll', 'Pekerjaan::getAll');
+$routes->post('/pekerjaan/getOne', 'Pekerjaan::getOne');
+$routes->post('/pekerjaan/add', 'Pekerjaan::add');
+$routes->post('/pekerjaan/edit', 'Pekerjaan::edit');
+$routes->post('/pekerjaan/remove', 'Pekerjaan::remove');
+
+$routes->get('/pendidikan', 'PendidikanAlumni::index');
+$routes->post('/pendidikan/getAll', 'PendidikanAlumni::getAll');
+$routes->post('/pendidikan/getOne', 'PendidikanAlumni::getOne');
+$routes->post('/pendidikan/add', 'PendidikanAlumni::add');
+$routes->post('/pendidikan/edit', 'PendidikanAlumni::edit');
+$routes->post('/pendidikan/remove', 'PendidikanAlumni::remove');
 
 
 $routes->get('/alumni', 'Alumni::index');

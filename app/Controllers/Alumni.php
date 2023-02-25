@@ -73,7 +73,7 @@ class Alumni extends BaseController
 			$ops .= '<button type="button" class="btn  btn-success" onClick="save(' . $value->id . ')"><i class="fa-solid fa-user"></i>   ' .  lang("App.detail")  . '</button>';
 			$ops .= '<a href="' . base_url('alumni/kembalikan/' . $value->id_siswa) . '" class="btn btn-warning"><i class="fa fa-graduation-cap"></i> Kembalikan</a>';
 			$ops .= '<button type="button" class="btn  btn-warning" onClick="simpan(' . $value->id_siswa . ')"><i class="fa-solid fa-wand-magic-sparkles"></i>Upload</button>';
-			$ops .= '</div></div>';
+			$ops .= '</div>';
 
 			$data['data'][$key] = array(
 				$value->id,
@@ -367,9 +367,9 @@ class Alumni extends BaseController
 				echo "hasil : " . $verify_pass;
 			}
 		} else {
-			$session->setFlashdata('msg', 'Email not Found');
-			// return redirect()->to('/login');
-			echo "hasil : ";
+			$session->setFlashdata('msg', 'NISN tidak ditemukan');
+			return redirect()->to(base_url('alumni/login_alumni'));
+			// echo "hasil : ";
 		}
 	}
 

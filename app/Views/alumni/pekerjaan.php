@@ -1,4 +1,4 @@
-<?= $this->extend("layout/master") ?>
+<?= $this->extend("layout/talumni") ?>
 
 <?= $this->section("content") ?>
 
@@ -7,7 +7,7 @@
   <div class="card-header">
     <div class="row">
       <div class="col-10 mt-2">
-        <h3 class="card-title">Data Siswa</h3>
+        <h3 class="card-title">pekerjaan</h3>
       </div>
       <div class="col-2">
         <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
@@ -19,30 +19,19 @@
     <table id="data_table" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>No</th>
-          <th>NISN</th>
-          <th>NIS</th>
-          <th>Nama Lengkap</th>
-          <th>Kelas</th>
-          <th>Fase</th>
+          <th>Id</th>
+          <th>Id jenis</th>
+          <th>Nama Instansi</th>
+          <th>Jabatan</th>
+          <th>Nama Atasan</th>
+          <th>Alamat Instansi</th>
+          <th>No Telepon</th>
+          <th>Id alumni</th>
+          <th>Tahun Masuk</th>
 
           <th></th>
         </tr>
       </thead>
-      <tbody>
-
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>No</th>
-          <th>NISN</th>
-          <th>NIS</th>
-          <th>Nama Lengkap</th>
-          <th>Kelas</th>
-          <th>Fase</th>
-          <th></th>
-        </tr>
-      </tfoot>
     </table>
   </div>
   <!-- /.card-body -->
@@ -64,34 +53,54 @@
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
           <div class="row">
+
             <div class="col-md-12">
-              <div class="form-group">
-                <div class="select2-purple">
-                  <label for="id_siswa" class="col-form-label"> Nama siswa: <span class="text-danger">*</span> </label>
-                  <select id="id_siswa" class="search select2" multiple="multiple" name="id_siswa[]" required>
-                    <?php foreach ($siswa as $s) { ?>
-                      <option value="<?php echo $s->id; ?>"><?php echo $s->nama_lengkap; ?></option>"
-                    <?php } ?>
-                  </select>
-                </div>
+              <div class="form-group mb-3">
+                <label for="nama_instansi" class="col-form-label"> Nama Instansi: <span class="text-danger">*</span> </label>
+                <input type="text" id="nama_instansi" name="nama_instansi" class="form-control" placeholder="Nama Instansi" minlength="0" maxlength="250" required>
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group mb-3">
-                <label for="id_kelas" class="col-form-label"> Kelas: <span class="text-danger">*</span> </label>
-                <select id="id_kelas" name="id_kelas" class="form-control" required>
-                  <option value="">Pilih Kelas</option>
-                  <?php foreach ($kelas as $k) { ?>
-                    <option value="<?php echo $k->id; ?>"><?php echo $k->nama_kelas; ?></option>"
-                  <?php } ?>
-                </select>
+                <label for="jabatan" class="col-form-label"> Jabatan: <span class="text-danger">*</span> </label>
+                <input type="text" id="jabatan" name="jabatan" class="form-control" placeholder="Jabatan" minlength="0" maxlength="200" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="nama_atasan" class="col-form-label"> Nama Atasan: <span class="text-danger">*</span> </label>
+                <input type="text" id="nama_atasan" name="nama_atasan" class="form-control" placeholder="Nama Atasan" minlength="0" maxlength="200" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="alamat_instansi" class="col-form-label"> Alamat Instansi: <span class="text-danger">*</span> </label>
+                <textarea cols="40" rows="5" id="alamat_instansi" name="alamat_instansi" class="form-control" placeholder="Alamat Instansi" minlength="0" required></textarea>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="no_telepon" class="col-form-label"> No Telepon: <span class="text-danger">*</span> </label>
+                <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="No Telepon" minlength="0" maxlength="100" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="id_alumni" class="col-form-label"> Id alumni: <span class="text-danger">*</span> </label>
+                <input type="number" id="id_alumni" name="id_alumni" class="form-control" placeholder="Id alumni" minlength="0" maxlength="11" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="tahun_masuk" class="col-form-label"> Tahun Masuk: </label>
+                <input type="number" id="tahun_masuk" name="tahun_masuk" class="form-control" placeholder="Tahun Masuk" minlength="0" maxlength="11">
               </div>
             </div>
           </div>
 
           <div class="form-group text-center">
             <div class="btn-group">
-              <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
+              <button type="submit" class="btn btn-success mr-2" id="form-btn"><?= lang("App.save") ?></button>
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
             </div>
           </div>
@@ -110,92 +119,27 @@
 
 <!-- page script -->
 <?= $this->section("pageScript") ?>
-
-
 <script>
   // dataTables
-
-
-
   $(function() {
-
-    $('#data_table tfoot th').each(function() {
-      var title = $(this).text();
-      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-    });
-
     var table = $('#data_table').removeAttr('width').DataTable({
-
-      "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-        $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
-      },
-      'columnDefs': [{
-        "targets": 6, // your case first column
-        "className": "text-center",
-        // "width": "4%"
-      }, ],
       "paging": true,
       "lengthChange": false,
-      // "searching": true,
+      "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": true,
+      "autoWidth": false,
       "scrollY": '45vh',
       "scrollX": true,
-      "scrollCollapse": true,
-      columnDefs: [{
-        width: 20,
-        targets: 0
-      }],
-      "responsive": true,
+      "scrollCollapse": false,
+      "responsive": false,
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
         "dataType": "json",
         async: "true"
-      },
-      initComplete: function() {
-        this.api().columns([1, 2, 4, 5]).every(function() {
-          var column = this;
-          var select = $('<select class="form-control"><option value=""></option></select>')
-            .appendTo($(column.footer()).empty())
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
-
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
-            });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-          });
-        }, );
-
-        this.api().columns([0, 1, 2, 3, 6]).every(function() {
-          var column = this;
-          var select = $('<input type="text" class="form-control" />')
-            .appendTo($(column.footer()).empty())
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
-
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
-            });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-          });
-        }, );
       }
     });
-
-
   });
 
   var urlController = '';
@@ -237,9 +181,14 @@
           $('#data-modal').modal('show');
           //insert data to form
           $("#data-form #id").val(response.id);
-          // alert(response.id_siswa);
-          $("#data-form #id_siswa").val(response.id_siswa).trigger('change');
-          $("#data-form #id_kelas").val(response.id_kelas);
+
+          $("#data-form #nama_instansi").val(response.nama_instansi);
+          $("#data-form #jabatan").val(response.jabatan);
+          $("#data-form #nama_atasan").val(response.nama_atasan);
+          $("#data-form #alamat_instansi").val(response.alamat_instansi);
+          $("#data-form #no_telepon").val(response.no_telepon);
+          $("#data-form #id_alumni").val(response.id_alumni);
+          $("#data-form #tahun_masuk").val(response.tahun_masuk);
 
         }
       });
@@ -380,22 +329,7 @@
       }
     })
   }
-
-  $(".search").select2({
-
-    dropdownParent: $('#data-modal .modal-content')
-
-
-  });
 </script>
-
-<style>
-  tfoot input {
-    width: 100%;
-    padding: 3px;
-    box-sizing: border-box;
-  }
-</style>
 
 
 <?= $this->endSection() ?>

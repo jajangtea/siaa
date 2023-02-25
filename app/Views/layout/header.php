@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?= 'ADEL CCG - ' . esc($title) ?></title>
+    <title><?= 'SIPADA - ' . esc($title) ?></title>
     <meta name="description" content="Garment Factory Process">
     <meta name="keyword" content="garment,factory,khonkaen,ocomshop">
     <meta name="author" content="ocomshop">
@@ -17,20 +17,25 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?= base_url('asset/plugins/fontawesome-free/css/all.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/jqvmap/jqvmap.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="<?= base_url('asset/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') ?>">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('asset/css/adminlte.min.css') ?>">
+
     <!--<link rel="stylesheet" href="<?php /* echo base_url('asset/css/rtl/adminlte.rtl.min.css') */ ?>"> -->
 
     <!-- SweetAlert2 Bootstrap or Dark -->
     <link rel="stylesheet" href="<?= base_url('asset/css/sweetalert2-dark.min.css') ?>">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/DataTables-1.11.3/css/dataTables.bootstrap5.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/Responsive-2.2.9/css/responsive.bootstrap5.min.css'); ?>">
 
     <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/StateRestore-1.1.1/css/stateRestore.bootstrap5.min.css') ?>">
-
+    <link rel="stylesheet" href="<?= base_url('asset/plugins/summernote/summernote-bs4.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('asset/plugins/select2/css/select2.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('asset/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
 

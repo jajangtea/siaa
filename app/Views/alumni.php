@@ -192,7 +192,7 @@
           $('.uploadBtn').prop('Enabled');
           document.getElementById("upload_image_form").reset();
         }
-       
+
       });
     }
   });

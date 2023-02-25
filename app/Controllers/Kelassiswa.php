@@ -50,15 +50,11 @@ class Kelassiswa extends BaseController
 		foreach ($result->getResult() as $key => $value) {
 
 			$ops = '<div class="btn-group">';
-			$ops .= '<button type="button" class=" btn btn-sm dropdown-toggle btn-info" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-			$ops .= '<i class="fa-solid fa-pen-square"></i>  </button>';
-			$ops .= '<div class="dropdown-menu">';
-			$ops .= '<a class="dropdown-item text-info" onClick="save(' . $value->id . ')"><i class="fa-solid fa-pen-to-square"></i>   ' .  lang("App.edit")  . '</a>';
-			$ops .= '<a class="dropdown-item text-orange" ><i class="fa-solid fa-copy"></i>   ' .  lang("App.copy")  . '</a>';
-			$ops .= '<div class="dropdown-divider"></div>';
-			$ops .= '<a class="dropdown-item text-danger" onClick="remove(' . $value->id . ')"><i class="fa-solid fa-trash"></i>   ' .  lang("App.delete")  . '</a>';
-			$ops .= '</div><a href="' . base_url('siswa/updatelulus/' . $value->id_siswa) . '" class="btn btn-warning float-right"><i class="fa fa-graduation-cap"></i> Lulus</button></div>';
-
+			
+			$ops .= '<button type="button" onClick="save(' . $value->id . ')" class="btn btn-info"><i class="fa fa-pen-square"></i> Edit</button>';
+			$ops .= '<a href="' . base_url('siswa/updatelulus/' . $value->id_siswa) . '" class="btn btn-warning"><i class="fa fa-graduation-cap"></i> Lulus</a>';
+			$ops .= '<button type="button" onClick="remove(' . $value->id . ')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>';
+			$ops .= '</div>';
 			$data['data'][$key] = array(
 				$value->id,
 				$value->nisn,

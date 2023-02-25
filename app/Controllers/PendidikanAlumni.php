@@ -25,10 +25,10 @@ class PendidikanAlumni extends BaseController
 
 	    $data = [
                 'controller'    	=> 'pendidikanAlumni',
-                'title'     		=> 'Data Pendidikan'				
+                'title'     		=> 'Data Pendidikan Alumni'				
 			];
 		
-		return view('pendidikanAlumni', $data);
+		return view('alumni/pendidikanAlumni', $data);
 			
 	}
 
