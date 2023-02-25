@@ -268,23 +268,32 @@ class Alumni extends BaseController
 			return $this->response->setJSON($response);
 		} else {
 
+			$session = session();
+			$id_siswa = $session->get('id_siswa');
+
 			$imageFile = $this->request->getFile('file');
-			$imageFile->move(WRITEPATH . 'uploads');
+			$imageFile->move('uploads');
 			$data = [
 				'al_img' => $imageFile->getClientName(),
 				'file'  => $imageFile->getClientMimeType(),
-				'id_kegiatan' => '1',
-				'id_tp_lulus' => '1',
-				'id_siswa' => '3'
+				'id_siswa' => $id_siswa
 
 			];
-			$save = $builder->insert($data);
 
-			$response = [
-				'success' => true,
-				'data' => $save,
-				'msg' => "Image successfully uploaded"
-			];
+			$db = db_connect();
+			$sql = 'update alumni set al_img=:al_img:,file=:file: where id_siswa=:id_siswa:';
+			$db->query($sql, $data);
+
+			if ($db->query($sql, $data)) {
+				// echo 'Success!';
+				$response['success'] = true;
+				$response['msg'] = "Image Succesfully uploaded";
+				$response['messages'] = lang("App.update-success");
+			} else {
+				$response['success'] = true;
+				$response['msg'] = "Image error uploaded";
+				$response['messages'] = lang("App.update-success");
+			}
 		}
 		return $this->response->setJSON($response);
 	}
@@ -409,6 +418,7 @@ class Alumni extends BaseController
 	public function getTahunLulus()
 	{
 		$session = session();
+
 		$db      = \Config\Database::connect();
 		$builder = $db->table('alumni');
 		$builder->where('alumni.id_siswa', $session->get('id_siswa'));
@@ -433,6 +443,8 @@ class Alumni extends BaseController
 			throw new \CodeIgniter\Exceptions\PageNotFoundException();
 		}
 	}
+
+
 
 
 
@@ -475,7 +487,7 @@ class Alumni extends BaseController
 
 
 		$this->validation->setRules([
-			
+
 			'id_kegiatan' => ['label' => 'Id kegiatan', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
 			'id_tp_lulus' => ['label' => 'Id tp lulus', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
 			'telepon' => ['label' => 'Telepon', 'rules' => 'required|min_length[0]|max_length[20]'],

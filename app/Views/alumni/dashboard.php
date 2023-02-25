@@ -49,9 +49,10 @@
                         <h3 class="card-title">Data Terbaru Alumni</h3>
                     </div>
                     <!-- /.card-header -->
+
                     <div class="card-body">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url('asset/img/user4-128x128.jpg') ?>" alt="Alumni profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url() . 'uploads/' . $biodata->foto_terbaru ?>" alt="Alumni profile picture">
                         </div>
                         <h3 class="profile-username text-center"><?= $biodata->nama_lengkap ?></h3>
 
@@ -288,7 +289,7 @@
                         <span id="alertMsg"></span>
                     </div>
                     <div class="d-grid text-center">
-                        <img class="mb-3" id="ajaxImgUpload" alt="Preview Image" src="https://via.placeholder.com/300" />
+                        <img class="mb-3" id="ajaxImgUpload" alt="Preview Image" src="<?= base_url('uploads/' . $biodata->foto_terbaru) ?>" />
                     </div>
                     <div class="mb-3">
                         <input type="file" name="file" multiple="true" id="finput" onchange="onFileUpload(this);" class="form-control form-control-lg" accept="image/*">
@@ -309,6 +310,60 @@
 <!-- page script -->
 <?= $this->section("pageScript") ?>
 <script>
+    function onFileUpload(input, id) {
+        id = id || '#ajaxImgUpload';
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $(id).attr('src', e.target.result).width(300)
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#upload_image_form').on('submit', function(e) {
+        $('.uploadBtn').html('Uploading ...');
+        $('.uploadBtn').prop('Disabled');
+        e.preventDefault();
+        if ($('#file').val() == '') {
+            alert("Choose File");
+            $('.uploadBtn').html('Upload');
+            $('.uploadBtn').prop('enabled');
+            document.getElementById("upload_image_form").reset();
+        } else {
+            $.ajax({
+                url: "<?php echo base_url(); ?>/alumni/upload",
+                method: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                dataType: "json",
+                success: function(res) {
+                    // console.log(res.success);
+                    if (res.success == true) {
+                        // $('#ajaxImgUpload').attr('src', 'https://via.placeholder.com/300');
+                        $('#alertMsg').html(res.msg);
+                        $('#alertMessage').show();
+                        location.replace('<?= base_url($controller . "/dashboard") ?>');
+                        $('#data-modal-upload').modal('hide');
+                    } else {
+                        $('#alertMsg').html(res.msg);
+                        $('#alertMessage').show();
+                    }
+                    setTimeout(function() {
+                        $('#alertMsg').html('');
+                        $('#alertMessage').hide();
+                    }, 4000);
+                    $('.uploadBtn').html('Upload');
+                    $('.uploadBtn').prop('Enabled');
+                    document.getElementById("upload_image_form").reset();
+                }
+
+            });
+        }
+    });
+
     nisn = <?= $biodata->id_siswa; ?>;
     id = parseInt(nisn);
     var urlController = '';
@@ -459,7 +514,10 @@
                     $("#info-header-modalLabel").text('<?= lang("App.edit") ?>');
                     $("#form-btn").text(submitText);
                     $('#data-modal-upload').modal('show');
-                    $("#data-form #al_img").val(response.id_kegiatan);
+
+                    $('#data-form #ajaxImgUpload').attr('src', '<?= base_url("uploads/") ?>' + response.al_img);
+
+                    // $("#data-form #ajaxImgUpload").val(response.al_img);
 
                 }
             });
