@@ -12,19 +12,24 @@ class Pekerjaan extends BaseController
 
 	protected $pekerjaanModel;
 	protected $validation;
+	protected $session;
 
 	public function __construct()
 	{
 		$this->pekerjaanModel = new PekerjaanModel();
 		$this->validation =  \Config\Services::validation();
+		$this->session=session();
 	}
 
 	public function index()
 	{
+		
 
 		$data = [
 			'controller'    	=> 'pekerjaan',
-			'title'     		=> 'Pekerjaan Alumni'
+			'title'     		=> 'Pekerjaan Alumni',
+			'nama_lengkap'     		=> $this->session->get('nama_lengkap'),
+		'session' =>$this->session,   
 		];
 
 		return view('alumni/pekerjaan', $data);
@@ -43,20 +48,17 @@ class Pekerjaan extends BaseController
 			$ops .= '<i class="fa-solid fa-pen-square"></i>  </button>';
 			$ops .= '<div class="dropdown-menu">';
 			$ops .= '<a class="dropdown-item text-info" onClick="save(' . $value->id . ')"><i class="fa-solid fa-pen-to-square"></i>   ' .  lang("App.edit")  . '</a>';
-			$ops .= '<a class="dropdown-item text-orange" ><i class="fa-solid fa-copy"></i>   ' .  lang("App.copy")  . '</a>';
 			$ops .= '<div class="dropdown-divider"></div>';
 			$ops .= '<a class="dropdown-item text-danger" onClick="remove(' . $value->id . ')"><i class="fa-solid fa-trash"></i>   ' .  lang("App.delete")  . '</a>';
 			$ops .= '</div></div>';
 
 			$data['data'][$key] = array(
 				$value->id,
-				
 				$value->nama_instansi,
 				$value->jabatan,
 				$value->nama_atasan,
 				$value->alamat_instansi,
 				$value->no_telepon,
-				$value->id_alumni,
 				$value->tahun_masuk,
 
 				$ops
@@ -84,8 +86,9 @@ class Pekerjaan extends BaseController
 
 	public function add()
 	{
+      
+		$session = session();
 		$response = array();
-
 		$fields['id'] = $this->request->getPost('id');
 	
 		$fields['nama_instansi'] = $this->request->getPost('nama_instansi');
@@ -93,7 +96,7 @@ class Pekerjaan extends BaseController
 		$fields['nama_atasan'] = $this->request->getPost('nama_atasan');
 		$fields['alamat_instansi'] = $this->request->getPost('alamat_instansi');
 		$fields['no_telepon'] = $this->request->getPost('no_telepon');
-		$fields['id_alumni'] = $this->request->getPost('id_alumni');
+		$fields['id_siswa'] = $session->get('id_siswa');
 		$fields['tahun_masuk'] = $this->request->getPost('tahun_masuk');
 
 
@@ -104,7 +107,7 @@ class Pekerjaan extends BaseController
 			'nama_atasan' => ['label' => 'Nama Atasan', 'rules' => 'required|min_length[0]|max_length[200]'],
 			'alamat_instansi' => ['label' => 'Alamat Instansi', 'rules' => 'required|min_length[0]'],
 			'no_telepon' => ['label' => 'No Telepon', 'rules' => 'required|min_length[0]|max_length[100]'],
-			'id_alumni' => ['label' => 'Id alumni', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
+			'id_siswa' => ['label' => 'Id Siswa', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
 			'tahun_masuk' => ['label' => 'Tahun Masuk', 'rules' => 'permit_empty|numeric|min_length[0]|max_length[11]'],
 
 		]);
@@ -141,7 +144,7 @@ class Pekerjaan extends BaseController
 		$fields['nama_atasan'] = $this->request->getPost('nama_atasan');
 		$fields['alamat_instansi'] = $this->request->getPost('alamat_instansi');
 		$fields['no_telepon'] = $this->request->getPost('no_telepon');
-		$fields['id_alumni'] = $this->request->getPost('id_alumni');
+		$fields['id_siswa'] = $this->request->getPost('id_siswa');
 		$fields['tahun_masuk'] = $this->request->getPost('tahun_masuk');
 
 
@@ -152,7 +155,7 @@ class Pekerjaan extends BaseController
 			'nama_atasan' => ['label' => 'Nama Atasan', 'rules' => 'required|min_length[0]|max_length[200]'],
 			'alamat_instansi' => ['label' => 'Alamat Instansi', 'rules' => 'required|min_length[0]'],
 			'no_telepon' => ['label' => 'No Telepon', 'rules' => 'required|min_length[0]|max_length[100]'],
-			'id_alumni' => ['label' => 'Id alumni', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
+			'id_siswa' => ['label' => 'Id Siswa', 'rules' => 'required|numeric|min_length[0]|max_length[11]'],
 			'tahun_masuk' => ['label' => 'Tahun Masuk', 'rules' => 'permit_empty|numeric|min_length[0]|max_length[11]'],
 
 		]);

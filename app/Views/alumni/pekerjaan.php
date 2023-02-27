@@ -7,7 +7,7 @@
   <div class="card-header">
     <div class="row">
       <div class="col-10 mt-2">
-        <h3 class="card-title">pekerjaan</h3>
+        <h3 class="card-title">Daftar Pekerjaan Alumni</h3>
       </div>
       <div class="col-2">
         <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
@@ -19,14 +19,12 @@
     <table id="data_table" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Id jenis</th>
+          <th>No</th>
           <th>Nama Instansi</th>
           <th>Jabatan</th>
           <th>Nama Atasan</th>
           <th>Alamat Instansi</th>
           <th>No Telepon</th>
-          <th>Id alumni</th>
           <th>Tahun Masuk</th>
 
           <th></th>
@@ -74,33 +72,38 @@
             </div>
             <div class="col-md-12">
               <div class="form-group mb-3">
-                <label for="alamat_instansi" class="col-form-label"> Alamat Instansi: <span class="text-danger">*</span> </label>
-                <textarea cols="40" rows="5" id="alamat_instansi" name="alamat_instansi" class="form-control" placeholder="Alamat Instansi" minlength="0" required></textarea>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group mb-3">
                 <label for="no_telepon" class="col-form-label"> No Telepon: <span class="text-danger">*</span> </label>
                 <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="No Telepon" minlength="0" maxlength="100" required>
               </div>
             </div>
+
             <div class="col-md-12">
               <div class="form-group mb-3">
-                <label for="id_alumni" class="col-form-label"> Id alumni: <span class="text-danger">*</span> </label>
-                <input type="number" id="id_alumni" name="id_alumni" class="form-control" placeholder="Id alumni" minlength="0" maxlength="11" required>
+                <label for="tahun_masuk" class="col-form-label"> Tahun Masuk: </label>
+                <select name="tahun_masuk" id="tahun_masuk" class="form-control">
+                  <?php
+                  $initialYear = 2012;
+                  $currentYear = date('Y');
+                  for ($i = $initialYear; $i <= $currentYear + 1; $i++) {
+                    $checked = ($i == $currentYear ? "selected" : "");
+
+                    echo '<option value="' . $i . '" ' . $checked . '>' . $i . '</option>';
+                  }
+                  ?>
+                </select>
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group mb-3">
-                <label for="tahun_masuk" class="col-form-label"> Tahun Masuk: </label>
-                <input type="number" id="tahun_masuk" name="tahun_masuk" class="form-control" placeholder="Tahun Masuk" minlength="0" maxlength="11">
+                <label for="alamat_instansi" class="col-form-label"> Alamat Instansi: <span class="text-danger">*</span> </label>
+                <textarea cols="40" rows="5" id="alamat_instansi" name="alamat_instansi" class="form-control" placeholder="Alamat Instansi" minlength="0" required></textarea>
               </div>
             </div>
           </div>
 
           <div class="form-group text-center">
             <div class="btn-group">
-              <button type="submit" class="btn btn-success mr-2" id="form-btn"><?= lang("App.save") ?></button>
+              <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
             </div>
           </div>
@@ -123,12 +126,15 @@
   // dataTables
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
+      "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
+      },
       "paging": true,
       "lengthChange": false,
       "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": false,
+      "autoWidth": true,
       "scrollY": '45vh',
       "scrollX": true,
       "scrollCollapse": false,
@@ -187,7 +193,7 @@
           $("#data-form #nama_atasan").val(response.nama_atasan);
           $("#data-form #alamat_instansi").val(response.alamat_instansi);
           $("#data-form #no_telepon").val(response.no_telepon);
-          $("#data-form #id_alumni").val(response.id_alumni);
+          $("#data-form #id_siswa").val(response.id_siswa);
           $("#data-form #tahun_masuk").val(response.tahun_masuk);
 
         }

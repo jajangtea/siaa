@@ -20,6 +20,7 @@ class Alumni extends BaseController
 	protected $pekerjaanModel;
 	protected $kegiatanModel;
 	protected $validation;
+	protected $session;
 
 	public function __construct()
 	{
@@ -29,6 +30,7 @@ class Alumni extends BaseController
 		$this->pekerjaanModel = new PekerjaanModel();
 		$this->kegiatanModel = new KegiatanModel();
 		$this->validation =  \Config\Services::validation();
+		$this->session = session();
 	}
 
 	public function index()
@@ -268,8 +270,7 @@ class Alumni extends BaseController
 			return $this->response->setJSON($response);
 		} else {
 
-			$session = session();
-			$id_siswa = $session->get('id_siswa');
+			$id_siswa = $this->session->get('id_siswa');
 
 			$imageFile = $this->request->getFile('file');
 			$imageFile->move('uploads');
@@ -338,11 +339,10 @@ class Alumni extends BaseController
 
 	public function auth()
 	{
-		$session = session();
 		$nisn = $this->request->getVar('nisn');
 		$password = $this->request->getVar('password');
 		$db = db_connect();
-		$sql = "select siswa.nisn,alumni.password,alumni.id_siswa from alumni INNER join siswa on siswa.id=alumni.id_siswa where siswa.nisn='" . $nisn . "' ";
+		$sql = "select siswa.nama_lengkap,siswa.nisn,alumni.al_img as foto_terbaru,alumni.id as id_alumni,alumni.password,alumni.id_siswa from alumni INNER join siswa on siswa.id=alumni.id_siswa where siswa.nisn='" . $nisn . "' ";
 
 		$data = $db->query($sql)->getRow();
 
@@ -354,12 +354,12 @@ class Alumni extends BaseController
 					'nisn'     => $data->nisn,
 					'id_siswa'     => $data->id_siswa,
 					'password'    => $data->password,
+					'nama_lengkap,' => $data->nama_lengkap,
+					'foto_terbaru,' => $data->foto_terbaru,
 					'logged_in'     => TRUE
 				];
-				echo "hasilx : " . $verify_pass;
-				print_r($ses_data);
-				// exit;
-				$session->set($ses_data);
+				
+				$this->session->set($ses_data);
 				return redirect()->to(base_url('alumni/dashboard'));
 			} else {
 				// $session->setFlashdata('msg', 'Wrong Password');
@@ -367,7 +367,7 @@ class Alumni extends BaseController
 				echo "hasil : " . $verify_pass;
 			}
 		} else {
-			$session->setFlashdata('msg', 'NISN tidak ditemukan');
+			$this->session->setFlashdata('msg', 'NISN tidak ditemukan');
 			return redirect()->to(base_url('alumni/login_alumni'));
 			// echo "hasil : ";
 		}
@@ -375,8 +375,7 @@ class Alumni extends BaseController
 
 	public function logout()
 	{
-		$session = session();
-		$session->destroy();
+		$this->session->destroy();
 		return redirect()->to(base_url('alumni/login_alumni'));
 	}
 
@@ -386,11 +385,9 @@ class Alumni extends BaseController
 
 		$response = $data['data'] = array();
 
-		$session = session();
-		// echo "Welcome back, " . $session->get('nisn');
 		$db      = \Config\Database::connect();
 		$builder = $db->table('siswa');
-		$builder->where('siswa.nisn', $session->get('nisn'));
+		$builder->where('siswa.nisn', $this->session->get('nisn'));
 		$builder->select('alumni.id_siswa,siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id,tp.tahun_pelajaran,alumni.al_img as foto_terbaru,alumni.telepon as telepon_terbaru,alumni.alamat as alamat_terbaru,siswa.img as foto_lawas,kegiatan.nama_kegiatan');
 		$builder->join('status', 'status.id = siswa.id_status');
 		$builder->join('tp', 'tp.id = siswa.id_tp_masuk');
@@ -412,16 +409,18 @@ class Alumni extends BaseController
 
 		];
 
+
+
+
 		return view('alumni/dashboard', $data);
 	}
 
 	public function getTahunLulus()
 	{
-		$session = session();
 
 		$db      = \Config\Database::connect();
 		$builder = $db->table('alumni');
-		$builder->where('alumni.id_siswa', $session->get('id_siswa'));
+		$builder->where('alumni.id_siswa', $this->session->get('id_siswa'));
 		$builder->select('tp.tahun_pelajaran');
 		$builder->join('tp', 'tp.id = alumni.id_tp_lulus');
 		$result = $builder->get()->getRow();
@@ -431,10 +430,9 @@ class Alumni extends BaseController
 
 	public function getOne_alumni()
 	{
-		$session = session();
 		$response = array();
 
-		$id = $session->get('id_siswa');
+		$id = $this->session->get('id_siswa');
 
 		if ($this->validation->check($id, 'required|numeric')) {
 			$data = $this->alumniModel->where('id_siswa', $id)->first();
@@ -450,8 +448,7 @@ class Alumni extends BaseController
 
 	public function getPendidikan()
 	{
-		$session = session();
-		$id = $session->get('id_siswa');
+		$id = $this->session->get('id_siswa');
 
 		$db      = \Config\Database::connect();
 		$builder = $db->table('pendidikan');
@@ -464,8 +461,7 @@ class Alumni extends BaseController
 
 	public function getPekerjaan()
 	{
-		$session = session();
-		$id = $session->get('id_siswa');
+		$id = $this->session->get('id_siswa');
 
 		$db      = \Config\Database::connect();
 		$builder = $db->table('pekerjaan');
