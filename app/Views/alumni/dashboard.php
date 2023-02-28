@@ -318,7 +318,8 @@
                 <h4 class="modal-title text-white" id="info-header-modalLabel">Ganti Password</h4>
             </div>
             <div class="modal-body">
-                <form id="data-form" class="pl-3 pr-3">
+         
+                <form id="data-form-pass" class="pl-3 pr-3">
                     <?= csrf_field() ?>
                     <div class="row">
                         <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
@@ -346,12 +347,9 @@
 
                     <div class="form-group text-center">
                         <div class="btn-group">
-                            <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
+                            <button type="submit" class="btn btn-success" id="form-btn-ganti-passs"><?= lang("App.save") ?></button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
-
                         </div>
-
-
                     </div>
                 </form>
             </div>
@@ -443,6 +441,7 @@
 
             urlController = '<?= base_url($controller . "/edit_alumni") ?>';
             submitText = '<?= lang("App.update") ?>';
+
             $.ajax({
                 url: '<?php echo base_url($controller . "/getOne_alumni") ?>',
                 type: 'post',
@@ -671,10 +670,11 @@
 
     function updatePass() {
         // reset the form 
-        $("#data-form")[0].reset();
+        $("#data-form-pass")[0].reset();
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
+
         if (id > 0) { //edit
-            urlController = '<?= base_url($controller . "/edit_alumni") ?>';
+            urlController = '<?= base_url($controller . "/edit_password") ?>';
             submitText = '<?= lang("App.update") ?>';
             $.ajax({
                 url: '<?php echo base_url($controller . "/getOne_alumni") ?>',
@@ -685,9 +685,8 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $("#form-btn").text(submitText);
+                    $("#form-btn-ganti-passs").text(submitText);
                     $('#data-modal-pass').modal('show');
-                    $('#data-form #ajaxImgUpload').attr('src', '<?= base_url("uploads/") ?>' + response.al_img);
                 }
             });
         }
@@ -715,7 +714,7 @@
                 }
             },
             submitHandler: function(form) {
-                var form = $('#data-form');
+                var form = $('#data-form-pass');
                 $(".text-danger").remove();
                 $.ajax({
                     // fixBug get url from global function only
@@ -738,8 +737,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
-                                $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-                                $('#data-modal').modal('hide');
+                                $('#data-modal-pass').modal('hide');
                             })
                         } else {
                             if (response.messages instanceof Object) {
@@ -763,16 +761,16 @@
 
                             }
                         }
-                        $('#form-btn').html(getSubmitText());
+                        $('#form-btn-ganti-passs').html(getSubmitText());
                     }
                 });
                 return false;
             }
         });
 
-        $('#data-form').validate({
+        $('#data-form-pass').validate({
 
-            //insert data-form to database
+            //insert data-form-pass to database
 
         });
     }

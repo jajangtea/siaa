@@ -30,7 +30,6 @@ class Alumni extends BaseController
 		$this->pekerjaanModel = new PekerjaanModel();
 		$this->kegiatanModel = new KegiatanModel();
 		$this->validation =  \Config\Services::validation();
-
 	}
 
 	public function index()
@@ -287,7 +286,7 @@ class Alumni extends BaseController
 			$db->query($sql, $data);
 
 			if ($db->query($sql, $data)) {
-	
+
 				$response['success'] = true;
 				$response['msg'] = "Image Succesfully uploaded";
 				$response['messages'] = lang("App.update-success");
@@ -341,7 +340,7 @@ class Alumni extends BaseController
 	public function auth()
 	{
 		$nisn = $this->request->getVar('nisn');
-		$password = $this->request->getVar('password');
+		$password_login = $this->request->getVar('password');
 		$db = db_connect();
 		$sql = "select siswa.nama_lengkap,siswa.nisn,alumni.al_img as foto_terbaru,alumni.id as id_alumni,alumni.password,alumni.id_siswa from alumni INNER join siswa on siswa.id=alumni.id_siswa where siswa.nisn='" . $nisn . "' ";
 
@@ -349,7 +348,7 @@ class Alumni extends BaseController
 
 		if ($data) {
 			$pass = $data->password;
-			$verify_pass = password_verify($password, $pass);
+			$verify_pass = password_verify($password_login, $pass);
 			if ($verify_pass) {
 				$ses_data = [
 					'nisn'     => $data->nisn,
@@ -362,7 +361,7 @@ class Alumni extends BaseController
 
 				$_SESSION['nama_lengkap']  = $data->nama_lengkap;
 				$_SESSION['foto_terbaru']  = $data->foto_terbaru;
-				
+
 				session()->set($ses_data);
 				return redirect()->to(base_url('alumni/dashboard'));
 			} else {
@@ -414,7 +413,7 @@ class Alumni extends BaseController
 		];
 
 
-		$_SESSION['foto_terbaru']=$result->foto_terbaru;
+		$_SESSION['foto_terbaru'] = $result->foto_terbaru;
 
 		return view('alumni/dashboard', $data);
 	}
@@ -519,5 +518,65 @@ class Alumni extends BaseController
 		}
 
 		return $this->response->setJSON($response);
+	}
+	public function edit_password()
+	{
+		$response = array();
+		$fields['id'] = $this->request->getPost('id');
+		$fields['password_lama'] = $this->request->getPost('password_lama');
+		$fields['password1'] = $this->request->getPost('password1');
+		$fields['password2'] = $this->request->getPost('password2');
+		$password_lama = $this->request->getVar('password_lama');
+		$password1 = $this->request->getVar('password1');
+
+		$this->validation->setRules([
+
+			'password_lama' => ['label' => 'Password Lama', 'rules' => 'required|min_length[0]|max_length[8]'],
+			'password1' => ['label' => 'Password Baru', 'rules' => 'required|min_length[0]|max_length[8]'],
+			'password2' => ['label' => 'Konfirmasi Password', 'rules' => 'required|matches[password1]'],
+
+		]);
+
+		$id = session('id_siswa');
+		$db = db_connect();
+		$sql_siswa = "select *  from siswa where id='$id'";
+		$data_siswa = $db->query($sql_siswa)->getRow();
+		$nisn = $data_siswa->nisn;
+
+
+		$sql = "select siswa.nama_lengkap,siswa.nisn,alumni.al_img as foto_terbaru,alumni.id as id_alumni,alumni.password,alumni.id_siswa from alumni INNER join siswa on siswa.id=alumni.id_siswa where siswa.nisn='" . $nisn . "' ";
+
+		$data = $db->query($sql)->getRow();
+
+		if ($data) {
+			$pass = $data->password;
+			$verify_pass = password_verify($password_lama, $pass);
+			if ($verify_pass) {
+
+				if ($this->validation->run($fields) == FALSE) {
+					$response['success'] = false;
+					$response['messages'] = $this->validation->getErrors(); //Show Error in Input Form
+
+				} else {
+					$data_pass = [
+						'password' => password_hash($password1, PASSWORD_DEFAULT),
+						'id' => $data->id_alumni
+					];
+					$sql_update_passsword = 'update alumni set password=:password: where id=:id:';
+					$db->query($sql_update_passsword, $data_pass);
+					$response['success'] = true;
+					$response['messages'] = "Password berhasil diganti.";
+				}
+			} else {
+
+				$response['success'] = false;
+				$response['messages'] = "Password lama salah." . $verify_pass;
+			}
+		}
+
+		return $this->response->setJSON($response);
+		
+
+
 	}
 }

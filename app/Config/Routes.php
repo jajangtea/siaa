@@ -107,6 +107,7 @@ $routes->get('/alumni/dashboard', 'Alumni::dashboard',['filter' => 'auth']);
 $routes->get('/alumni/logout', 'Alumni::logout');
 $routes->post('/alumni/getOne_alumni', 'Alumni::getOne_alumni');
 $routes->post('/alumni/edit_alumni', 'Alumni::edit_alumni');
+$routes->post('/alumni/edit_password', 'Alumni::edit_password');
 
 $routes->match(['get', 'post'], 'kelassiswa/ajaxSearch', 'Kelassiswa::ajaxSearch');
 

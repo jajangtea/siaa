@@ -1,6 +1,5 @@
 <?php
 
-
 return [
     'new' => 'Data Baru',
     'add'  => 'Tambah',
