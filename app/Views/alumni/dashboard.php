@@ -52,7 +52,7 @@
 
                     <div class="card-body">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url() .'/'. 'uploads' .'/'. $biodata->foto_terbaru ?>" alt="Alumni profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url() . '/' . 'uploads' . '/' . $biodata->foto_terbaru ?>" alt="Alumni profile picture">
                         </div>
                         <h3 class="profile-username text-center"><?= $biodata->nama_lengkap ?></h3>
 
@@ -74,7 +74,9 @@
                         </ul>
 
                         <button type="button" onclick="update()" class="btn btn-primary btn-block"><b>Update Data</b></button>
-                        <button type="button" onclick="updateFoto()" class="btn btn-primary btn-block"><b>Update Foto</b></button>
+                        <button type="button" onclick="updateFoto()" class="btn btn-success btn-block"><b>Update Foto</b></button>
+                        <button type="button" onclick="updatePass()" class="btn btn-warning btn-block"><b>Ganti Password</b></button>
+
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -85,7 +87,7 @@
                     <div class="col-12">
                         <div class="callout callout-info">
                             <h5><i class="fas fa-info"></i> Note:</h5>
-                       
+
                             Kegiatan <b><?= $biodata->nama_lengkap ?></b> saat ini adalah <b><?= $biodata->nama_kegiatan ?></b>. Berikut adalah informasi pendidikan dan pekerjaan setelah lulus di SMAN 5 Tanjungpinang
                         </div>
 
@@ -219,6 +221,7 @@
             </div>
             <div class="modal-body">
                 <form id="data-form" class="pl-3 pr-3">
+                    <?= csrf_field() ?>
                     <div class="row">
                         <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
                     </div>
@@ -237,7 +240,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label for="id_tp_lulus" class="col-form-label"> Telepon: </label>
+                                <label for="id_tp_lulus" class="col-form-label"> Tahun Lulus: </label>
                                 <select id="id_tp_lulus" name="id_tp_lulus" class="form-control" required>
                                     <option value="">Pilih Tahun Lulus</option>
                                     <?php foreach ($tp as $k) { ?>
@@ -282,10 +285,12 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
         <div class="modal-content">
             <div class="text-center bg-info p-3" id="model-header">
-                <h4 class="modal-title text-white" id="info-header-modalLabel"></h4>
+                <h4 class="modal-title text-white" id="info-header-modalLabel">Ganti Foto</h4>
             </div>
+
             <div class="modal-body">
                 <form method="post" id="upload_image_form" enctype="multipart/form-data">
+                    <?= csrf_field() ?>
                     <div id="alertMessage" class="alert alert-warning mb-3" style="display: none">
                         <span id="alertMsg"></span>
                     </div>
@@ -293,11 +298,60 @@
                         <img class="mb-3" id="ajaxImgUpload" alt="Preview Image" src="<?= base_url('uploads/' . $biodata->foto_terbaru) ?>" />
                     </div>
                     <div class="mb-3">
-                        <input type="file" name="file" multiple="true" id="finput" onchange="onFileUpload(this);" class="form-control form-control-lg" accept="image/*">
+                        <input type="file" name="file" multiple="true" id="finput" onchange="onFileUpload(this);" class="form-control" accept="image/*">
                     </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-success uploadBtn">Upload</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<div id="data-modal-pass" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="text-center bg-info p-3" id="model-header">
+                <h4 class="modal-title text-white" id="info-header-modalLabel">Ganti Password</h4>
+            </div>
+            <div class="modal-body">
+                <form id="data-form" class="pl-3 pr-3">
+                    <?= csrf_field() ?>
+                    <div class="row">
+                        <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="telepon" class="col-form-label"> Password Lama: </label>
+                                <input type="password" id="password_lama" name="password_lama" class="form-control" placeholder="Password Lama" minlength="0" maxlength="20">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="telepon" class="col-form-label"> Password Baru: </label>
+                                <input type="password" id="password1" name="password1" class="form-control" placeholder="Password Baru" minlength="0" maxlength="20">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label for="telepon" class="col-form-label"> Konfirmasi Password: </label>
+                                <input type="password" id="password2" name="password2" class="form-control" placeholder="Konfirmasi Password" minlength="0" maxlength="20">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
+
+                        </div>
+
+
                     </div>
                 </form>
             </div>
@@ -311,6 +365,9 @@
 <!-- page script -->
 <?= $this->section("pageScript") ?>
 <script>
+    let csrfToken = '<?= csrf_token() ?>';
+    let csrfHash = '<?= csrf_hash() ?>';
+
     function onFileUpload(input, id) {
         id = id || '#ajaxImgUpload';
         if (input.files && input.files[0]) {
@@ -390,6 +447,7 @@
                 url: '<?php echo base_url($controller . "/getOne_alumni") ?>',
                 type: 'post',
                 data: {
+                    [csrfToken]: csrfHash,
                     id: id
                 },
                 dataType: 'json',
@@ -496,7 +554,6 @@
 
 
     function updateFoto() {
-        console.log(id);
         // reset the form 
         $("#data-form")[0].reset();
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
@@ -507,12 +564,13 @@
                 url: '<?php echo base_url($controller . "/getOne_alumni") ?>',
                 type: 'post',
                 data: {
+                    [csrfToken]: csrfHash,
                     id: id
                 },
                 dataType: 'json',
                 success: function(response) {
+                    console.log('berhasil');
                     $('#model-header').removeClass('bg-success').addClass('bg-info');
-                    $("#info-header-modalLabel").text('<?= lang("App.edit") ?>');
                     $("#form-btn").text(submitText);
                     $('#data-modal-upload').modal('show');
 
@@ -520,6 +578,116 @@
 
                     // $("#data-form #ajaxImgUpload").val(response.al_img);
 
+                }
+            });
+        }
+        $.validator.setDefaults({
+            highlight: function(element) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+            },
+            errorElement: 'div ',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else if ($(element).is('.select')) {
+                    element.next().after(error);
+                } else if (element.hasClass('select2')) {
+                    //error.insertAfter(element);
+                    error.insertAfter(element.next());
+                } else if (element.hasClass('selectpicker')) {
+                    error.insertAfter(element.next());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var form = $('#data-form');
+                $(".text-danger").remove();
+                $.ajax({
+                    // fixBug get url from global function only
+                    // get global variable is bug!
+                    url: getUrl(),
+                    type: 'post',
+                    data: form.serialize(),
+                    cache: false,
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $('#form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                    },
+                    success: function(response) {
+                        if (response.success === true) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: response.messages,
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function() {
+                                $('#data_table').DataTable().ajax.reload(null, false).draw(false);
+                                $('#data-modal').modal('hide');
+                            })
+                        } else {
+                            if (response.messages instanceof Object) {
+                                $.each(response.messages, function(index, value) {
+                                    var ele = $("#" + index);
+                                    ele.closest('.form-control')
+                                        .removeClass('is-invalid')
+                                        .removeClass('is-valid')
+                                        .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                                    ele.after('<div class="invalid-feedback">' + response.messages[index] + '</div>');
+                                });
+                            } else {
+                                Swal.fire({
+                                    toast: false,
+                                    position: 'bottom-end',
+                                    icon: 'error',
+                                    title: response.messages,
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                })
+
+                            }
+                        }
+                        $('#form-btn').html(getSubmitText());
+                    }
+                });
+                return false;
+            }
+        });
+
+        $('#data-form').validate({
+
+            //insert data-form to database
+
+        });
+    }
+
+
+
+    function updatePass() {
+        // reset the form 
+        $("#data-form")[0].reset();
+        $(".form-control").removeClass('is-invalid').removeClass('is-valid');
+        if (id > 0) { //edit
+            urlController = '<?= base_url($controller . "/edit_alumni") ?>';
+            submitText = '<?= lang("App.update") ?>';
+            $.ajax({
+                url: '<?php echo base_url($controller . "/getOne_alumni") ?>',
+                type: 'post',
+                data: {
+                    [csrfToken]: csrfHash,
+                    id: id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $("#form-btn").text(submitText);
+                    $('#data-modal-pass').modal('show');
+                    $('#data-form #ajaxImgUpload').attr('src', '<?= base_url("uploads/") ?>' + response.al_img);
                 }
             });
         }

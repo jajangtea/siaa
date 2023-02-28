@@ -13,6 +13,7 @@
                 <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
             <?php endif; ?>
             <form action="/alumni/auth" method="post">
+            <?= csrf_field() ?>
                 <div class="input-group mb-3">
                     <input type="text" name="nisn" class="form-control">
                     <div class="input-group-append">

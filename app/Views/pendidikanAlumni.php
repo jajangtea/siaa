@@ -3,42 +3,42 @@
 <?= $this->section("content") ?>
 
 <!-- Main content -->
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-10 mt-2">
-              <h3 class="card-title">Data Pendidikan</h3>
-            </div>
-            <div class="col-2">
-              <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i>   <?= lang('App.new') ?></button>
-            </div>
-          </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-          <table id="data_table" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-              <th>Id</th>
-<th>Nama Kampus</th>
-<th>Fakultas</th>
-<th>Program studi</th>
-<th>Jenjang</th>
-<th>Alamat Kampus</th>
-<th>No telepon</th>
-<th>Id alumni</th>
-<th>Keterangan</th>
-<th>Tahun masuk</th>
-<th>Tahun lulus</th>
-
-			  <th></th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-        <!-- /.card-body -->
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-10 mt-2">
+        <h3 class="card-title">Data Pendidikan</h3>
       </div>
-      <!-- /.card -->
+      <div class="col-2">
+        <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
+      </div>
+    </div>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table id="data_table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nama Kampus</th>
+          <th>Fakultas</th>
+          <th>Program studi</th>
+          <th>Jenjang</th>
+          <th>Alamat Kampus</th>
+          <th>No telepon</th>
+          <th>Id alumni</th>
+          <th>Keterangan</th>
+          <th>Tahun masuk</th>
+          <th>Tahun lulus</th>
+
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- /.card-body -->
+</div>
+<!-- /.card -->
 
 <!-- /Main content -->
 
@@ -51,85 +51,86 @@
       </div>
       <div class="modal-body">
         <form id="data-form" class="pl-3 pr-3">
+        <?= csrf_field() ?>
           <div class="row">
-<input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="nama_kampus" class="col-form-label"> Nama Kampus: <span class="text-danger">*</span> </label>
-									<input type="text" id="nama_kampus" name="nama_kampus" class="form-control" placeholder="Nama Kampus" minlength="0"  maxlength="200" required>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="fakultas" class="col-form-label"> Fakultas: <span class="text-danger">*</span> </label>
-									<input type="text" id="fakultas" name="fakultas" class="form-control" placeholder="Fakultas" minlength="0"  maxlength="200" required>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="program_studi" class="col-form-label"> Program studi: <span class="text-danger">*</span> </label>
-									<input type="text" id="program_studi" name="program_studi" class="form-control" placeholder="Program studi" minlength="0"  maxlength="100" required>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="jenjang" class="col-form-label"> Jenjang: <span class="text-danger">*</span> </label>
-									<input type="text" id="jenjang" name="jenjang" class="form-control" placeholder="Jenjang" minlength="0"  maxlength="20" required>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="alamat_kampus" class="col-form-label"> Alamat Kampus: <span class="text-danger">*</span> </label>
-									<textarea cols="40" rows="5" id="alamat_kampus" name="alamat_kampus" class="form-control" placeholder="Alamat Kampus" minlength="0"  required></textarea>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="no_telepon" class="col-form-label"> No telepon: <span class="text-danger">*</span> </label>
-									<input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="No telepon" minlength="0"  maxlength="20" required>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="id_alumni" class="col-form-label"> Id alumni: <span class="text-danger">*</span> </label>
-									<select id="id_alumni" name="id_alumni" class="form-select" required>
-										<option value="select1">select1</option>
-										<option value="select2">select2</option>
-										<option value="select3">select3</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="keterangan" class="col-form-label"> Keterangan: </label>
-									<input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan" minlength="0"  maxlength="100" >
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="tahun_masuk" class="col-form-label"> Tahun masuk: <span class="text-danger">*</span> </label>
-									<select id="tahun_masuk" name="tahun_masuk" class="form-select" required>
-										<option value="select1">select1</option>
-										<option value="select2">select2</option>
-										<option value="select3">select3</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="tahun_lulus" class="col-form-label"> Tahun lulus: <span class="text-danger">*</span> </label>
-									<select id="tahun_lulus" name="tahun_lulus" class="form-select" required>
-										<option value="select1">select1</option>
-										<option value="select2">select2</option>
-										<option value="select3">select3</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-						</div>
+            <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="nama_kampus" class="col-form-label"> Nama Kampus: <span class="text-danger">*</span> </label>
+                <input type="text" id="nama_kampus" name="nama_kampus" class="form-control" placeholder="Nama Kampus" minlength="0" maxlength="200" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="fakultas" class="col-form-label"> Fakultas: <span class="text-danger">*</span> </label>
+                <input type="text" id="fakultas" name="fakultas" class="form-control" placeholder="Fakultas" minlength="0" maxlength="200" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="program_studi" class="col-form-label"> Program studi: <span class="text-danger">*</span> </label>
+                <input type="text" id="program_studi" name="program_studi" class="form-control" placeholder="Program studi" minlength="0" maxlength="100" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="jenjang" class="col-form-label"> Jenjang: <span class="text-danger">*</span> </label>
+                <input type="text" id="jenjang" name="jenjang" class="form-control" placeholder="Jenjang" minlength="0" maxlength="20" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="alamat_kampus" class="col-form-label"> Alamat Kampus: <span class="text-danger">*</span> </label>
+                <textarea cols="40" rows="5" id="alamat_kampus" name="alamat_kampus" class="form-control" placeholder="Alamat Kampus" minlength="0" required></textarea>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="no_telepon" class="col-form-label"> No telepon: <span class="text-danger">*</span> </label>
+                <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="No telepon" minlength="0" maxlength="20" required>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="id_alumni" class="col-form-label"> Id alumni: <span class="text-danger">*</span> </label>
+                <select id="id_alumni" name="id_alumni" class="form-select" required>
+                  <option value="select1">select1</option>
+                  <option value="select2">select2</option>
+                  <option value="select3">select3</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="keterangan" class="col-form-label"> Keterangan: </label>
+                <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan" minlength="0" maxlength="100">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="tahun_masuk" class="col-form-label"> Tahun masuk: <span class="text-danger">*</span> </label>
+                <select id="tahun_masuk" name="tahun_masuk" class="form-select" required>
+                  <option value="select1">select1</option>
+                  <option value="select2">select2</option>
+                  <option value="select3">select3</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="tahun_lulus" class="col-form-label"> Tahun lulus: <span class="text-danger">*</span> </label>
+                <select id="tahun_lulus" name="tahun_lulus" class="form-select" required>
+                  <option value="select1">select1</option>
+                  <option value="select2">select2</option>
+                  <option value="select3">select3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          </div>
 
           <div class="form-group text-center">
             <div class="btn-group">
@@ -154,6 +155,8 @@
 <?= $this->section("pageScript") ?>
 <script>
   // dataTables
+  let csrfToken = '<?= csrf_token() ?>';
+  let csrfHash = '<?= csrf_hash() ?>';
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
       "paging": true,
@@ -168,6 +171,9 @@
       "responsive": false,
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
+        "data": {
+          [csrfToken]: csrfHash,
+        },
         "type": "POST",
         "dataType": "json",
         async: "true"
@@ -204,6 +210,7 @@
         url: '<?php echo base_url($controller . "/getOne") ?>',
         type: 'post',
         data: {
+          [csrfToken]: csrfHash,
           id: id
         },
         dataType: 'json',
@@ -213,17 +220,17 @@
           $("#form-btn").text(submitText);
           $('#data-modal').modal('show');
           //insert data to form
-          			$("#data-form #id").val(response.id);
-			$("#data-form #nama_kampus").val(response.nama_kampus);
-			$("#data-form #fakultas").val(response.fakultas);
-			$("#data-form #program_studi").val(response.program_studi);
-			$("#data-form #jenjang").val(response.jenjang);
-			$("#data-form #alamat_kampus").val(response.alamat_kampus);
-			$("#data-form #no_telepon").val(response.no_telepon);
-			$("#data-form #id_alumni").val(response.id_alumni);
-			$("#data-form #keterangan").val(response.keterangan);
-			$("#data-form #tahun_masuk").val(response.tahun_masuk);
-			$("#data-form #tahun_lulus").val(response.tahun_lulus);
+          $("#data-form #id").val(response.id);
+          $("#data-form #nama_kampus").val(response.nama_kampus);
+          $("#data-form #fakultas").val(response.fakultas);
+          $("#data-form #program_studi").val(response.program_studi);
+          $("#data-form #jenjang").val(response.jenjang);
+          $("#data-form #alamat_kampus").val(response.alamat_kampus);
+          $("#data-form #no_telepon").val(response.no_telepon);
+          $("#data-form #id_alumni").val(response.id_alumni);
+          $("#data-form #keterangan").val(response.keterangan);
+          $("#data-form #tahun_masuk").val(response.tahun_masuk);
+          $("#data-form #tahun_lulus").val(response.tahun_lulus);
 
         }
       });
@@ -333,14 +340,15 @@
           url: '<?php echo base_url($controller . "/remove") ?>',
           type: 'post',
           data: {
-            id : id
+            [csrfToken]: csrfHash,
+          id: id
           },
           dataType: 'json',
           success: function(response) {
 
             if (response.success === true) {
               Swal.fire({
-                toast:true,
+                toast: true,
                 position: 'top-end',
                 icon: 'success',
                 title: response.messages,
@@ -351,7 +359,7 @@
               })
             } else {
               Swal.fire({
-                toast:false,
+                toast: false,
                 position: 'bottom-end',
                 icon: 'error',
                 title: response.messages,

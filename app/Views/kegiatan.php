@@ -42,6 +42,7 @@
       </div>
       <div class="modal-body">
         <form id="data-form" class="pl-3 pr-3">
+        <?= csrf_field() ?>
           <div class="row">
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
@@ -77,6 +78,8 @@
 <?= $this->section("pageScript") ?>
 <script>
   // dataTables
+  let csrfToken = '<?= csrf_token() ?>';
+  let csrfHash = '<?= csrf_hash() ?>';
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
       "paging": true,
@@ -92,6 +95,13 @@
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
+        "data": {
+          [csrfToken]: csrfHash,
+        },
+        "contentType": 'application/x-www-form-urlencoded; charset=UTF-8',
+        "headers": {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
         "dataType": "json",
         async: "true"
       }
@@ -113,7 +123,7 @@
     // reset the form 
     $("#data-form")[0].reset();
     $(".form-control").removeClass('is-invalid').removeClass('is-valid');
-    if (typeof id === 'undefined' || id < 1) { //add
+    if (typeof id === 'undefined' || id < 1) {
       urlController = '<?= base_url($controller . "/add") ?>';
       submitText = '<?= lang("App.save") ?>';
       $('#model-header').removeClass('bg-info').addClass('bg-success');
@@ -127,6 +137,7 @@
         url: '<?php echo base_url($controller . "/getOne") ?>',
         type: 'post',
         data: {
+          [csrfToken]: csrfHash,
           id: id
         },
         dataType: 'json',
@@ -135,7 +146,6 @@
           $("#info-header-modalLabel").text('<?= lang("App.edit") ?>');
           $("#form-btn").text(submitText);
           $('#data-modal').modal('show');
-          //insert data to form
           $("#data-form #id").val(response.id);
           $("#data-form #nama_kegiatan").val(response.nama_kegiatan);
 
@@ -247,6 +257,7 @@
           url: '<?php echo base_url($controller . "/remove") ?>',
           type: 'post',
           data: {
+            [csrfToken]: csrfHash,
             id: id
           },
           dataType: 'json',

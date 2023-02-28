@@ -36,9 +36,9 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
-            'honeypot',
+            // 'honeypot',
             // 'login'
-            // 'csrf',
+            'csrf',
             // 'invalidchars',
         ],
         'after' => [
@@ -68,9 +68,5 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [
-        'login' => [
-            'before' => ['alumni/*']
-        ],
-    ];
+
 }

@@ -60,6 +60,7 @@
       </div>
       <div class="modal-body">
         <form id="data-form" class="pl-3 pr-3">
+        <?= csrf_field() ?>
           <div class="row">
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
@@ -114,8 +115,8 @@
 
 <script>
   // dataTables
-
-
+  let csrfToken = '<?= csrf_token() ?>';
+  let csrfHash = '<?= csrf_hash() ?>';
 
   $(function() {
 
@@ -151,6 +152,9 @@
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
+        "data": {
+          [csrfToken]: csrfHash,
+        },
         "dataType": "json",
         async: "true"
       },
@@ -227,6 +231,7 @@
         url: '<?php echo base_url($controller . "/getOne") ?>',
         type: 'post',
         data: {
+          [csrfToken]: csrfHash,
           id: id
         },
         dataType: 'json',
@@ -349,7 +354,8 @@
           url: '<?php echo base_url($controller . "/remove") ?>',
           type: 'post',
           data: {
-            id: id
+            [csrfToken]: csrfHash,
+          id: id
           },
           dataType: 'json',
           success: function(response) {
