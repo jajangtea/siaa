@@ -72,13 +72,13 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group mb-2">
-                <label for="nis" class="col-form-label"> Nis: <span class="text-danger">*</span> </label>
+                <label for="nis" class="col-form-label"> NIS: <span class="text-danger">*</span> </label>
                 <input type="number" id="nis" name="nis" class="form-control" placeholder="Nis" minlength="0" maxlength="11" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group mb-2">
-                <label for="nisn" class="col-form-label"> Nisn: <span class="text-danger">*</span> </label>
+                <label for="nisn" class="col-form-label"> NISN: <span class="text-danger">*</span> </label>
                 <input type="number" id="nisn" name="nisn" class="form-control" placeholder="Nisn" minlength="0" maxlength="11" required>
               </div>
             </div>

@@ -87,7 +87,7 @@ class Pekerjaan extends BaseController
 	public function add()
 	{
       
-		$session = session();
+
 		$response = array();
 		$fields['id'] = $this->request->getPost('id');
 	
@@ -96,7 +96,7 @@ class Pekerjaan extends BaseController
 		$fields['nama_atasan'] = $this->request->getPost('nama_atasan');
 		$fields['alamat_instansi'] = $this->request->getPost('alamat_instansi');
 		$fields['no_telepon'] = $this->request->getPost('no_telepon');
-		$fields['id_siswa'] = $session->get('id_siswa');
+		$fields['id_siswa'] = session('id_siswa');
 		$fields['tahun_masuk'] = $this->request->getPost('tahun_masuk');
 
 

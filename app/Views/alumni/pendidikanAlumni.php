@@ -19,18 +19,16 @@
     <table id="data_table" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Id</th>
+          <th>No</th>
           <th>Nama Kampus</th>
           <th>Fakultas</th>
           <th>Program studi</th>
           <th>Jenjang</th>
           <th>Alamat Kampus</th>
-          <th>No telepon</th>
-          <th>Id alumni</th>
+          <th>No Handphone / WA</th>
           <th>Keterangan</th>
           <th>Tahun masuk</th>
           <th>Tahun lulus</th>
-
           <th></th>
         </tr>
       </thead>
@@ -51,6 +49,7 @@
       </div>
       <div class="modal-body">
         <form id="data-form" class="pl-3 pr-3">
+          <?=csrf_field() ?>
           <div class="row">
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
@@ -82,7 +81,7 @@
 
             <div class="col-md-6">
               <div class="form-group mb-3">
-                <label for="no_telepon" class="col-form-label"> No telepon: <span class="text-danger">*</span> </label>
+                <label for="no_telepon" class="col-form-label"> No Handphone / WA: <span class="text-danger">*</span> </label>
                 <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="No telepon" minlength="0" maxlength="20" required>
               </div>
             </div>
@@ -168,6 +167,9 @@
   // dataTables
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
+      "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
+      },
       "paging": true,
       "lengthChange": false,
       "searching": true,
@@ -236,7 +238,7 @@
           $("#data-form #jenjang").val(response.jenjang);
           $("#data-form #alamat_kampus").val(response.alamat_kampus);
           $("#data-form #no_telepon").val(response.no_telepon);
-          $("#data-form #id_alumni").val(response.id_alumni);
+          $("#data-form #id_siswa").val(response.id_siswa);
           $("#data-form #keterangan").val(response.keterangan);
           $("#data-form #tahun_masuk").val(response.tahun_masuk);
           $("#data-form #tahun_lulus").val(response.tahun_lulus);
