@@ -44,7 +44,7 @@
 
 <!-- ADD modal content -->
 <div id="data-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="text-center bg-info p-3" id="model-header">
         <h4 class="modal-title text-white" id="info-header-modalLabel"></h4>
@@ -55,28 +55,80 @@
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label for="nama_kampus" class="col-form-label"> Nama Kampus: <span class="text-danger">*</span> </label>
                 <input type="text" id="nama_kampus" name="nama_kampus" class="form-control" placeholder="Nama Kampus" minlength="0" maxlength="200" required>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label for="fakultas" class="col-form-label"> Fakultas: <span class="text-danger">*</span> </label>
                 <input type="text" id="fakultas" name="fakultas" class="form-control" placeholder="Fakultas" minlength="0" maxlength="200" required>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label for="program_studi" class="col-form-label"> Program studi: <span class="text-danger">*</span> </label>
                 <input type="text" id="program_studi" name="program_studi" class="form-control" placeholder="Program studi" minlength="0" maxlength="100" required>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label for="jenjang" class="col-form-label"> Jenjang: <span class="text-danger">*</span> </label>
                 <input type="text" id="jenjang" name="jenjang" class="form-control" placeholder="Jenjang" minlength="0" maxlength="20" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label for="no_telepon" class="col-form-label"> No telepon: <span class="text-danger">*</span> </label>
+                <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="No telepon" minlength="0" maxlength="20" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label for="keterangan" class="col-form-label"> Keterangan: </label>
+                <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan" minlength="0" maxlength="100">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label for="tahun_masuk" class="col-form-label"> Tahun masuk: <span class="text-danger">*</span> </label>
+                <select name="tahun_masuk" id="tahun_masuk" class="form-control" required>
+                  <?php
+                  $initialYear = 2012;
+                  $currentYear = date('Y');
+                  for ($i = $initialYear; $i <= $currentYear + 1; $i++) {
+                    $checked = ($i == $currentYear ? "selected" : "");
+
+                    echo '<option value="' . $i . '" ' . $checked . '>' . $i . '</option>';
+                  }
+                  ?>
+                </select>
+
+
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label for="tahun_lulus" class="col-form-label"> Tahun lulus: <span class="text-danger">*</span> </label>
+                <select name="tahun_lulus" id="tahun_lulus" class="form-control" required>
+                  <?php
+                  $initialYear = 2012;
+                  $currentYear = date('Y');
+                  for ($i = $initialYear; $i <= $currentYear + 1; $i++) {
+                    $checked = ($i == $currentYear ? "selected" : "");
+
+                    echo '<option value="' . $i . '" ' . $checked . '>' . $i . '</option>';
+                  }
+                  ?>
+                </select>
+
+
               </div>
             </div>
             <div class="col-md-12">
@@ -85,55 +137,13 @@
                 <textarea cols="40" rows="5" id="alamat_kampus" name="alamat_kampus" class="form-control" placeholder="Alamat Kampus" minlength="0" required></textarea>
               </div>
             </div>
-            <div class="col-md-12">
-              <div class="form-group mb-3">
-                <label for="no_telepon" class="col-form-label"> No telepon: <span class="text-danger">*</span> </label>
-                <input type="text" id="no_telepon" name="no_telepon" class="form-control" placeholder="No telepon" minlength="0" maxlength="20" required>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group mb-3">
-                <label for="id_alumni" class="col-form-label"> Id alumni: <span class="text-danger">*</span> </label>
-                <select id="id_alumni" name="id_alumni" class="form-select" required>
-                  <option value="select1">select1</option>
-                  <option value="select2">select2</option>
-                  <option value="select3">select3</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group mb-3">
-                <label for="keterangan" class="col-form-label"> Keterangan: </label>
-                <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan" minlength="0" maxlength="100">
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group mb-3">
-                <label for="tahun_masuk" class="col-form-label"> Tahun masuk: <span class="text-danger">*</span> </label>
-                <select id="tahun_masuk" name="tahun_masuk" class="form-select" required>
-                  <option value="select1">select1</option>
-                  <option value="select2">select2</option>
-                  <option value="select3">select3</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group mb-3">
-                <label for="tahun_lulus" class="col-form-label"> Tahun lulus: <span class="text-danger">*</span> </label>
-                <select id="tahun_lulus" name="tahun_lulus" class="form-select" required>
-                  <option value="select1">select1</option>
-                  <option value="select2">select2</option>
-                  <option value="select3">select3</option>
-                </select>
-              </div>
-            </div>
           </div>
           <div class="row">
           </div>
 
           <div class="form-group text-center">
             <div class="btn-group">
-              <button type="submit" class="btn btn-success mr-2" id="form-btn"><?= lang("App.save") ?></button>
+              <button type="submit" class="btn btn-success" id="form-btn"><?= lang("App.save") ?></button>
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><?= lang("App.cancel") ?></button>
             </div>
           </div>
@@ -153,6 +163,8 @@
 <!-- page script -->
 <?= $this->section("pageScript") ?>
 <script>
+  let csrfToken = '<?= csrf_token() ?>';
+  let csrfHash = '<?= csrf_hash() ?>';
   // dataTables
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
@@ -169,6 +181,9 @@
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
+        "data": {
+          [csrfToken]: csrfHash,
+        },
         "dataType": "json",
         async: "true"
       }
@@ -204,6 +219,7 @@
         url: '<?php echo base_url($controller . "/getOne") ?>',
         type: 'post',
         data: {
+          [csrfToken]: csrfHash,
           id: id
         },
         dataType: 'json',
@@ -333,6 +349,7 @@
           url: '<?php echo base_url($controller . "/remove") ?>',
           type: 'post',
           data: {
+            [csrfToken]: csrfHash,
             id: id
           },
           dataType: 'json',

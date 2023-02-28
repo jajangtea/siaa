@@ -392,7 +392,7 @@
           type: 'post',
           data: {
             [csrfToken]: csrfHash,
-          id: id
+            id: id
           },
           dataType: 'json',
           success: function(response) {

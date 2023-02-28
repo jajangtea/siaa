@@ -26,7 +26,7 @@ class Pekerjaan extends BaseController
 		
 
 		$data = [
-			'controller'    	=> 'pekerjaan',
+			'controller'    	=> 'alumni/pekerjaan',
 			'title'     		=> 'Pekerjaan Alumni',
 			'nama_lengkap'     		=> $this->session->get('nama_lengkap'),
 		'session' =>$this->session,   

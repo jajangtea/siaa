@@ -24,7 +24,7 @@ class PendidikanAlumni extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'pendidikanAlumni',
+                'controller'    	=> 'alumni/pendidikanAlumni',
                 'title'     		=> 'Data Pendidikan Alumni'				
 			];
 		

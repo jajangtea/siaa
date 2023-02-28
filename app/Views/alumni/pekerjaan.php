@@ -47,6 +47,7 @@
       </div>
       <div class="modal-body">
         <form id="data-form" class="pl-3 pr-3">
+        <?= csrf_field() ?>
           <div class="row">
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
@@ -123,13 +124,16 @@
 <!-- page script -->
 <?= $this->section("pageScript") ?>
 <script>
+  let csrfToken = '<?= csrf_token() ?>';
+  let csrfHash = '<?= csrf_hash() ?>';
   // dataTables
   $(function() {
     var table = $('#data_table').removeAttr('width').DataTable({
       "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
-      },  'columnDefs': [{
-        "targets": 6, 
+      },
+      'columnDefs': [{
+        "targets": 6,
         "className": "text-center",
       }, ],
       "paging": true,
@@ -149,6 +153,9 @@
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',
         "type": "POST",
+        "data": {
+          [csrfToken]: csrfHash,
+        },
         "dataType": "json",
         async: "true"
       }
@@ -184,6 +191,7 @@
         url: '<?php echo base_url($controller . "/getOne") ?>',
         type: 'post',
         data: {
+          [csrfToken]: csrfHash,
           id: id
         },
         dataType: 'json',
@@ -311,6 +319,7 @@
           url: '<?php echo base_url($controller . "/remove") ?>',
           type: 'post',
           data: {
+            [csrfToken]: csrfHash,
             id: id
           },
           dataType: 'json',

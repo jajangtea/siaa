@@ -51,7 +51,7 @@
       </div>
       <div class="modal-body">
         <form id="data-form" class="pl-3 pr-3">
-        <?= csrf_field() ?>
+          <?= csrf_field() ?>
           <div class="row">
             <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
           </div>
@@ -341,7 +341,7 @@
           type: 'post',
           data: {
             [csrfToken]: csrfHash,
-          id: id
+            id: id
           },
           dataType: 'json',
           success: function(response) {

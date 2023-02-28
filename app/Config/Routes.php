@@ -78,19 +78,19 @@ $routes->post('/kelas/add', 'Kelas::add');
 $routes->post('/kelas/edit', 'Kelas::edit');
 $routes->post('/kelas/remove', 'Kelas::remove');
 
-$routes->get('/pekerjaan', 'Pekerjaan::index');
-$routes->post('/pekerjaan/getAll', 'Pekerjaan::getAll');
-$routes->post('/pekerjaan/getOne', 'Pekerjaan::getOne');
-$routes->post('/pekerjaan/add', 'Pekerjaan::add');
-$routes->post('/pekerjaan/edit', 'Pekerjaan::edit');
-$routes->post('/pekerjaan/remove', 'Pekerjaan::remove');
+$routes->get('/alumni/pekerjaan', 'Pekerjaan::index');
+$routes->post('/alumni/pekerjaan/getAll', 'Pekerjaan::getAll');
+$routes->post('/alumni/pekerjaan/getOne', 'Pekerjaan::getOne');
+$routes->post('/alumni/pekerjaan/add', 'Pekerjaan::add');
+$routes->post('/alumni/pekerjaan/edit', 'Pekerjaan::edit');
+$routes->post('/alumni/pekerjaan/remove', 'Pekerjaan::remove');
 
-$routes->get('/pendidikan', 'PendidikanAlumni::index');
-$routes->post('/pendidikan/getAll', 'PendidikanAlumni::getAll');
-$routes->post('/pendidikan/getOne', 'PendidikanAlumni::getOne');
-$routes->post('/pendidikan/add', 'PendidikanAlumni::add');
-$routes->post('/pendidikan/edit', 'PendidikanAlumni::edit');
-$routes->post('/pendidikan/remove', 'PendidikanAlumni::remove');
+$routes->get('/alumni/pendidikanAlumni', 'PendidikanAlumni::index');
+$routes->post('/alumni/pendidikanAlumni/getAll', 'PendidikanAlumni::getAll');
+$routes->post('/alumni/pendidikanAlumni/getOne', 'PendidikanAlumni::getOne');
+$routes->post('/alumni/pendidikanAlumni/add', 'PendidikanAlumni::add');
+$routes->post('/alumni/pendidikanAlumni/edit', 'PendidikanAlumni::edit');
+$routes->post('/alumni/pendidikanAlumni/remove', 'PendidikanAlumni::remove');
 
 
 $routes->get('/alumni', 'Alumni::index');
