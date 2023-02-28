@@ -3,33 +3,33 @@
 <?= $this->section("content") ?>
 
 <!-- Main content -->
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-10 mt-2">
-              <h3 class="card-title">Tahun Pelajaran</h3>
-            </div>
-            <div class="col-2">
-              <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i>   <?= lang('App.new') ?></button>
-            </div>
-          </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-          <table id="data_table" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-              <th>Id</th>
-<th>TP</th>
-
-			  <th></th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-        <!-- /.card-body -->
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-10 mt-2">
+        <h3 class="card-title">Tahun Pelajaran</h3>
       </div>
-      <!-- /.card -->
+      <div class="col-2">
+        <button type="button" class="btn float-right btn-success" onclick="save()" title="<?= lang("App.new") ?>"> <i class="fa fa-plus"></i> <?= lang('App.new') ?></button>
+      </div>
+    </div>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table id="data_table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>TP</th>
+
+          <th></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- /.card-body -->
+</div>
+<!-- /.card -->
 
 <!-- /Main content -->
 
@@ -43,16 +43,16 @@
       <div class="modal-body">
         <form id="data-form" class="pl-3 pr-3">
           <div class="row">
-<input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group mb-3">
-									<label for="tp" class="col-form-label"> TP: <span class="text-danger">*</span> </label>
-									<input type="text" id="tp" name="tp" class="form-control" placeholder="TP" minlength="0"  maxlength="15" required>
-								</div>
-							</div>
-						</div>
+            <input type="hidden" id="id" name="id" class="form-control" placeholder="Id" maxlength="11" required>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-3">
+                <label for="tp" class="col-form-label"> TP: <span class="text-danger">*</span> </label>
+                <input type="text" id="tp" name="tp" class="form-control" placeholder="TP" minlength="0" maxlength="15" required>
+              </div>
+            </div>
+          </div>
 
           <div class="form-group text-center">
             <div class="btn-group">
@@ -136,8 +136,8 @@
           $("#form-btn").text(submitText);
           $('#data-modal').modal('show');
           //insert data to form
-          			$("#data-form #id").val(response.id);
-			$("#data-form #tp").val(response.tp);
+          $("#data-form #id").val(response.id);
+          $("#data-form #tp").val(response.tahun_pelajaran);
 
         }
       });
@@ -247,14 +247,14 @@
           url: '<?php echo base_url($controller . "/remove") ?>',
           type: 'post',
           data: {
-            id : id
+            id: id
           },
           dataType: 'json',
           success: function(response) {
 
             if (response.success === true) {
               Swal.fire({
-                toast:true,
+                toast: true,
                 position: 'top-end',
                 icon: 'success',
                 title: response.messages,
@@ -265,7 +265,7 @@
               })
             } else {
               Swal.fire({
-                toast:false,
+                toast: false,
                 position: 'bottom-end',
                 icon: 'error',
                 title: response.messages,

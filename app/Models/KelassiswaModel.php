@@ -31,7 +31,7 @@ class KelassiswaModel extends Model
 	public function getSiswa()
 	{
 
-		$query = $this->db->query('select * from siswa');
+		$query = $this->db->query('select * from siswa where id_status=1');
 		return $query->getResult();
 	}
 	public function getKelas()

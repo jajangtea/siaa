@@ -66,6 +66,7 @@ $routes->post('/peminatan/remove', 'Peminatan::remove');
 
 $routes->get('/tp', 'Tp::index');
 $routes->post('/tp/getAll', 'Tp::getAll');
+$routes->post('/tp/getOne', 'Tp::getOne');
 $routes->post('/tp/add', 'Tp::add');
 $routes->post('/tp/edit', 'Tp::edit');
 $routes->post('/tp/remove', 'Tp::remove');

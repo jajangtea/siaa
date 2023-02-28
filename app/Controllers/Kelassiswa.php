@@ -42,7 +42,7 @@ class Kelassiswa extends BaseController
 		$db      = \Config\Database::connect();
 		$builder = $db->table('kelas_siswa');
 		$builder->select('kelas_siswa.id,siswa.nisn,siswa.nis,siswa.nama_lengkap,kelas.nama_kelas,kelas.fase,kelas_siswa.id_siswa');
-		$builder->where('siswa.id_status','1');
+		$builder->where('siswa.id_status', '1');
 		$builder->join('siswa', 'siswa.id = kelas_siswa.id_siswa');
 		$builder->join('kelas', 'kelas.id = kelas_siswa.id_kelas');
 		$result = $builder->get();
@@ -50,7 +50,7 @@ class Kelassiswa extends BaseController
 		foreach ($result->getResult() as $key => $value) {
 
 			$ops = '<div class="btn-group">';
-			
+
 			$ops .= '<button type="button" onClick="save(' . $value->id . ')" class="btn btn-info"><i class="fa fa-pen-square"></i> Edit</button>';
 			$ops .= '<a href="' . base_url('siswa/updatelulus/' . $value->id_siswa) . '" class="btn btn-warning"><i class="fa fa-graduation-cap"></i> Lulus</a>';
 			$ops .= '<button type="button" onClick="remove(' . $value->id . ')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>';
@@ -66,7 +66,12 @@ class Kelassiswa extends BaseController
 				$ops
 			);
 		}
+		
+		// $db      = \Config\Database::connect();
+		// $sql = $db->getLastQuery();
+		// echo $sql;
 
+		// exit;
 		return $this->response->setJSON($data);
 	}
 
@@ -115,8 +120,14 @@ class Kelassiswa extends BaseController
 					'id_siswa' => $id_siswa,
 					'id_kelas' => $id_kelas,
 				];
-				// $this->db->table('kelas')->insert($data);
-				$this->kelassiswaModel->insert($data);
+				if ($this->kelassiswaModel->insert($data)) {
+					$response['success'] = true;
+					$response['messages'] = lang("App.insert-success");
+				} else {
+
+					$response['success'] = false;
+					$response['messages'] = lang("App.insert-error");
+				}
 			}
 		}
 

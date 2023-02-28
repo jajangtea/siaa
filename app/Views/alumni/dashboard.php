@@ -52,7 +52,7 @@
 
                     <div class="card-body">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url() . 'uploads/' . $biodata->foto_terbaru ?>" alt="Alumni profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="<?= base_url() .'/'. 'uploads' .'/'. $biodata->foto_terbaru ?>" alt="Alumni profile picture">
                         </div>
                         <h3 class="profile-username text-center"><?= $biodata->nama_lengkap ?></h3>
 
@@ -85,6 +85,7 @@
                     <div class="col-12">
                         <div class="callout callout-info">
                             <h5><i class="fas fa-info"></i> Note:</h5>
+                       
                             Kegiatan <b><?= $biodata->nama_lengkap ?></b> saat ini adalah <b><?= $biodata->nama_kegiatan ?></b>. Berikut adalah informasi pendidikan dan pekerjaan setelah lulus di SMAN 5 Tanjungpinang
                         </div>
 

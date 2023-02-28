@@ -128,16 +128,23 @@
     var table = $('#data_table').removeAttr('width').DataTable({
       "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
-      },
+      },  'columnDefs': [{
+        "targets": 6, 
+        "className": "text-center",
+      }, ],
       "paging": true,
       "lengthChange": false,
       "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": true,
+      "autoWidth": false,
       "scrollY": '45vh',
       "scrollX": true,
       "scrollCollapse": false,
+      columnDefs: [{
+        width: 60,
+        targets: 0
+      }],
       "responsive": false,
       "ajax": {
         "url": '<?php echo base_url($controller . "/getAll") ?>',

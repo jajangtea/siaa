@@ -7,17 +7,15 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-    <?php
-    $local_session = \Config\Services::session(); // Needed for Point 5
-?>
+
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?= base_url("uploads/") ?>" class="img-circle elevation-2" alt="User Image">
+                <img src="<?= base_url("uploads") .'/'. $_SESSION['foto_terbaru'] ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
 
-                <a href="<?= base_url('alumni/dashboard') ?>" class="d-block"><?= $local_session->get('nama_lengkap'); ?></a>
+                <a href="<?= base_url('alumni/dashboard') ?>" class="d-block"><?= $_SESSION['nama_lengkap'] ?></a>
             </div>
         </div>
 

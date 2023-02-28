@@ -45,11 +45,11 @@ class Pekerjaan extends BaseController
 
 			$ops = '<div class="btn-group">';
 			$ops .= '<button type="button" class=" btn btn-sm dropdown-toggle btn-info" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-			$ops .= '<i class="fa-solid fa-pen-square"></i>  </button>';
+			$ops .= '<i class="fa fa-pen"></i>  </button>';
 			$ops .= '<div class="dropdown-menu">';
-			$ops .= '<a class="dropdown-item text-info" onClick="save(' . $value->id . ')"><i class="fa-solid fa-pen-to-square"></i>   ' .  lang("App.edit")  . '</a>';
+			$ops .= '<a class="dropdown-item text-info" onClick="save(' . $value->id . ')"><i class="fa fa-pen-square"></i>   ' .  lang("App.edit")  . '</a>';
 			$ops .= '<div class="dropdown-divider"></div>';
-			$ops .= '<a class="dropdown-item text-danger" onClick="remove(' . $value->id . ')"><i class="fa-solid fa-trash"></i>   ' .  lang("App.delete")  . '</a>';
+			$ops .= '<a class="dropdown-item text-danger" onClick="remove(' . $value->id . ')"><i class="fa fa-trash"></i>   ' .  lang("App.delete")  . '</a>';
 			$ops .= '</div></div>';
 
 			$data['data'][$key] = array(
@@ -144,7 +144,7 @@ class Pekerjaan extends BaseController
 		$fields['nama_atasan'] = $this->request->getPost('nama_atasan');
 		$fields['alamat_instansi'] = $this->request->getPost('alamat_instansi');
 		$fields['no_telepon'] = $this->request->getPost('no_telepon');
-		$fields['id_siswa'] = $this->request->getPost('id_siswa');
+		$fields['id_siswa'] = session('id_siswa');
 		$fields['tahun_masuk'] = $this->request->getPost('tahun_masuk');
 
 
