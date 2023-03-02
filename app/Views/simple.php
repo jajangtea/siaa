@@ -3,51 +3,38 @@
 <?= $this->section("content") ?>
 
 <!-- Main content -->
-<h2 class="text-center display-4">Pencarian Data</h2>
-<form action="enhanced-results.html">
+<h2 class="text-center display-4">Pencarian Data Alumni & Siswa</h2>
+<form>
+    <input type="hidden" id="id_status" name="id_status">
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                     <div class="form-group">
-                        <label>Result Type:</label>
-                        <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%;">
-                            <option>Text only</option>
-                            <option>Images</option>
-                            <option>Video</option>
+                        <label>Jenis Pencarian :</label>
+                        <select class="form-control" name="jenis" id="jenis" onChange="getJenis(this.value);">
+                            <option selected value="1">Siswa</option>
+                            <option value="2">Alumni</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-8">
                     <div class="form-group">
-                        <label>Sort Order:</label>
-                        <select class="select2" style="width: 100%;">
-                            <option selected>ASC</option>
-                            <option>DESC</option>
+                        <label>Nama Siswa / Alumni :</label>
+                        <select class="select2" style="width: 100%;" name="nama_lengkap" id="nama_lengkap">
+
                         </select>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        <label>Order By:</label>
-                        <select class="select2" style="width: 100%;">
-                            <option selected>Title</option>
-                            <option>Date</option>
-                        </select>
+
+
+
+                        <img id="loader" src="<?= base_url('asset/img/loader.gif') ?>" />
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <div class="input-group input-group-lg">
-                    <label>Masukan Nama</label>
-                    <select class="select2 form-control form-control-lg" style="width: 100%;">
-                        <option selected>Title</option>
-                        <option>Date</option>
-                    </select>
 
-                </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary mt-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
+                    <button class="btn btn-primary mt-2" type="button" id="form-btn"> <i class="fa fa-search"></i> Cari...</button>
                 </div>
 
             </div>
@@ -61,6 +48,12 @@
 
 <?= $this->section("pageScript") ?>
 <script>
+    let csrfToken = '<?= csrf_token() ?>';
+    let csrfHash = '<?= csrf_hash() ?>';
+
+    var $element = $('select2').select2();
+
+    $("#loader").hide();
     $(function() {
         //Initialize Select2 Elements
         $('.select2').select2()
@@ -70,138 +63,63 @@
             theme: 'bootstrap4'
         })
 
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', {
-            'placeholder': 'dd/mm/yyyy'
-        })
-        //Datemask2 mm/dd/yyyy
-        $('#datemask2').inputmask('mm/dd/yyyy', {
-            'placeholder': 'mm/dd/yyyy'
-        })
-        //Money Euro
-        $('[data-mask]').inputmask()
+    })
 
-        //Date picker
-        $('#reservationdate').datetimepicker({
-            format: 'L'
-        });
-
-        //Date and time picker
-        $('#reservationdatetime').datetimepicker({
-            icons: {
-                time: 'far fa-clock'
-            }
-        });
-
-        //Date range picker
-        $('#reservation').daterangepicker()
-        //Date range picker with time picker
-        $('#reservationtime').daterangepicker({
-            timePicker: true,
-            timePickerIncrement: 30,
-            locale: {
-                format: 'MM/DD/YYYY hh:mm A'
-            }
-        })
-        //Date range as a button
-        $('#daterange-btn').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
+    function getJenis(val) {
+        $("#loader").show();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url($controller . "/getAll") ?>",
+            data: {
+                [csrfToken]: csrfHash,
+                "id_status": val
             },
-            function(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            // beforeSend: function() {
+            //     $('#form-btn').html('<i class="fa fa-spinner fa-spin"></i> Loading...');
+            // },
+            success: function(response) {
+
+                // var data = {
+                //     id: 1,
+                //     text: 'Barn owl'
+                // };
+
+                // var newOption = new Option(data.text, data.id, false, false);
+                // $('#nama_lengkap').append(newOption).trigger('change');
+
+                // for (var d = 0; d < response.length; d++) {
+                //     var item = response[d];
+
+                //     // Create the DOM option that is pre-selected by default
+                //     var newOption = new Option(item.nama_lengkap, item.nisn, false, false);
+                //     $('#nama_lengkap').append(newOption).trigger('change');
+                // }
+
+                // // // Update the selected options that are displayed
+                // // // $element.trigger('change');
+                // // $('#nama_lengkap').val(null).trigger('change');
+                // $("#nama_lengkap").off('change');
+
+                if ($('#nama_lengkap').find("option[value='" + response.nisn + "']").length) {
+                    for (var d = 0; d < response.length; d++) {
+                    var item = response[d];
+
+                    // Create the DOM option that is pre-selected by default
+                    var newOption = new Option(item.nama_lengkap, item.nisn, false, false);
+                    $('#nama_lengkap').append(newOption).trigger('change');
+                }
+                } else {
+                    // Create a DOM Option and pre-select by default
+                    var newOption = new Option(item.nama_lengkap, item.nisn, true, true);
+                    // Append it to the select
+                    $('#nama_lengkap').append(newOption).trigger('change');
+                }
+
+
+                $("#loader").hide();
             }
-        )
-
-        //Timepicker
-        $('#timepicker').datetimepicker({
-            format: 'LT'
-        })
-
-        //Bootstrap Duallistbox
-        $('.duallistbox').bootstrapDualListbox()
-
-        //Colorpicker
-        $('.my-colorpicker1').colorpicker()
-        //color picker with addon
-        $('.my-colorpicker2').colorpicker()
-
-        $('.my-colorpicker2').on('colorpickerChange', function(event) {
-            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-        })
-
-        $("input[data-bootstrap-switch]").each(function() {
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        })
-
-    })
-    // BS-Stepper Init
-    document.addEventListener('DOMContentLoaded', function() {
-        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
-
-    // DropzoneJS Demo Code Start
-    Dropzone.autoDiscover = false
-
-    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-    var previewNode = document.querySelector("#template")
-    previewNode.id = ""
-    var previewTemplate = previewNode.parentNode.innerHTML
-    previewNode.parentNode.removeChild(previewNode)
-
-    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/target-url", // Set the url
-        thumbnailWidth: 80,
-        thumbnailHeight: 80,
-        parallelUploads: 20,
-        previewTemplate: previewTemplate,
-        autoQueue: false, // Make sure the files aren't queued until manually added
-        previewsContainer: "#previews", // Define the container to display the previews
-        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-    })
-
-    myDropzone.on("addedfile", function(file) {
-        // Hookup the start button
-        file.previewElement.querySelector(".start").onclick = function() {
-            myDropzone.enqueueFile(file)
-        }
-    })
-
-    // Update the total progress bar
-    myDropzone.on("totaluploadprogress", function(progress) {
-        document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-    })
-
-    myDropzone.on("sending", function(file) {
-        // Show the total progress bar when upload starts
-        document.querySelector("#total-progress").style.opacity = "1"
-        // And disable the start button
-        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-    })
-
-    // Hide the total progress bar when nothing's uploading anymore
-    myDropzone.on("queuecomplete", function(progress) {
-        document.querySelector("#total-progress").style.opacity = "0"
-    })
-
-    // Setup the buttons for all transfers
-    // The "add files" button doesn't need to be setup because the config
-    // `clickable` has already been specified.
-    document.querySelector("#actions .start").onclick = function() {
-        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        });
     }
-    document.querySelector("#actions .cancel").onclick = function() {
-        myDropzone.removeAllFiles(true)
-    }
-    // DropzoneJS Demo Code End
 </script>
 
 <?= $this->endSection() ?>

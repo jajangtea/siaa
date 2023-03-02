@@ -26,8 +26,8 @@ class Home extends BaseController
        
 
         $data = [
-            'controller'        => 'Pencarian Data',
-            'title'             => '',
+            'controller'        => 'simple',
+            'title'             => 'Pencarian Data',
     
 
         ];
@@ -54,4 +54,37 @@ class Home extends BaseController
 
         return $count;
     }
+
+
+    public function getAll()
+	{
+        $id_status = $this->request->getPost('id_status');
+		$response = $data['data'] = array();
+
+		$db      = \Config\Database::connect();
+		$builder = $db->table('siswa');
+		$builder->where('id_status',$id_status);
+		$builder->select('nisn,nama_lengkap');
+		$results = $builder->get()->getResult();
+
+		foreach ($results as $key => $value) {
+            $data['data'][$key] = array(
+				$value->nisn,
+				$value->nama_lengkap,
+				
+			);
+        }
+
+		return $this->response->setJSON($results);
+	}
+
+
+
+    public function getSiswaOrAlumni()
+	{
+        $db = \Config\Database::connect();
+
+		$query = $db->query('select * from siswa where id_status=1');
+		return $query->getResult();
+	}
 }

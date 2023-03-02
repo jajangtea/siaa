@@ -29,6 +29,7 @@
                                 <li class="nav-item"><a class="nav-link" href="<?= base_url('/dashboard') ?>">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://lms.sman5-tpi.sch.id">E-Learning</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://pustaka.sman5-tpi.sch.id">E-Library</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?=base_url('simple')?>">Pencarian Alumni & Siswa</a></li>
                                 <li class="nav-item dropdown no-caret">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Social Media
