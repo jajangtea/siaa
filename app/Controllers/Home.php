@@ -2,8 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\KelassiswaModel;
+
 class Home extends BaseController
 {
+    protected $kelassiswaModel;
     public function index()
     {
         $jml_alumni = $this->getJmlAlumni();
@@ -17,6 +20,18 @@ class Home extends BaseController
             'jml_siswa' => $jml_siswa,
         ];
         return view('home', $data);
+    }
+    public function simple()
+    {
+       
+
+        $data = [
+            'controller'        => 'Home',
+            'title'             => 'Daftar Siswa Perkelas',
+    
+
+        ];
+        return view('simple', $data);
     }
 
     public function getJmlSiswa()

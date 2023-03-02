@@ -6,11 +6,11 @@
 
 
 <script src="<?= base_url('asset/plugins/jquery/jquery.min.js') ?>"></script>
-<script src="<?= base_url('asset/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
+<!-- <script src="<?php // base_url('asset/plugins/jquery-ui/jquery-ui.min.js') ?>"></script> -->
 
 
 <!-- Bootstrap 5 with Popper.js-->
-<script src="<?= base_url('asset/js/bootstrap.bundle.min.js') ?>"></script>
+<script src="<?= base_url('asset/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 <!-- overlayScrollbars -->
 <script src="<?= base_url('asset/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
 <!-- AdminLTE App -->
@@ -226,4 +226,6 @@
       options: stackedBarChartOptions
     })
   })
+
+ 
 </script>
