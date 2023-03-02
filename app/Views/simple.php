@@ -11,14 +11,10 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label>Result Type:</label>
-                        <select class="select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
+                        <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%;">
+                            <option>Text only</option>
+                            <option>Images</option>
+                            <option>Video</option>
                         </select>
                     </div>
                 </div>
@@ -34,27 +30,26 @@
                 <div class="col-3">
                     <div class="form-group">
                         <label>Order By:</label>
-                        <select class="select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
+                        <select class="select2" style="width: 100%;">
+                            <option selected>Title</option>
+                            <option>Date</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group input-group-lg">
+                <label>Masukan Nama</label>
+                    <select class="select2 form-control form-control-lg" style="width: 100%;">
+                        <option selected>Title</option>
+                        <option>Date</option>
+                    </select>
 
-
-
-                    <button type="submit" class="btn btn-danger float-right">
-                        <i class="fa fa-search"></i> Cari
-                    </button>
                 </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary mt-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
+                </div>
+
             </div>
         </div>
     </div>
