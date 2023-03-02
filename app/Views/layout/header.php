@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?= 'SIPADA - ' . esc($title) ?></title>
+    <title><?= 'SIMANIS - ' . esc($title) ?></title>
     <meta name="description" content="Garment Factory Process">
     <meta name="keyword" content="garment,factory,khonkaen,ocomshop">
     <meta name="author" content="ocomshop">

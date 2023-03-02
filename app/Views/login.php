@@ -4,10 +4,10 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+            <a href="<?=base_url('/dashboard')?>" class="h1">SI<b>Manis</b></a>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Halaman ini digunakan untuk login alumni</p>
 
             <?php if (session()->getFlashdata('msg')) : ?>
                 <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
@@ -50,12 +50,7 @@
           
             <!-- /.social-auth-links -->
 
-            <p class="mb-1">
-                <a href="forgot-password.html">I forgot my password</a>
-            </p>
-            <p class="mb-0">
-                <a href="register.html" class="text-center">Register a new membership</a>
-            </p>
+           
         </div>
         <!-- /.card-body -->
     </div>

@@ -23,7 +23,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?= 'SIPADA - ' . esc($title) ?></title>
+    <title><?= 'SIMANIS - ' . esc($title) ?></title>
     <meta name="description" content="Garment Factory Process">
     <meta name="keyword" content="garment,factory,khonkaen,ocomshop">
     <meta name="author" content="ocomshop">
@@ -51,6 +51,25 @@
 
     <link rel="stylesheet" href="<?= base_url('asset/plugins/select2/css/select2.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('asset/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
+
+    <style type="text/css">
+        .login-page {
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: #02308d;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            height: 100vh;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .card-primary.card-outline {
+            border-top: 3px solid #fd7e14;
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -58,11 +77,13 @@
     <!-- /.login-box -->
 
     <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="<?= base_url('asset/plugins/jquery/jquery.min.js') ?>"></script>
     <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url('asset/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
     <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="<?= base_url('asset/js/adminlte.min.js') ?>"></script>
 </body>
+
+
 
 </html>
