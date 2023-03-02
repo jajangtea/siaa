@@ -3,7 +3,7 @@
 <?= $this->section("content") ?>
 
 <!-- Main content -->
-<h2 class="text-center display-4">Enhanced Search</h2>
+<h2 class="text-center display-4">Pencarian Data</h2>
 <form action="enhanced-results.html">
     <div class="row">
         <div class="col-md-10 offset-md-1">

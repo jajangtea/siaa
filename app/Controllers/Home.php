@@ -26,8 +26,8 @@ class Home extends BaseController
        
 
         $data = [
-            'controller'        => 'Home',
-            'title'             => 'Daftar Siswa Perkelas',
+            'controller'        => 'Pencarian Data',
+            'title'             => '',
     
 
         ];
