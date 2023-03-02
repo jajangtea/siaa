@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
                 <div class="input-group input-group-lg">
-                <label>Masukan Nama</label>
+                    <label>Masukan Nama</label>
                     <select class="select2 form-control form-control-lg" style="width: 100%;">
                         <option selected>Title</option>
                         <option>Date</option>
