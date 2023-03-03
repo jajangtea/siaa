@@ -20,16 +20,17 @@
                 </div>
                 <div class="col-8">
                     <div class="form-group">
-                        <label>Nama Siswa / Alumni :</label>
+                        <label>Nama Siswa / Alumni :</label>  <img id="loader" src="<?= base_url('asset/img/loader.gif') ?>" />
                         <select class="select2" style="width: 100%;" name="nama_lengkap" id="nama_lengkap">
-
                         </select>
 
 
 
-                        <img id="loader" src="<?= base_url('asset/img/loader.gif') ?>" />
+
                     </div>
                 </div>
+
+             
             </div>
             <div class="form-group">
 
@@ -67,6 +68,11 @@
 
     function getJenis(val) {
         $("#loader").show();
+        $('#nama_lengkap').empty();
+        $('nama_lengkap').select2({
+            placeholder: "Select a state",
+            allowClear: true
+        });
         $.ajax({
             type: "POST",
             url: "<?php echo base_url($controller . "/getAll") ?>",
@@ -74,48 +80,17 @@
                 [csrfToken]: csrfHash,
                 "id_status": val
             },
-            // beforeSend: function() {
-            //     $('#form-btn').html('<i class="fa fa-spinner fa-spin"></i> Loading...');
-            // },
             success: function(response) {
-
-                // var data = {
-                //     id: 1,
-                //     text: 'Barn owl'
-                // };
-
-                // var newOption = new Option(data.text, data.id, false, false);
-                // $('#nama_lengkap').append(newOption).trigger('change');
-
-                // for (var d = 0; d < response.length; d++) {
-                //     var item = response[d];
-
-                //     // Create the DOM option that is pre-selected by default
-                //     var newOption = new Option(item.nama_lengkap, item.nisn, false, false);
-                //     $('#nama_lengkap').append(newOption).trigger('change');
-                // }
-
-                // // // Update the selected options that are displayed
-                // // // $element.trigger('change');
-                // // $('#nama_lengkap').val(null).trigger('change');
-                // $("#nama_lengkap").off('change');
-
-                if ($('#nama_lengkap').find("option[value='" + response.nisn + "']").length) {
-                    for (var d = 0; d < response.length; d++) {
+                for (var d = 0; d < response.length; d++) {
                     var item = response[d];
-
-                    // Create the DOM option that is pre-selected by default
                     var newOption = new Option(item.nama_lengkap, item.nisn, false, false);
                     $('#nama_lengkap').append(newOption).trigger('change');
                 }
-                } else {
-                    // Create a DOM Option and pre-select by default
-                    var newOption = new Option(item.nama_lengkap, item.nisn, true, true);
-                    // Append it to the select
-                    $('#nama_lengkap').append(newOption).trigger('change');
-                }
-
-
+                $('#nama_lengkap').val(null).trigger('change');
+                $("#nama_lengkap").select2({
+                    placeholder: "Pilih atau inputkan nama",
+                    allowClear: true
+                });
                 $("#loader").hide();
             }
         });
