@@ -21,14 +21,14 @@ class Home extends BaseController
         ];
         return view('home', $data);
     }
-    public function simple()
+    public function simpleSearch()
     {
-       
+
 
         $data = [
             'controller'        => 'simple',
             'title'             => 'Pencarian Data',
-    
+
 
         ];
         return view('simple', $data);
@@ -57,67 +57,61 @@ class Home extends BaseController
 
 
     public function getAll()
-	{
+    {
         $id_status = $this->request->getPost('id_status');
-		$response = $data['data'] = array();
+        $response = $data['data'] = array();
 
-		$db      = \Config\Database::connect();
-		$builder = $db->table('siswa');
-		$builder->where('id_status',$id_status);
-		$builder->select('nisn,nama_lengkap');
-		$results = $builder->get()->getResult();
+        $db      = \Config\Database::connect();
+        $builder = $db->table('siswa');
+        $builder->where('id_status', $id_status);
+        $builder->select('nisn,nama_lengkap');
+        $results = $builder->get()->getResult();
 
-		foreach ($results as $key => $value) {
+        foreach ($results as $key => $value) {
             $data['data'][$key] = array(
-				$value->nisn,
-				$value->nama_lengkap,
-				
-			);
+                $value->nisn,
+                $value->nama_lengkap,
+
+            );
         }
 
-		return $this->response->setJSON($results);
-	}
+        return $this->response->setJSON($results);
+    }
 
 
 
     public function getSiswaOrAlumni()
-	{
+    {
         $db = \Config\Database::connect();
 
-		$query = $db->query('select * from siswa where id_status=1');
-		return $query->getResult();
-	}
+        $query = $db->query('select * from siswa where id_status=1');
+        return $query->getResult();
+    }
 
 
 
     public function getAllPerson()
-	{
+    {
 
-		$response = $data['data'] = array();
+        $response = $data['data'] = array();
 
-		$db      = \Config\Database::connect();
-		$builder = $db->table('siswa');
-		$builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id');
-		$builder->join('status', 'status.id = siswa.id_status');
-		$result = $builder->get();
+        $db      = \Config\Database::connect();
+        $builder = $db->table('siswa');
+        $builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id');
+        $builder->join('status', 'status.id = siswa.id_status');
+        $result = $builder->get();
 
-		foreach ($result->getResult() as $key => $value) {
+        foreach ($result->getResult() as $key => $value) {
 
-			$data['data'][$key] = array(
-				$value->id,
-				$value->nis,
-				$value->nisn,
-				$value->nama_lengkap,
-				$value->nama_ayah,
-				$value->nama_ibu,
-				$value->nama_wali,
-				$value->alamat,
-				$value->telepon,
-				$value->nama_status,
+            $data['data'][$key] = array(
+                $value->nisn,
+                $value->nis,
+                $value->nama_lengkap,
+                $value->nama_status,
 
-			);
-		}
+            );
+        }
 
-		return $this->response->setJSON($data);
-	}
+        return $this->response->setJSON($data);
+    }
 }

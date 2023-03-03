@@ -3,75 +3,69 @@
 <?= $this->section("content") ?>
 
 <!-- Main content -->
-<h2 class="text-center display-4">Pencarian Data Alumni & Siswa</h2>
-<form>
-    <input type="hidden" id="id_status" name="id_status">
-    <div class="row">
-        <div class="col-md-10 offset-md-1">
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-group">
-                        <label>Jenis Pencarian :</label>
-                        <select class="form-control" name="jenis" id="jenis" onChange="getJenis(this.value);">
-                            <option selected value="1">Siswa</option>
-                            <option value="2">Alumni</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="form-group">
-                        <label>Nama Siswa / Alumni :</label> <img id="loader" src="<?= base_url('asset/img/loader.gif') ?>" />
-                        <select class="select2" style="width: 100%;" name="nama_lengkap" id="nama_lengkap" data-column-index='2'>
-                        </select>
-
-
-
-
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="form-group">
-
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button id="form-btn" onclick="getAllPerson()" class="btn btn-primary mt-2 mr-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
-                    <button id="form-btn-refresh" class="btn btn-danger  mt-2" type="button"> <i class="fa fa-pen"></i> Refresh</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</form>
-
 
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Data Siswa</h3>
-
+                <h2 class="text-center display-4">Pencarian Data Alumni & Siswa</h2>
             </div>
+            <div class="card-body">
+                <form>
+                    <?= csrf_field() ?>
+                    <input type="hidden" id="id_status" name="id_status">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label>Jenis Pencarian :</label>
+                                        <select class="form-control" name="jenis" id="jenis" onChange="getJenis(this.value);">
+                                            <option selected value="1">Siswa</option>
+                                            <option value="2">Alumni</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label>Nama Siswa / Alumni :</label> <img id="loader" src="<?= base_url('asset/img/loader.gif') ?>" />
+                                        <select class="select2" style="width: 100%;" name="nama_lengkap" id="nama_lengkap" data-column-index='0'>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button id="form-btn" onclick="getAllPerson()" class="btn btn-primary mt-2 mr-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
+                                    <button id="form-btn-refresh" class="btn btn-danger  mt-2" type="button"> <i class="fa fa-pen"></i> Refresh</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
             <div class="card-body">
                 <table id="data_table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>NIS</th>
                             <th>NISN</th>
+                            <th>NIS</th>
                             <th>Nama Lengkap</th>
-                            <th>Nama Ayah</th>
-                            <th>Nama Ibu</th>
-                            <th>Nama Wali</th>
-                            <th>Alamat</th>
-                            <th>Telepon</th>
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-
-                    </tbody>
-
                 </table>
             </div>
         </div>
@@ -83,22 +77,18 @@
 
 <?= $this->section("pageScript") ?>
 <script>
-    $(function() {
-        $('#data_table tfoot th').each(function() {
-            var title = $(this).text();
-            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-        });
-        var table = $('#data_table').removeAttr('width').DataTable({
-            "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
-            },
+    let csrfToken = '<?= csrf_token() ?>';
+    let csrfHash = '<?= csrf_hash() ?>';
+    $("#loader").hide();
 
+    $(function() {
+        var table = $('#data_table').removeAttr('width').DataTable({
+            "dom": 'lrtip',
             "paging": true,
             "lengthChange": false,
-            // "searching": true,
-            "ordering": true,
+            "searching": true,
             "info": true,
-            "autoWidth": true,
+            "autoWidth": false,
             "scrollY": '45vh',
             "scrollX": true,
             "scrollCollapse": true,
@@ -119,11 +109,11 @@
             },
 
         });
+
     });
 
     $(document).ready(function() {
 
-        // DataTable
         var dtable = $('#data_table').DataTable();
 
         $('#form-btn').on('click', function() {
@@ -140,11 +130,12 @@
 
         $('#form-btn-refresh').on('click', function() {
             $('#data_table').dataTable().fnDestroy();
-            var table = $('#data_table').DataTable();
-
+            var table = $('#data_table').DataTable({
+                "order": [], //Initial no order.
+            });
             setInterval(function() {
                 table.ajax.reload();
-            }, 30000);
+            }, 0);
 
         });
     });
@@ -156,12 +147,11 @@
         });
     }
 
-    let csrfToken = '<?= csrf_token() ?>';
-    let csrfHash = '<?= csrf_hash() ?>';
+
 
     var $element = $('select2').select2();
 
-    $("#loader").hide();
+
     $(function() {
         //Initialize Select2 Elements
         $('.select2').select2()
@@ -176,10 +166,6 @@
     function getJenis(val) {
         $("#loader").show();
         $('#nama_lengkap').empty();
-        $('nama_lengkap').select2({
-            placeholder: "Select a state",
-            allowClear: true
-        });
         $.ajax({
             type: "POST",
             url: "<?php echo base_url($controller . "/getAll") ?>",
@@ -202,10 +188,6 @@
             }
         });
     }
-
-    // function getRefresh() {
-    //     $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-    // }
 </script>
 
 <?= $this->endSection() ?>
