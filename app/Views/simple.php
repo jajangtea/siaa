@@ -35,8 +35,8 @@
             <div class="form-group">
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button id="form-btn" onclick="getAllPerson()" class="btn btn-primary mt-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
-                    <button id="form-btn-refresh" class="btn btn-info mt-2" type="button"> <i class="fa fa-pen"></i> Refresh</button>
+                    <button id="form-btn" onclick="getAllPerson()" class="btn btn-primary mt-2 mr-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
+                    <button id="form-btn-refresh" class="btn btn-danger  mt-2" type="button"> <i class="fa fa-pen"></i> Refresh</button>
                 </div>
 
             </div>
@@ -66,7 +66,6 @@
                             <th>Alamat</th>
                             <th>Telepon</th>
                             <th>Status</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,44 +117,7 @@
                 "dataType": "json",
                 async: "true",
             },
-            initComplete: function() {
-                this.api().columns([9]).every(function() {
-                    var column = this;
-                    var select = $('<select class="form-control"><option value=""></option></select>')
-                        .appendTo($(column.footer()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
 
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
-
-                    column.data().unique().sort().each(function(d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                    });
-                }, );
-                this.api().columns([0, 1, 2, 3, 4, 5, 6, 7, 8, 10]).every(function() {
-                    var column = this;
-                    var select = $('<input type="text" class="form-control" />')
-                        .appendTo($(column.footer()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
-
-                    column.data().unique().sort().each(function(d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                    });
-                }, );
-            }
         });
     });
 
@@ -176,24 +138,15 @@
         });
 
 
-        // $('#form-btn-refresh').on('click', function() {
-        //     //clear global search values
+        $('#form-btn-refresh').on('click', function() {
+            $('#data_table').dataTable().fnDestroy();
+            var table = $('#data_table').DataTable();
 
-        //     $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-        // });
+            setInterval(function() {
+                table.ajax.reload();
+            }, 30000);
 
-
-        $('#form-btn-refresh').click(function refreshData() {
-            var table = $('#data_table').dataTable();
-            // table.ajax.reload();
-
-            $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-
-            //Or
-            //uitable.ajax.reload();
         });
-
-
     });
 
     function getAllPerson() {
