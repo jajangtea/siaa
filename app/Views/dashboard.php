@@ -29,7 +29,7 @@
                                 <li class="nav-item"><a class="nav-link" href="<?= base_url('/dashboard') ?>">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://lms.sman5-tpi.sch.id">E-Learning</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://pustaka.sman5-tpi.sch.id">E-Library</a></li>
-                                <li class="nav-item"><a class="nav-link" href="<?=base_url('simple')?>">Pencarian Alumni & Siswa</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?= base_url('simple') ?>">Pencarian Alumni & Siswa</a></li>
                                 <li class="nav-item dropdown no-caret">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Social Media
@@ -112,8 +112,8 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4"><i data-feather="code"></i></div>
-                                <h3>Complete documentation</h3>
-                                <p class="mb-0">All of the layouts, page sections, components, and utilities are fully covered in this products docs.</p>
+                                <h3>Developer Information</h3>
+                                <p class="mb-0">SIMANIS di desain secara khusus agar mudah digunakan dan efisien mengorganisir data alumni dan siswa.</p>
                             </div>
                         </div>
                     </div>
@@ -138,53 +138,35 @@
                                 <div class="row gx-5">
                                     <div class="col-md-6 mb-4">
                                         <h6>Pramuka</h6>
-                                        <p class="mb-2 small">We've crafted landing page examples for many popular business and product types.</p>
-                                        <a class="small text-arrow-icon" href="#!">
-                                            Learn More
-                                            <i data-feather="arrow-right"></i>
-                                        </a>
+                                        <p class="mb-2 small">Pramuka merupakan kegiatan ekstrakurikuler 
+                                            yang bertujuan mewadahi bakat, minat, dan potensi anak untuk
+                                            dikembangkan.</p>
+
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <h6>PMR</h6>
-                                        <p class="mb-2 small mb-0">Use our pre-built page examples to quickly create inner pages to your website.</p>
-                                        <a class="small text-arrow-icon" href="#!">
-                                            Learn More
-                                            <i data-feather="arrow-right"></i>
-                                        </a>
+                                        <p class="mb-2 small mb-0">PMR merupakan kegiatan ekstrakurikuler yang berkaitan erat dengan dunia kesehatan dan kemanusiaan.</p>
+                                     
                                     </div>
                                 </div>
                                 <div class="row gx-5">
                                     <div class="col-md-6 mb-4">
                                         <h6>Futsal</h6>
-                                        <p class="mb-2 small mb-0">Our flex box based layout options make your site beautifully responsive and adaptable to any device.</p>
-                                        <a class="small text-arrow-icon" href="#!">
-                                            Learn More
-                                            <i data-feather="arrow-right"></i>
-                                        </a>
+                                        <p class="mb-2 small mb-0">Ekstrakurikuler merupakan wadah siswa untuk menyalurkan hobi serta mendidik sportifitas dan mencetak bibit olahragawan berprestasi di tingkat lokal, nasional maupun internasional.</p>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <h6>Paskibra</h6>
-                                        <p class="small mb-0">All of the sections on each page are modular, so you can drop them into an existing page, or start with a new one!</p>
-                                        <a class="small text-arrow-icon" href="#!">
-                                            Learn More
-                                            <i data-feather="arrow-right"></i>
-                                        </a>
+                                        <p class="small mb-0">Paskibra dapat menjadi media bagi anggotanya untuk membentuk nilai-nilai penting dalam diri. Di dalamnya terdapat nilai nilai seperti kedisiplinan, cinta tanah air, patriotisme.</p>
+                                      
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <h6>Programming</h6>
-                                        <p class="small mb-0">All of the sections on each page are modular, so you can drop them into an existing page, or start with a new one!</p>
-                                        <a class="small text-arrow-icon" href="#!">
-                                            Learn More
-                                            <i data-feather="arrow-right"></i>
-                                        </a>
+                                        <p class="small mb-0">Ekstrakurikuler Programming merupakan kegiatan yang melatih peserta didik dalam merancang aplikasi secara visual, Output dari Ekskul ini berupa program komputer yang dapat berjalan disetiap sistem operasi.</p>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <h6>Multimedia</h6>
-                                        <p class="small mb-0">All of the sections on each page are modular, so you can drop them into an existing page, or start with a new one!</p>
-                                        <a class="small text-arrow-icon" href="#!">
-                                            Learn More
-                                            <i data-feather="arrow-right"></i>
-                                        </a>
+                                        <p class="small mb-0">Ekstrakurikuler Multimedia merupakan kegiatan tambahan yang diselenggarakan sekolah untuk mengembangkan bakat dan hobi siswa, terutama dalam dunia desain grafis.</p>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -245,8 +227,8 @@
                                 <div class="d-flex h-100">
                                     <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                     <div class="ms-4">
-                                        <h5 class="text-white">What is E-Alumni?</h5>
-                                        <p class="text-white-50">E-Alumni is a fully coded, responsive, Bootstrap based UI toolkit for developers.</p>
+                                        <h5 class="text-white">Apa itu SIMANIS?</h5>
+                                        <p class="text-white-50">SIMANIS Merupakan Sistem Informasi Manajemen Alumni dan Siswa SMAN 5 Tanjungpinang agar database alumni terorganisirs dengan baik.</p>
                                     </div>
                                 </div>
                             </div>
@@ -254,8 +236,8 @@
                                 <div class="d-flex h-100">
                                     <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                     <div class="ms-4">
-                                        <h5 class="text-white">What can I build with E-Alumni?</h5>
-                                        <p class="text-white-50">Build anything you want to using this UI kit! It is flexible, multipurpose, and full of tools for you to use during development.</p>
+                                        <h5 class="text-white">Apa yang dapat dilakukan SIMANIS?</h5>
+                                        <p class="text-white-50">SIMANIS dapat digunakan untuk melakukan tacking dan tracing data alumni serta dapat mencari data siswa yang aktif pada tahun pelajaran yang sedang berlangsung</p>
                                     </div>
                                 </div>
                             </div>
@@ -263,8 +245,8 @@
                                 <div class="d-flex h-100">
                                     <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                     <div class="ms-4">
-                                        <h5 class="text-white">Do I get free updates?</h5>
-                                        <p class="text-white-50">All of Start Bootstrap's premium products will come with updates for feature additions, bugfixes, and other small updates.</p>
+                                        <h5 class="text-white">Bagaimana cara menggunakan SIMANIS?</h5>
+                                        <p class="text-white-50">SIMANIS di desain secara khusus agar mudah digunakan, alumni dapat mengupdate data riwayat pendidikan dan pekerjaan jika sudah dinyatakan lulus di SMAN 5 Tanjungpinang</p>
                                     </div>
                                 </div>
                             </div>
@@ -272,8 +254,8 @@
                                 <div class="d-flex h-100">
                                     <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                     <div class="ms-4">
-                                        <h5 class="text-white">What frameworks does it integrate with?</h5>
-                                        <p class="text-white-50">Our HTML based E-Alumni products are build with framework integration in mind. The compiled code is HTML and CSS, which is able to integrate with any framework.</p>
+                                        <h5 class="text-white">Siapa Saja yang dapat menggunakan SIMANIS?</h5>
+                                        <p class="text-white-50">SIMANIS dapat digunakan oleh pihak sekolah untuk melihat kegiatan siswa setelah lulus sekolah dan dapat digunakan Alumni untuk mengupdate data riwayat pendidikan dan pekerjaan setelah lulus.</p>
                                     </div>
                                 </div>
                             </div>
@@ -293,8 +275,8 @@
                             <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
                         </svg>
                     </div>
-            
-                <hr class="m-0" />
+
+                    <hr class="m-0" />
             </main>
         </div>
         <div id="layoutDefault_footer">
