@@ -39,8 +39,8 @@
                             <div class="form-group">
 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button id="form-btn" onclick="getAllPerson()" class="btn btn-primary mt-2 mr-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
-                                    <button id="form-btn-refresh" class="btn btn-danger  mt-2" type="button"> <i class="fa fa-pen"></i> Refresh</button>
+                                    <button id="form-btn" onclick="getAllPerson()" class="btn btn-primary mt-2 mr-2" type="button"> <i class="fas fa-search"></i> Cari</button>
+                                    <button id="form-btn-refresh" class="btn btn-danger  mt-2" type="button"> <i class="fas fa-rotate"></i> Refresh</button>
                                 </div>
 
                             </div>
@@ -63,6 +63,7 @@
                             <th>NISN</th>
                             <th>NIS</th>
                             <th>Nama Lengkap</th>
+                            <th>Kelas</th>
                             <th>Status</th>
                         </tr>
                     </thead>

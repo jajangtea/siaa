@@ -96,8 +96,10 @@ class Home extends BaseController
         $response = $data['data'] = array();
 
         $db      = \Config\Database::connect();
-        $builder = $db->table('siswa');
-        $builder->select('siswa.nisn,siswa.nis,siswa.nama_lengkap,siswa.nama_ayah,siswa.nama_ibu,siswa.nama_wali,siswa.alamat,siswa.telepon,status.nama_status,siswa.id');
+        $builder = $db->table('kelas_siswa');
+		$builder->select('kelas_siswa.id,siswa.nisn,siswa.nis,siswa.nama_lengkap,kelas.nama_kelas,kelas.fase,kelas_siswa.id_siswa,status.nama_status');
+		$builder->join('siswa', 'siswa.id = kelas_siswa.id_siswa');
+		$builder->join('kelas', 'kelas.id = kelas_siswa.id_kelas');
         $builder->join('status', 'status.id = siswa.id_status');
         $result = $builder->get();
 
@@ -107,6 +109,7 @@ class Home extends BaseController
                 $value->nisn,
                 $value->nis,
                 $value->nama_lengkap,
+                $value->nama_kelas,
                 $value->nama_status,
 
             );
