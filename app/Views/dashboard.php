@@ -9,8 +9,8 @@
     <meta name="author" content="" />
     <title>SIMANIS - Home</title>
     <link href="<?= base_url('asset/css/styles.css') ?>" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/    /aos.css" />
-    <link rel="icon" type="image/x-icon" href="<?= base_url('asset/ui/img/favico.ico') ?>" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('asset/ui/img/favicon.png')?>" />
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
 </head>
@@ -138,7 +138,7 @@
                                 <div class="row gx-5">
                                     <div class="col-md-6 mb-4">
                                         <h6>Pramuka</h6>
-                                        <p class="mb-2 small">Pramuka merupakan kegiatan ekstrakurikuler 
+                                        <p class="mb-2 small">Pramuka merupakan kegiatan ekstrakurikuler
                                             yang bertujuan mewadahi bakat, minat, dan potensi anak untuk
                                             dikembangkan.</p>
 
@@ -146,7 +146,7 @@
                                     <div class="col-md-6 mb-4">
                                         <h6>PMR</h6>
                                         <p class="mb-2 small mb-0">PMR merupakan kegiatan ekstrakurikuler yang berkaitan erat dengan dunia kesehatan dan kemanusiaan.</p>
-                                     
+
                                     </div>
                                 </div>
                                 <div class="row gx-5">
@@ -157,7 +157,7 @@
                                     <div class="col-md-6 mb-4">
                                         <h6>Paskibra</h6>
                                         <p class="small mb-0">Paskibra dapat menjadi media bagi anggotanya untuk membentuk nilai-nilai penting dalam diri. Di dalamnya terdapat nilai nilai seperti kedisiplinan, cinta tanah air, patriotisme.</p>
-                                      
+
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <h6>Programming</h6>
@@ -166,7 +166,7 @@
                                     <div class="col-md-6 mb-4">
                                         <h6>Multimedia</h6>
                                         <p class="small mb-0">Ekstrakurikuler Multimedia merupakan kegiatan tambahan yang diselenggarakan sekolah untuk mengembangkan bakat dan hobi siswa, terutama dalam dunia desain grafis.</p>
-                                    
+
                                     </div>
                                 </div>
                             </div>
