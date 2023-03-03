@@ -20,8 +20,8 @@
                 </div>
                 <div class="col-8">
                     <div class="form-group">
-                        <label>Nama Siswa / Alumni :</label>  <img id="loader" src="<?= base_url('asset/img/loader.gif') ?>" />
-                        <select class="select2" style="width: 100%;" name="nama_lengkap" id="nama_lengkap">
+                        <label>Nama Siswa / Alumni :</label> <img id="loader" src="<?= base_url('asset/img/loader.gif') ?>" />
+                        <select class="select2" style="width: 100%;" name="nama_lengkap" id="nama_lengkap" data-column-index='2'>
                         </select>
 
 
@@ -30,12 +30,13 @@
                     </div>
                 </div>
 
-             
+
             </div>
             <div class="form-group">
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary mt-2" type="button" id="form-btn"> <i class="fa fa-search"></i> Cari...</button>
+                    <button id="form-btn" onclick="getAllPerson()" class="btn btn-primary mt-2" type="button"> <i class="fa fa-search"></i> Cari...</button>
+                    <button id="form-btn-refresh" class="btn btn-info mt-2" type="button"> <i class="fa fa-pen"></i> Refresh</button>
                 </div>
 
             </div>
@@ -43,12 +44,165 @@
     </div>
 </form>
 
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Siswa</h3>
+
+            </div>
+            <div class="card-body">
+                <table id="data_table" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NIS</th>
+                            <th>NISN</th>
+                            <th>Nama Lengkap</th>
+                            <th>Nama Ayah</th>
+                            <th>Nama Ibu</th>
+                            <th>Nama Wali</th>
+                            <th>Alamat</th>
+                            <th>Telepon</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endSection() ?>
 <!-- /.content -->
 
 
 <?= $this->section("pageScript") ?>
 <script>
+    $(function() {
+        $('#data_table tfoot th').each(function() {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+        var table = $('#data_table').removeAttr('width').DataTable({
+            "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $('td:eq(0)', nRow).html(iDisplayIndexFull + 1);
+            },
+
+            "paging": true,
+            "lengthChange": false,
+            // "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "scrollY": '45vh',
+            "scrollX": true,
+            "scrollCollapse": true,
+            columnDefs: [{
+                width: 80,
+                targets: 0
+            }],
+            fixedColumns: true,
+            "responsive": true,
+            "ajax": {
+                "url": '<?php echo base_url($controller . "/getAllPerson") ?>',
+                "data": {
+                    [csrfToken]: csrfHash,
+                },
+                "type": "POST",
+                "dataType": "json",
+                async: "true",
+            },
+            initComplete: function() {
+                this.api().columns([9]).every(function() {
+                    var column = this;
+                    var select = $('<select class="form-control"><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                }, );
+                this.api().columns([0, 1, 2, 3, 4, 5, 6, 7, 8, 10]).every(function() {
+                    var column = this;
+                    var select = $('<input type="text" class="form-control" />')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                }, );
+            }
+        });
+    });
+
+    $(document).ready(function() {
+
+        // DataTable
+        var dtable = $('#data_table').DataTable();
+
+        $('#form-btn').on('click', function() {
+            //clear global search values
+            dtable.search('');
+            $('#nama_lengkap').each(function() {
+                if (this.value.length) {
+                    dtable.column($(this).data('columnIndex')).search(this.value);
+                }
+            });
+            dtable.draw();
+        });
+
+
+        // $('#form-btn-refresh').on('click', function() {
+        //     //clear global search values
+
+        //     $('#data_table').DataTable().ajax.reload(null, false).draw(false);
+        // });
+
+
+        $('#form-btn-refresh').click(function refreshData() {
+            var table = $('#data_table').dataTable();
+            // table.ajax.reload();
+
+            $('#data_table').DataTable().ajax.reload(null, false).draw(false);
+
+            //Or
+            //uitable.ajax.reload();
+        });
+
+
+    });
+
+    function getAllPerson() {
+        $('#nama_lengkap').keyup(function() {
+            var table = $('#data_table').DataTable();
+            table.search($(this).val()).draw();
+        });
+    }
+
     let csrfToken = '<?= csrf_token() ?>';
     let csrfHash = '<?= csrf_hash() ?>';
 
@@ -95,6 +249,10 @@
             }
         });
     }
+
+    // function getRefresh() {
+    //     $('#data_table').DataTable().ajax.reload(null, false).draw(false);
+    // }
 </script>
 
 <?= $this->endSection() ?>
