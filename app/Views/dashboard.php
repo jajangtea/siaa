@@ -22,11 +22,11 @@
                 <!-- Navbar-->
                 <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
                     <div class="container px-5">
-                        <a class="navbar-brand text-white" href="<?= base_url('/dashboard') ?>">SIMANIS</a>
+                        <a class="navbar-brand text-white" href="<?= base_url('/') ?>">SIMANIS</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto me-lg-5">
-                                <li class="nav-item"><a class="nav-link" href="<?= base_url('/dashboard') ?>">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?= base_url('/') ?>">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://lms.sman5-tpi.sch.id">E-Learning</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://pustaka.sman5-tpi.sch.id">E-Library</a></li>
                                 <li class="nav-item"><a class="nav-link" href="<?= base_url('simple') ?>">Pencarian Alumni & Siswa</a></li>
@@ -76,7 +76,7 @@
                             <div class="row gx-5 align-items-center">
                                 <div class="col-lg-6" data-aos="fade-up">
                                     <h1 class="page-header-ui-title">SIMANIS SMAN 5 Tanjungpinang</h1>
-                                    <p class="page-header-ui-text mb-5">Merupakan Sistem Informasi Manajemen Alumni dan Siswa SMAN 5 Tanjungpinang agar database alumni terstruktur dengan baik.</p>
+                                    <p class="page-header-ui-text mb-5">Merupakan Sistem Informasi Manajemen Alumni dan Siswa SMAN 5 Tanjungpinang agar database alumni dan siswa terstruktur dengan baik.</p>
                                     <a class="btn btn-teal fw-500 me-2" href="<?= base_url('alumni/login_alumni') ?>">
                                         Login Alumni
                                         <i class="ms-2" data-feather="arrow-right"></i>
@@ -186,7 +186,7 @@
                                     <div class="card-body p-5">
                                         <div class="text-center">
                                             <div class="badge bg-light text-dark rounded-pill badge-marketing badge-sm">Kegiatan Rohani</div>
-                                            <div class="content-skewed content-skewed-center"><img class="content-skewed-item img-fluid shadow-lg rounded-6" src="<?= base_url('asset/img/rohani.png') ?>" alt="..." /></div>
+                                            <div class="content-skewed content-skewed-center"><img class="content-skewed-item img-fluid shadow-lg rounded-6" src="<?= base_url('asset/img/rohani.jpg') ?>" alt="..." /></div>
                                         </div>
                                     </div>
                                 </div>
@@ -205,8 +205,8 @@
                                 <div class="card pricing h-100">
                                     <div class="card-body p-5">
                                         <div class="text-center">
-                                            <div class="badge bg-light text-dark rounded-pill badge-marketing badge-sm">Kewirausahaan</div>
-                                            <div class="content-skewed content-skewed-center"><img class="content-skewed-item img-fluid shadow-lg rounded-6" src="<?= base_url('asset/img/prestasi.jpg') ?>" alt="..." /></div>
+                                            <div class="badge bg-light text-dark rounded-pill badge-marketing badge-sm">Pelantikan anggota Ekskul</div>
+                                            <div class="content-skewed content-skewed-center"><img class="content-skewed-item img-fluid shadow-lg rounded-6" src="<?= base_url('asset/img/pelantikan.jpg') ?>" alt="..." /></div>
                                         </div>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                                     <div class="icon-stack flex-shrink-0 bg-teal text-white"><i class="fas fa-question"></i></div>
                                     <div class="ms-4">
                                         <h5 class="text-white">Siapa Saja yang dapat menggunakan SIMANIS?</h5>
-                                        <p class="text-white-50">SIMANIS dapat digunakan oleh pihak sekolah untuk melihat kegiatan siswa setelah lulus sekolah dan dapat digunakan Alumni untuk mengupdate data riwayat pendidikan dan pekerjaan setelah lulus.</p>
+                                        <p class="text-white-50">SIMANIS dapat digunakan oleh pihak sekolah untuk melihat kegiatan alumni dan dapat digunakan Alumni untuk mengupdate data riwayat pendidikan dan pekerjaan setelah lulus.</p>
                                     </div>
                                 </div>
                             </div>
@@ -263,9 +263,9 @@
                         <div class="row gx-5 justify-content-center text-center">
                             <div class="col-lg-8">
                                 <div class="badge bg-transparent-light rounded-pill badge-marketing mb-4">Get Started</div>
-                                <h2 class="text-white">Save time with E-Alumni</h2>
-                                <p class="lead text-white-50 mb-5">E-Alumni</p>
-                                <a class="btn btn-teal fw-500" href="https://www.sman5-tpi.sch.id/">Official Site</a>
+                                <h2 class="text-white">Kunjungi Website Resmi</h2>
+                                <p class="lead text-white-50 mb-5">SMAN 5 TANJUNGPINANG</p>
+                                <a class="btn btn-teal fw-500" href="https://www.sman5-tpi.sch.id/">Klik disini</a>
                             </div>
                         </div>
                     </div>
@@ -284,8 +284,8 @@
                 <div class="container px-5">
                     <div class="row gx-5">
                         <div class="col-lg-3">
-                            <div class="footer-brand">SIMANIS</div>
-                            <div class="mb-3">Design made easy</div>
+                            <div class="footer-brand">Fasilitas Sekolah</div>
+                            <div class="mb-3">Siswa SMAN 5 Tanjungpinang akan mendapatkan berbagai macam fasilitas</div>
                             <div class="icon-list-social mb-5">
                                 <a class="icon-list-social-link" href="https://www.instagram.com/official.sman5tpi/?hl=id"><i class="fab fa-instagram"></i></a>
                                 <a class="icon-list-social-link" href="https://www.facebook.com/stella.tanjungpinang"><i class="fab fa-facebook"></i></a>
@@ -296,42 +296,30 @@
                         <div class="col-lg-9">
                             <div class="row gx-5">
                                 <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                                    <div class="text-uppercase-expanded text-xs mb-4">Product</div>
+                                    <div class="text-uppercase-expanded text-xs mb-4">Free Hotspot Area</div>
                                     <ul class="list-unstyled mb-0">
-                                        <li class="mb-2"><a href="#!">Landing</a></li>
-                                        <li class="mb-2"><a href="#!">Pages</a></li>
-                                        <li class="mb-2"><a href="#!">Sections</a></li>
-                                        <li class="mb-2"><a href="#!">Documentation</a></li>
-                                        <li><a href="#!">Changelog</a></li>
+                                        <li class="mb-2"><p>Salah satu misi sekolah yaitu Mengoptimalkan pembelajaran dan bimbingan yang kreatif serta inovatif dengan memanfaatkan Teknologi Informasi, dengan adanya Free Hotspot area bagi siswa diharapkan dapat membangun siswa yang inovatif dan berprestasi.</p></li>
+                                        
                                     </ul>
                                 </div>
                                 <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                                    <div class="text-uppercase-expanded text-xs mb-4">Technical</div>
+                                    <div class="text-uppercase-expanded text-xs mb-4">E-Learning</div>
                                     <ul class="list-unstyled mb-0">
-                                        <li class="mb-2"><a href="#!">Documentation</a></li>
-                                        <li class="mb-2"><a href="#!">Changelog</a></li>
-                                        <li class="mb-2"><a href="#!">Theme Customizer</a></li>
-                                        <li><a href="#!">UI Kit</a></li>
+                                        <li class="mb-2"><p>E-Learning mendorong siswa agar mensukseskan program paperless di lingkungan SMAN 5 Tanjungpinang, Kegiatan pembelajaran seperti Materi,Tugas,Latihan Bahkan ujian akan terdokumentasi secara digital. dengan E-Learning siswa dapat belajar dimana saja dan kapan saja.</p></li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-                                    <div class="text-uppercase-expanded text-xs mb-4">Includes</div>
+                                    <div class="text-uppercase-expanded text-xs mb-4">E-Peprus</div>
                                     <ul class="list-unstyled mb-0">
-                                        <li class="mb-2"><a href="#!">Utilities</a></li>
-                                        <li class="mb-2"><a href="#!">Components</a></li>
-                                        <li class="mb-2"><a href="#!">Layouts</a></li>
-                                        <li class="mb-2"><a href="#!">Code Samples</a></li>
-                                        <li class="mb-2"><a href="#!">Products</a></li>
-                                        <li class="mb-2"><a href="#!">Affiliates</a></li>
-                                        <li><a href="#!">Updates</a></li>
+                                        <li class="mb-2"><p>E-Peprus adalah aplikasi perpustakaan digital yang memberikan akses kepada siswa untuk menjadi anggota perpustakaan. E-Perpus menyediakan ribuan koleksi bacaan digital berupa buku digtal, siswa dapat membaca buku digital dan meminjam buku fisik secara Online.</p></li>
+                                       
                                     </ul>
                                 </div>
                                 <div class="col-lg-3 col-md-6">
-                                    <div class="text-uppercase-expanded text-xs mb-4">Legal</div>
+                                    <div class="text-uppercase-expanded text-xs mb-4">Lab Multimedia dan IPA</div>
                                     <ul class="list-unstyled mb-0">
-                                        <li class="mb-2"><a href="#!">Privacy Policy</a></li>
-                                        <li class="mb-2"><a href="#!">Terms and Conditions</a></li>
-                                        <li><a href="#!">License</a></li>
+                                        <li class="mb-2"><p>Lab Multimedia digunakan untuk pembelajaran informatika tersedia komputer yang mencukupi untuk pembelajaran satu siswa satu komputer. di Di Lab IPA siswa dan guru melakukan penyelidikan dengan pengamatan-pengamatan objek-objek alam atau percobaan-percobaan</p></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -339,11 +327,9 @@
                     </div>
                     <hr class="my-5" />
                     <div class="row gx-5 align-items-center">
-                        <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                        <div class="col-md-6 small">Copyright &copy; <a href="https://www.sman5-tpi.sch.id/visi-misi" title="Website resmi SMAN 5 Tanjungpinang">SMAN 5 Tanjungpinang 2023</a></div>
                         <div class="col-md-6 text-md-end small">
-                            <a href="#!">Privacy Policy</a>
-                            &middot;
-                            <a href="#!">Terms &amp; Conditions</a>
+                            <a href="#!">Design By : <a href="https://www.contohapps.com">Contoh Aplikasi</a>
                         </div>
                     </div>
                 </div>
