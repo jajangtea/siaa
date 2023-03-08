@@ -38,5 +38,16 @@
     <link rel="stylesheet" href="<?= base_url('asset/plugins/select2/css/select2.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('asset/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
 
+    <style type="text/css">
+        .dataTables_wrapper {
+            font-size: 14px;
+            position: relative;
+            clear: both;
+            *zoom: 1;
+            zoom: 1;
 
+        }
+
+       
+    </style>
 </head>

@@ -141,7 +141,7 @@
       "ordering": true,
       "info": true,
       "autoWidth": true,
-      "scrollY": '45vh',
+      "scrollY": false,
       "scrollX": true,
       "scrollCollapse": true,
       columnDefs: [{

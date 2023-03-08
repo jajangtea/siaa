@@ -70,10 +70,10 @@ class Alumni extends BaseController
 
 		foreach ($result->getResult() as $key => $value) {
 			$ops = '<div class="btn-group">';
-			$ops .= '<button type="button" class="btn  btn-info" onClick="save(' . $value->id . ')"><i class="fa fa-pen-square"></i>   ' .  lang("App.edit")  . '</button>';
-			$ops .= '<button type="button" class="btn  btn-success" onClick="save(' . $value->id . ')"><i class="fa fa-user"></i>   ' .  lang("App.detail")  . '</button>';
-			$ops .= '<a href="' . base_url('alumni/kembalikan/' . $value->id_siswa) . '" class="btn btn-warning"><i class="fa fa-graduation-cap"></i> Kembalikan</a>';
-			$ops .= '<button type="button" class="btn  btn-warning" onClick="simpan(' . $value->id_siswa . ')"><i class="fa fa-upload"></i> Upload</button>';
+			$ops .= '<button type="button" class="btn  btn-info" onClick="save(' . $value->id . ')"><i class="fa fa-pen-square" title="' .  lang("App.edit")  . '"></i></button>';
+			$ops .= '<button type="button" class="btn  btn-success" onClick="save(' . $value->id . ')"><i class="fa fa-eye" title="' .  lang("App.detail")  . '"></i></button>';
+			$ops .= '<a href="' . base_url('alumni/kembalikan/' . $value->id_siswa) . '" class="btn btn-warning"><i class="fa fa-graduation-cap" title="' .  lang("App.back")  . '"></i></a>';
+			$ops .= '<button type="button" class="btn  btn-warning" onClick="simpan(' . $value->id_siswa . ')"><i class="fa fa-upload" title="' .  lang("App.upload")  . '"></i></button>';
 			$ops .= '</div>';
 
 			$data['data'][$key] = array(

@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center display-4">Pencarian Data Alumni & Siswa</h2>
+                <h2 class="text-center">Pencarian Data Alumni & Siswa</h2>
             </div>
             <div class="card-body">
                 <form>
@@ -90,9 +90,11 @@
             "searching": true,
             "info": true,
             "autoWidth": false,
-            "scrollY": '45vh',
+            "scrollY": false,
+            "pageLength": 20,
             "scrollX": true,
             "scrollCollapse": true,
+            
             columnDefs: [{
                 width: 80,
                 targets: 0
