@@ -77,11 +77,11 @@
                                 <div class="col-lg-6" data-aos="fade-up">
                                     <h1 class="page-header-ui-title">SIMANIS SMAN 5 Tanjungpinang</h1>
                                     <p class="page-header-ui-text mb-5">Merupakan Sistem Informasi Manajemen Alumni dan Siswa SMAN 5 Tanjungpinang agar database alumni dan siswa terstruktur dengan baik.</p>
-                                    <a class="btn btn-teal fw-500 me-2" href="<?= base_url('alumni/login_alumni') ?>">
+                                    <a class="btn btn-teal fw-500 me-2 mb-2" href="<?= base_url('alumni/login_alumni') ?>">
                                         Login Alumni
                                         <i class="ms-2" data-feather="arrow-right"></i>
                                     </a>
-                                    <a class="btn btn-purple   fw-500 me-2" href="<?= base_url('index.php/login') ?>">
+                                    <a class="btn btn-purple fw-500 me-2 mb-2" href="<?= base_url('index.php/login') ?>">
                                         Login Pegawai
                                         <i class="ms-2" data-feather="arrow-right"></i>
                                     </a>
